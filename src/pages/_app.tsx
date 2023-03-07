@@ -9,25 +9,34 @@ const GlobalStyle = createGlobalStyle`
   --black: #000;
   --transparent: transparent;
 
-  --gray: #C4C4C4;
-  --dark-gray: #424242;
+  --green-50: #E0F6F6;
+  --green-100: #CCEEED;
+  --green-200: #A8DEDD;
+  --green-300: #93D2D1;
+  --green-400: #66BBB9;
+  --green-500: #3AA5A3;
+  --green-600: #0F8F8D;
+  --green-700: #0F8F8D;
+  --green-800: #0F8F8D;
+  --green-900: #0F8F8D;
 
-  --light-blue: #f0f8ff;
-  --blue: #67BDFF;
-  --dark-blue: #1c9cfd;
-  --darker-blue: #0079cf;
-  --yellow: #ffe554;
-  --pink: #ce679a;
+  --gray-100: #f5f5f5;
+  --gray-200: #dddddd;
+  --gray-300: #444444;
+  --gray-400: #333333;
+
+  --primary: var(--green-600);
+  --secondary: var(--green-700);
 }
 
 ::selection {
-    background: var(--blue);
+    background: var(--primary);
     color: var(--white);
 }
 
 html {
-  font-family: 'Sora', sans-serif;
-  color: var(--dark-gray);
+  font-family: 'open sans', arial, sans-serif;
+  color: var(--gray-400);
 }
 `;
 
