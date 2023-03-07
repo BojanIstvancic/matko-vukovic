@@ -1,9 +1,9 @@
-import Link from "next/link";
-
-export default function FourOhFour() {
+const FourOhFour: React.FC<{}> = () => {
   return (
     <>
       <h1>404 - Page Not Found</h1>
     </>
   );
-}
+};
+
+export default FourOhFour;
