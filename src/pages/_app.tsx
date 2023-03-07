@@ -1,7 +1,6 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
-import "../styles/globals.css";
 
 const GlobalStyle = createGlobalStyle`
 :root {
@@ -37,6 +36,22 @@ const GlobalStyle = createGlobalStyle`
 html {
   font-family: 'open sans', arial, sans-serif;
   color: var(--gray-400);
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 `;
 

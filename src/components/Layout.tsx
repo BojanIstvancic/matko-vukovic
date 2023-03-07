@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Header from "./Header";
 import MobileNav from "./MobileNav";
+import Footer from "./Footer";
 
 const StyledLayout = styled.div`
   min-height: 100vh;
@@ -34,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ title, content, children }) => {
         />
         <Header setDisplayMobileNav={setDisplayMobileNav} />
         {children}
-        {/* * <Footer /> */}
+        <Footer />
       </StyledLayout>
     </>
   );
