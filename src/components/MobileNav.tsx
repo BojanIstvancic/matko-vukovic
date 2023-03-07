@@ -7,7 +7,7 @@ const StyledNav = styled.div<{ displayMobileNav: boolean }>`
   left: 0;
   right: 0;
   height: 0;
-  background: var(--blue);
+  background: var(--primary);
   transition: all 500ms ease;
   pointer-events: none;
   opacity: 0;

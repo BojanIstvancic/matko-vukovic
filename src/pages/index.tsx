@@ -1,17 +1,13 @@
-import Head from "next/head";
+import Layout from "../components/Layout";
 
 const Home: React.FC<{}> = () => {
   return (
     <>
-      <Head>
-        <title>Matko Vuković | Naslovna</title>
-        <meta property="og:title" content="Matko Vuković | Naslovna" />
-        <meta name="description" content="description" />
-        <meta property="og:description" content="description" />
-      </Head>
-      <main>
-        <h1>EVO NOVOG TEKSTA</h1>
-      </main>
+      <Layout title={"Matko Vuković | Naslovna"} content={"description"}>
+        <main>
+          <h1>EVO NOVOG TEKSTA</h1>
+        </main>
+      </Layout>
     </>
   );
 };
