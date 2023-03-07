@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import styled from "styled-components";
+import MobileNav from "./MobileNav";
 const StyledLayout = styled.div`
   min-height: 100vh;
   display: grid;
@@ -16,13 +17,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <StyledLayout>
-        {/* <MobileNav
+        <MobileNav
           setDisplayMobileNav={setDisplayMobileNav}
           displayMobileNav={displayMobileNav}
         />
-        <Header setDisplayMobileNav={setDisplayMobileNav} /> */}
+        {/* <Header setDisplayMobileNav={setDisplayMobileNav} />  */}
         {children}
-        {/* <Footer /> */}
+        {/* * <Footer /> */}
       </StyledLayout>
     </>
   );
