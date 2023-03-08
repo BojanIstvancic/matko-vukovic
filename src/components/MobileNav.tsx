@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 
 const StyledNav = styled.div<{ displayMobileNav: boolean }>`
@@ -41,6 +42,15 @@ const NavLink = styled.a`
     border-bottom: 1px solid var(--white);
   }
 
+  &.active {
+    background: var(--green-700);
+  }
+
+  &:hover {
+    transition: all 500ms ease;
+    background: var(--green-700);
+  }
+
   @media (min-width: 600px) {
     font-size: 18px;
   }
@@ -51,6 +61,7 @@ const NavCloseButton = styled.div`
   font-size: 30px;
   color: var(--white);
   cursor: pointer;
+  margin-bottom: 20px;
 `;
 
 interface MobileNavProps {
@@ -62,23 +73,44 @@ const MobileNav: React.FC<MobileNavProps> = ({
   setDisplayMobileNav,
   displayMobileNav,
 }) => {
+  const { asPath } = useRouter();
   return (
     <StyledNav displayMobileNav={displayMobileNav}>
       <NavContent>
         <NavCloseButton onClick={() => setDisplayMobileNav(false)}>
-          X
+          <i className="fa fa-times" aria-hidden="true"></i>
         </NavCloseButton>
         <Link href="/" passHref>
-          <NavLink onClick={() => setDisplayMobileNav(false)}>Naslovna</NavLink>
+          <NavLink
+            className={asPath === "/" ? "active" : ""}
+            onClick={() => setDisplayMobileNav(false)}
+          >
+            Naslovna
+          </NavLink>
         </Link>
         <Link href="/vesti" passHref>
-          <NavLink onClick={() => setDisplayMobileNav(false)}>Vesti</NavLink>
+          <NavLink
+            className={asPath === "/vesti" ? "active" : ""}
+            onClick={() => setDisplayMobileNav(false)}
+          >
+            Vesti
+          </NavLink>
         </Link>
         <Link href="/o-nama" passHref>
-          <NavLink onClick={() => setDisplayMobileNav(false)}>O nama</NavLink>
+          <NavLink
+            className={asPath === "/o-nama" ? "active" : ""}
+            onClick={() => setDisplayMobileNav(false)}
+          >
+            O nama
+          </NavLink>
         </Link>
         <Link href="/kontakt" passHref>
-          <NavLink onClick={() => setDisplayMobileNav(false)}>Kontakt</NavLink>
+          <NavLink
+            className={asPath === "/kontakt" ? "active" : ""}
+            onClick={() => setDisplayMobileNav(false)}
+          >
+            Kontakt
+          </NavLink>
         </Link>
       </NavContent>
     </StyledNav>

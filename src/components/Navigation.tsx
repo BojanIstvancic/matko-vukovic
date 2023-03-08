@@ -50,6 +50,7 @@ const NavigationHamburger = styled.div`
   i {
     font-size: 30px;
     color: var(--white);
+    cursor: pointer;
   }
 `;
 
