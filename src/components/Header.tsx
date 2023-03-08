@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import HeaderMain from "./HeaderMain";
 import TopBar from "./TopBar";
 
 const StyledHeader = styled.div`
@@ -7,7 +8,7 @@ const StyledHeader = styled.div`
   left: 0;
   right: 0;
   z-index: 100;
-  background: var(--primary);
+  background: var(--white);
 `;
 
 const Container = styled.div`
@@ -35,6 +36,7 @@ const Header: React.FC<HeaderProps> = ({ setDisplayMobileNav }) => {
   return (
     <StyledHeader>
       <TopBar />
+      <HeaderMain />
       <Container>
         HEADER
         <div onClick={() => setDisplayMobileNav(true)}>CLICK FOR MENY</div>
