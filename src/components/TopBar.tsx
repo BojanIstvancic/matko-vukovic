@@ -30,15 +30,14 @@ const SocialIconLink = styled.a`
 
   background: var(--green-800);
   border-radius: 50%;
-  transition: 0.5s;
 
   i {
     font-size: 20px;
     color: var(--gray-300);
-    transition: 0.5s;
   }
 
   &:hover {
+    transition: all 500ms ease;
     background: var(--primary);
 
     i {

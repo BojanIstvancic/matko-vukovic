@@ -11,9 +11,9 @@ const HeaderMainInner = styled.div`
   @media (min-width: 768px) {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 `;
-
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -43,6 +43,10 @@ const InfoItem = styled.p`
 `;
 const Contact = styled.div`
   margin-top: 20px;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+  }
 `;
 const ContacItem = styled(InfoItem)`
   font-size: 13px;

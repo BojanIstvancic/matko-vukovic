@@ -8,13 +8,13 @@ const StyledNav = styled.div<{ displayMobileNav: boolean }>`
   right: 0;
   height: 0;
   background: var(--primary);
-  transition: all 500ms ease;
   pointer-events: none;
   opacity: 0;
 
   ${({ displayMobileNav }) =>
     displayMobileNav &&
     css`
+      transition: all 500ms ease;
       height: 100%;
       opacity: 1;
       z-index: 999;

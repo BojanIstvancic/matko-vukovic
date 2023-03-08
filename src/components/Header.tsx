@@ -28,19 +28,11 @@ const Container = styled.div`
   }
 `;
 
-interface HeaderProps {
-  setDisplayMobileNav: (value: boolean) => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ setDisplayMobileNav }) => {
+const Header: React.FC<{}> = () => {
   return (
     <StyledHeader>
       <TopBar />
       <HeaderMain />
-      <Container>
-        HEADER
-        <div onClick={() => setDisplayMobileNav(true)}>CLICK FOR MENY</div>
-      </Container>
     </StyledHeader>
   );
 };

@@ -4,11 +4,12 @@ import styled from "styled-components";
 import Header from "./Header";
 import MobileNav from "./MobileNav";
 import Footer from "./Footer";
+import Navigation from "./Navigation";
 
 const StyledLayout = styled.div`
   min-height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto auto 1fr auto;
 `;
 
 interface LayoutProps {
@@ -33,7 +34,8 @@ const Layout: React.FC<LayoutProps> = ({ title, content, children }) => {
           setDisplayMobileNav={setDisplayMobileNav}
           displayMobileNav={displayMobileNav}
         />
-        <Header setDisplayMobileNav={setDisplayMobileNav} />
+        <Header />
+        <Navigation setDisplayMobileNav={setDisplayMobileNav} />
         {children}
         <Footer />
       </StyledLayout>
