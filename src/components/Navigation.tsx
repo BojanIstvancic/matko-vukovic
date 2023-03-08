@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import Container from "./Container";
 
@@ -26,10 +27,14 @@ const NavigationDesktop = styled.div`
     padding: 15px 25px;
     text-transform: uppercase;
 
-    &:hover {
-      transition: all 500ms ease;
+    &:hover,
+    &.active {
       color: var(--white);
       background: var(--green-700);
+    }
+
+    &:hover {
+      transition: all 500ms ease;
     }
   }
 `;
@@ -53,15 +58,24 @@ interface NavigationProps {
 }
 
 const Navigation: React.FC<NavigationProps> = ({ setDisplayMobileNav }) => {
+  const { asPath } = useRouter();
   return (
     <StyledNavigation>
       <Container>
         <StyledNavigationInner>
           <NavigationDesktop>
-            <Link href="/">Naslovna</Link>
-            <Link href="/vesti">Vesti</Link>
-            <Link href="/o-nama">O Nama</Link>
-            <Link href="/kontakt">Kontakt</Link>
+            <Link href="/" passHref>
+              <a className={asPath === "/" ? "active" : ""}>Naslovna</a>
+            </Link>
+            <Link href="/vesti" passHref>
+              <a className={asPath === "vesti" ? "active" : ""}>Vesti</a>
+            </Link>
+            <Link href="/o-nama" passHref>
+              <a className={asPath === "o-nama" ? "active" : ""}>O Nama</a>
+            </Link>
+            <Link href="/kontakt" passHref>
+              <a className={asPath === "kontakt" ? "active" : ""}>Kontakt</a>
+            </Link>
           </NavigationDesktop>
           <NavigationHamburger onClick={() => setDisplayMobileNav(true)}>
             <i className="fa fa-bars" aria-hidden="true"></i>
