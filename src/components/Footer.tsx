@@ -4,7 +4,7 @@ import Container from "./Container";
 const StyledFooter = styled.div``;
 
 const BottomBar = styled.div`
-  background-color: var(--gray-300);
+  background-color: var(--gray-500);
 `;
 
 const Footer: React.FC<{}> = () => {

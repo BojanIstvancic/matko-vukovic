@@ -21,8 +21,9 @@ const GlobalStyle = createGlobalStyle`
 
   --gray-100: #f5f5f5;
   --gray-200: #dddddd;
-  --gray-300: #444444;
-  --gray-400: #333333;
+  --gray-300: #9d9d9d;
+  --gray-400: #444444;
+  --gray-500: #333333;
 
   --primary: var(--green-600);
   --secondary: var(--green-700);
@@ -35,7 +36,7 @@ const GlobalStyle = createGlobalStyle`
 
 html {
   font-family: 'open sans', arial, sans-serif;
-  color: var(--gray-400);
+  color: var(--gray-500);
 }
 
 html,
