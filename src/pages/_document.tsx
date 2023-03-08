@@ -7,21 +7,21 @@ export default function Document() {
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/apple-touch-icon.png"
+        href="/images/apple-touch-icon.png"
         // Iphone, Ipad
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/favicon-32x32.png"
+        href="/public/images/favicon-32x32.png"
         // Mac
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/favicon-16x16.png"
+        href="/images/favicon-16x16.png"
         // windows
       />
       <link
@@ -33,7 +33,7 @@ export default function Document() {
       />
       <link
         rel="mask-icon"
-        type="/safari-pinned-tab.svg"
+        type="/images/safari-pinned-tab.svg"
         color="red"
         // IOS
       />
