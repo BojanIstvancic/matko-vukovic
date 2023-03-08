@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import TopBar from "./TopBar";
 
 const StyledHeader = styled.div`
   position: sticky;
@@ -33,6 +34,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ setDisplayMobileNav }) => {
   return (
     <StyledHeader>
+      <TopBar />
       <Container>
         HEADER
         <div onClick={() => setDisplayMobileNav(true)}>CLICK FOR MENY</div>
