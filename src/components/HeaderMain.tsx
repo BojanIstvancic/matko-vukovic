@@ -7,21 +7,39 @@ import Logo from "/public/images/logo.png";
 const StyledHeaderMain = styled.div`
   padding: 30px 0;
 `;
-const HeaderMainInner = styled.div``;
+const HeaderMainInner = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 const Info = styled.div`
   margin-top: 20px;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+    margin-left: 40px;
+  }
 `;
 const InfoItem = styled.p`
   font-size: 15px;
   font-weight: 300;
   text-align: center;
   margin-top: 5px;
+
+  @media (min-width: 768px) {
+    text-align: left;
+  }
 `;
 const Contact = styled.div`
   margin-top: 20px;
@@ -40,8 +58,10 @@ const HeaderMain: React.FC<{}> = () => {
       <Container>
         <HeaderMainInner>
           <InfoContainer>
-            <Link href="/">
-              <Image src={Logo} alt="logo" width={150} height={90} />
+            <Link href="/" passHref>
+              <a>
+                <Image src={Logo} alt="logo" width={150} height={90} />
+              </a>
             </Link>
             <Info>
               <InfoItem>
