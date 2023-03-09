@@ -48,7 +48,7 @@ const Contact = styled.div`
     margin-top: 0;
   }
 `;
-const ContacItem = styled(InfoItem)`
+const ContactItem = styled(InfoItem)`
   font-size: 13px;
   i {
     margin-right: 10px;
@@ -80,13 +80,13 @@ const HeaderMain: React.FC<{}> = () => {
             </Info>
           </InfoContainer>
           <Contact>
-            <ContacItem>
+            <ContactItem>
               <i className="fa fa-phone"></i>Pozovite nas +38124/4562-573
-            </ContacItem>
-            <ContacItem>
+            </ContactItem>
+            <ContactItem>
               <i className="fa fa-envelope"></i>
               <a href="mailto:osmatkov_su@mts.rs">osmatkov_su@mts.rs</a>
-            </ContacItem>
+            </ContactItem>
           </Contact>
         </HeaderMainInner>
       </Container>

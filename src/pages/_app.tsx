@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
   --gray-100: #f5f5f5;
   --gray-200: #dddddd;
   --gray-300: #9d9d9d;
+  --gray-350: #767676;
   --gray-400: #444444;
   --gray-500: #333333;
 
@@ -53,6 +54,12 @@ a {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 20px
 }
 `;
 

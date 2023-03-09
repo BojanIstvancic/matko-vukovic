@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import BottomBar from "./BottomBar";
+import FooterMain from "./FooterMain";
 
 const StyledFooter = styled.div`
   color: var(--white);
@@ -8,6 +9,7 @@ const StyledFooter = styled.div`
 const Footer: React.FC<{}> = () => {
   return (
     <StyledFooter>
+      <FooterMain />
       <BottomBar />
     </StyledFooter>
   );
