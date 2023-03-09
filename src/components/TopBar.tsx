@@ -56,7 +56,11 @@ const TopBar: React.FC<{}> = () => {
               href="https://www.facebook.com/profile.php?id=100007996877884"
               target="_blank"
             >
-              <i className="fa fa-facebook" aria-hidden="true"></i>
+              <i
+                className="fa fa-facebook"
+                aria-hidden="true"
+                title="facebook"
+              ></i>
             </SocialIconLink>
           </SocialIcon>
           <SocialIcon>
