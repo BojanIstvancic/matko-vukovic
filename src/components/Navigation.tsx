@@ -8,7 +8,7 @@ const StyledNavigation = styled.div`
 `;
 
 const StyledNavigationInner = styled.div`
-  padding: 10px;
+  padding: 10px 0;
 
   @media (min-width: 768px) {
     padding: 0;
