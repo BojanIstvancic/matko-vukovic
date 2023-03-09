@@ -61,6 +61,12 @@ h3 {
   font-weight: 300;
   margin-bottom: 20px
 }
+
+h4 {
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
 `;
 
 export default function App({ Component, pageProps }: AppProps) {

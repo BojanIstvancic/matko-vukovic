@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Container from "./Container";
 import FooterContact from "./FooterContact";
-import FooterQuery from "./FooterQuery";
 
 const StyledFooterMain = styled.div`
   background-color: var(--gray-400);
@@ -19,7 +18,6 @@ const FooterMain: React.FC<{}> = () => {
     <StyledFooterMain>
       <Container>
         <StyledFooterMainInner>
-          <FooterQuery />
           <FooterContact />
         </StyledFooterMainInner>
       </Container>
