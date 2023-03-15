@@ -4,7 +4,9 @@ import styled from "styled-components";
 import Container from "./Container";
 
 const StyledNavigation = styled.div`
+  position: sticky;
   background: var(--primary);
+  margin-bottom: 20px;
 `;
 
 const StyledNavigationInner = styled.div`
@@ -69,18 +71,18 @@ const Navigation: React.FC<NavigationProps> = ({ setDisplayMobileNav }) => {
               <a className={asPath === "/" ? "active" : ""}>Naslovna</a>
             </Link>
             <Link href="/vesti" passHref>
-              <a className={asPath === "vesti" ? "active" : ""}>Vesti</a>
+              <a className={asPath === "/vesti" ? "active" : ""}>Vesti</a>
             </Link>
             <Link href="/rec-direktora" passHref>
-              <a className={asPath === "rec-direktora" ? "active" : ""}>
+              <a className={asPath === "/rec-direktora" ? "active" : ""}>
                 Reč direktora
               </a>
             </Link>
             <Link href="/o-nama" passHref>
-              <a className={asPath === "o-nama" ? "active" : ""}>O Nama</a>
+              <a className={asPath === "/o-nama" ? "active" : ""}>O Nama</a>
             </Link>
             <Link href="/kontakt" passHref>
-              <a className={asPath === "kontakt" ? "active" : ""}>Kontakt</a>
+              <a className={asPath === "/kontakt" ? "active" : ""}>Kontakt</a>
             </Link>
           </NavigationDesktop>
           <NavigationHamburger onClick={() => setDisplayMobileNav(true)}>

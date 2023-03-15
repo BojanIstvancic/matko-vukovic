@@ -6,27 +6,22 @@ const StyledBottomBar = styled.div`
 
   p {
     font-size: 11px;
+    margin-bottom: 0;
   }
 `;
 const BottomBarInner = styled.div`
-  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  @media (min-width: 768px) {
-    display: flex;
-    justify-content: space-between;
-  }
+  padding: 10px 0;
 `;
 
 const SocialIcons = styled.ul`
   display: flex;
   align-items: center;
 
-  margin-top: 15px;
   list-style: none;
-
-  @media (min-width: 768px) {
-    margin-top: 0;
-  }
 `;
 const SocialIcon = styled.li`
   margin-right: 20px;

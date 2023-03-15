@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
 
   --gray-100: #f5f5f5;
   --gray-200: #dddddd;
+  --gray-250: #e8e8e8;
   --gray-300: #9d9d9d;
   --gray-350: #767676;
   --gray-400: #444444;
@@ -56,16 +57,37 @@ a {
   padding: 0;
 }
 
+h1 {
+  font-size: 28px;
+  font-weight: 300;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--gray-250);
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
 h3 {
   font-size: 24px;
   font-weight: 300;
-  margin-bottom: 20px
+  margin-bottom: 20px;
 }
 
 h4 {
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 15px;
+}
+
+p {
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: var(---gray-400);
 }
 `;
 
