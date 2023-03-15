@@ -5,8 +5,10 @@ import Container from "./Container";
 
 const StyledNavigation = styled.div`
   position: sticky;
+  top: 0;
   background: var(--primary);
   margin-bottom: 20px;
+  z-index: 20;
 `;
 
 const StyledNavigationInner = styled.div`
