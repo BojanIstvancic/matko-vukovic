@@ -4,7 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 const LinkContent = styled.h2`
-  display: inline;
+  display: inline-block;
 
   margin-bottom: 30px;
   padding: 10px;
@@ -17,6 +17,10 @@ const LinkContent = styled.h2`
     cursor: pointer;
     background: var(--primary);
     color: var(--white);
+  }
+
+  @media (max-width: 400px) {
+    font-size: 18px;
   }
 `;
 const Error: React.FC<{}> = () => {

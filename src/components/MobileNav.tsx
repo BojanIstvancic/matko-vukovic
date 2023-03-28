@@ -96,20 +96,12 @@ const MobileNav: React.FC<MobileNavProps> = ({
             Vesti
           </NavLink>
         </Link>
-        <Link href="/rec-direktora" passHref>
+        <Link href="/o-skoli" passHref>
           <NavLink
-            className={asPath === "/rec-direktora" ? "active" : ""}
+            className={asPath === "/o-skoli" ? "active" : ""}
             onClick={() => setDisplayMobileNav(false)}
           >
-            Reč direktora
-          </NavLink>
-        </Link>
-        <Link href="/o-nama" passHref>
-          <NavLink
-            className={asPath === "/o-nama" ? "active" : ""}
-            onClick={() => setDisplayMobileNav(false)}
-          >
-            O nama
+            O školi
           </NavLink>
         </Link>
         <Link href="/kontakt" passHref>
