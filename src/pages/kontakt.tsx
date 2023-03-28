@@ -1,7 +1,7 @@
 import Container from "@/components/Container";
 import Layout from "@/components/Layout";
 import styled from "styled-components";
-import ContactImage from "/public/images/young-office-woman-talks-phone.jpg";
+import ContactImage from "/public/images/pages/kontakt/young-office-woman-talks-phoneyoung-office-woman-talks-phone.jpg";
 import Image from "next/image";
 
 const InfoContainer = styled.div`
