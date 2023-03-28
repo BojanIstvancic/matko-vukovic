@@ -1,9 +1,34 @@
 import Container from "@/components/Container";
 import Layout from "@/components/Layout";
 import styled from "styled-components";
+import SchoolOne from "/public/images/pages/o-skoli/velika-skola.jpg";
+import SchoolTwo from "/public/images/pages/o-skoli/mala-skola.jpg";
+import SchoolThree from "/public/images/pages/o-skoli/mala-skola-2.jpg";
+import Image from "next/image";
 
 const AboutUsInner = styled.div`
   padding-bottom: 20px;
+`;
+
+const AboutBlock = styled.div`
+  margin-bottom: 30px;
+`;
+
+const AboutBlockContent = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+  }
+`;
+
+const AboutBlockContentImage = styled.div`
+  position: relative;
+  margin-bottom: 10px;
+
+  @media (min-width: 768px) {
+    flex: 300px 0 0;
+    margin-right: 30px;
+    margin-bottom: 0;
+  }
 `;
 
 const AboutUs: React.FC<{}> = () => {
@@ -23,10 +48,84 @@ const AboutUs: React.FC<{}> = () => {
             метода рада спремних да радимо у 21. веку.
           </p>
           <br />
-          <h2 style={{ color: "var(--gray-300)" }}>Radimo u tri zgrade:</h2>
-          <h2>Centralna škola</h2>
-          <h2>Mala škola u Gatu</h2>
-          <h2>Mala škola u Malom bajmoku</h2>
+          <AboutBlock>
+            <h2>Centralna škola</h2>
+            <AboutBlockContent>
+              <AboutBlockContentImage>
+                <Image
+                  src={SchoolOne}
+                  alt="velika-skola"
+                  width={550}
+                  height={367}
+                />
+              </AboutBlockContentImage>
+              <p>
+                Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum
+                eget, diam. Pellentesque habitant morbi tristique senectus et
+                netus et malesuada fames ac turpis egestas. Nunc sed turpis.
+                Praesent egestas tristique nibh. Suspendisse nisl elit, rhoncus
+                eget, elementum ac, condimentum eget, diam. Pellentesque
+                habitant morbi tristique senectus et netus et malesuada fames ac
+                turpis egestas. Nunc sed turpis. Praesent egestas tristique
+                nibh. Suspendisse nisl elit, rhoncus eget, elementum ac,
+                condimentum eget, diam. Pellentesque habitant morbi tristique
+                senectus et netus et malesuada fames ac turpis egestas. Nunc sed
+                turpis. Praesent egestas tristique nibh.
+              </p>
+            </AboutBlockContent>
+          </AboutBlock>
+          <AboutBlock>
+            <h2>Mala škola u Gatu</h2>
+            <AboutBlockContent>
+              <AboutBlockContentImage>
+                <Image
+                  src={SchoolTwo}
+                  alt="mala-skola"
+                  width={550}
+                  height={350}
+                />
+              </AboutBlockContentImage>
+              <p>
+                Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum
+                eget, diam. Pellentesque habitant morbi tristique senectus et
+                netus et malesuada fames ac turpis egestas. Nunc sed turpis.
+                Praesent egestas tristique nibh. Suspendisse nisl elit, rhoncus
+                eget, elementum ac, condimentum eget, diam. Pellentesque
+                habitant morbi tristique senectus et netus et malesuada fames ac
+                turpis egestas. Nunc sed turpis. Praesent egestas tristique
+                nibh. Suspendisse nisl elit, rhoncus eget, elementum ac,
+                condimentum eget, diam. Pellentesque habitant morbi tristique
+                senectus et netus et malesuada fames ac turpis egestas. Nunc sed
+                turpis. Praesent egestas tristique nibh.
+              </p>
+            </AboutBlockContent>
+          </AboutBlock>
+          <AboutBlock>
+            <h2>Mala škola u Malom bajmoku</h2>
+            <AboutBlockContent>
+              <AboutBlockContentImage>
+                <Image
+                  src={SchoolThree}
+                  alt="mala-skola-2"
+                  width={550}
+                  height={373}
+                />
+              </AboutBlockContentImage>
+              <p>
+                Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum
+                eget, diam. Pellentesque habitant morbi tristique senectus et
+                netus et malesuada fames ac turpis egestas. Nunc sed turpis.
+                Praesent egestas tristique nibh. Suspendisse nisl elit, rhoncus
+                eget, elementum ac, condimentum eget, diam. Pellentesque
+                habitant morbi tristique senectus et netus et malesuada fames ac
+                turpis egestas. Nunc sed turpis. Praesent egestas tristique
+                nibh. Suspendisse nisl elit, rhoncus eget, elementum ac,
+                condimentum eget, diam. Pellentesque habitant morbi tristique
+                senectus et netus et malesuada fames ac turpis egestas. Nunc sed
+                turpis. Praesent egestas tristique nibh.
+              </p>
+            </AboutBlockContent>
+          </AboutBlock>
 
           <h2 style={{ color: "var(--gray-300)" }}>Ђаци су наша школа</h2>
           <p>
