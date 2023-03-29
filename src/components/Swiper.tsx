@@ -9,9 +9,13 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 const StyledSwiper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
   .swiper {
     width: 100%;
-    height: 350px;
+    height: 100%;
   }
 
   .swiper-slide {

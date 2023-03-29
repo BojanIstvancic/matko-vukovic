@@ -11,7 +11,14 @@ import styled from "styled-components";
 const StyledHome = styled.div``;
 
 const SwiperSection = styled.section`
+  position: relative;
   margin-bottom: 20px;
+
+  height: 200px;
+
+  @media (min-width: 1200px) {
+    height: 350px;
+  }
 `;
 
 const Home: React.FC<{}> = () => {
