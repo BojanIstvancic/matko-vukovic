@@ -1,12 +1,14 @@
 import Container from "@/components/Container";
 import Layout from "@/components/Layout";
+import Image from "next/image";
+
 import styled from "styled-components";
+
 import SchoolOne from "/public/images/pages/o-skoli/velika-skola.jpg";
 import SchoolTwo from "/public/images/pages/o-skoli/mala-skola.jpg";
 import SchoolThree from "/public/images/pages/o-skoli/mala-skola-2.jpg";
-import Image from "next/image";
 
-const AboutUsInner = styled.div`
+const StyledAboutUs = styled.section`
   padding-bottom: 20px;
 `;
 
@@ -35,7 +37,7 @@ const AboutUs: React.FC<{}> = () => {
   return (
     <Layout title={"Matko Vuković | O školi"} content={"description"}>
       <Container>
-        <AboutUsInner>
+        <StyledAboutUs>
           <h1>O školi</h1>
           <p>
             Образовање деце је традиција и обавеза. Због тога су наши преци још
@@ -139,7 +141,7 @@ const AboutUs: React.FC<{}> = () => {
             су и желили. Зато и није никако чудо што се овде школују деца и са
             других територија града јер се добар глас надалеко чује.
           </p>
-        </AboutUsInner>
+        </StyledAboutUs>
       </Container>
     </Layout>
   );

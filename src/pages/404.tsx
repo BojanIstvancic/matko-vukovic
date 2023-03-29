@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import Layout from "@/components/Layout";
 import Link from "next/link";
+
 import styled from "styled-components";
 
 const LinkContent = styled.h2`

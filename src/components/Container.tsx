@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.main`
   position: relative;
   margin: 0px auto;
   width: 100%;

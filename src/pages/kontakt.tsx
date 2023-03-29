@@ -1,8 +1,12 @@
 import Container from "@/components/Container";
 import Layout from "@/components/Layout";
-import styled from "styled-components";
-import ContactImage from "/public/images/pages/kontakt/contact-background.jpg";
 import Image from "next/image";
+
+import styled from "styled-components";
+
+import ContactImage from "/public/images/pages/kontakt/contact-background.jpg";
+
+const StyledContact = styled.section``;
 
 const InfoContainer = styled.div`
   display: flex;
@@ -42,7 +46,7 @@ const Contact: React.FC<{}> = () => {
   return (
     <Layout title={"Matko Vuković | Kontakt"} content={"description"}>
       <Container>
-        <>
+        <StyledContact>
           <h1>Kontakt</h1>
           <InfoContainer>
             <Info>
@@ -87,7 +91,7 @@ const Contact: React.FC<{}> = () => {
               />
             </InfoImageContainer>
           </InfoContainer>
-        </>
+        </StyledContact>
       </Container>
     </Layout>
   );
