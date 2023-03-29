@@ -8,35 +8,10 @@ import SwiperImage3 from "/public/images/pages/index/swiper-3.jpg";
 
 import styled from "styled-components";
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
 const StyledHome = styled.div``;
 
 const SwiperSection = styled.section`
-  width: 100%;
   margin-bottom: 20px;
-
-  .swiper {
-    width: 100%;
-    height: 350px;
-  }
-
-  .swiper-slide {
-    position: relative;
-  }
-
-  .swiper-pagination-bullet {
-    background: var(--primary);
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    &:after {
-      color: var(--primary);
-    }
-  }
 `;
 
 const Home: React.FC<{}> = () => {
