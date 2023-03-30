@@ -214,10 +214,10 @@ const Blog: React.FC<{}> = () => {
                     layout="fill"
                     alt={`blog-post-image-${index}`}
                   />
-                  <a href="#" target="_blank" />
+                  <a href="/vesti/1" />
                 </BlogPostImageContainer>
                 <BlogPostContent>
-                  <Link href="#">
+                  <Link href="/vesti/1">
                     <h3>{item.title}</h3>
                   </Link>
                   <p>{item.content.substr(0, 95)}...</p>

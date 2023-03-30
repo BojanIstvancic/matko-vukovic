@@ -43,6 +43,10 @@ const SwiperTitle = styled.h1`
 
 const BlogPostSection = styled.section`
   margin-bottom: 20px;
+
+  h2 {
+    cursor: pointer;
+  }
 `;
 const BlogPostContainer = styled.div`
   @media (min-width: 1000px) {
@@ -178,7 +182,9 @@ const Home: React.FC<{}> = () => {
             <SwiperTitle>Matko Vuković</SwiperTitle>
           </SwiperSection>
           <BlogPostSection>
-            <h2>Vesti</h2>
+            <Link href="/vesti">
+              <h2>Vesti</h2>
+            </Link>
             <BlogPostContainer>
               {blogPosts.map((item, index) => (
                 <BlogPost key={index}>
@@ -215,11 +221,11 @@ const Home: React.FC<{}> = () => {
                         </linearGradient>
                       </defs>
                     </svg>
-                    <a href="#" target="_blank" />
+                    <a href="/vesti/1" />
                     <span>Pročitaj</span>
                   </BlogPostImageContainer>
                   <BlogPostContent>
-                    <Link href="#">
+                    <Link href="/vesti/1">
                       <h3>{item.title}</h3>
                     </Link>
                     <p>{item.content.substr(0, 95)}...</p>
