@@ -26,6 +26,7 @@ const SwiperTitle = styled.h1`
   position: absolute;
   bottom: 20px;
   right: 20px;
+  margin: 0;
 
   padding: 10px 20px;
   color: var(--white);
@@ -33,6 +34,11 @@ const SwiperTitle = styled.h1`
   font-weight: bold;
   border: none;
   z-index: 5;
+
+  @media (max-width: 1200px) {
+    font-size: 20px;
+    padding: 5px 10px;
+  }
 `;
 
 const BlogPostSection = styled.section`

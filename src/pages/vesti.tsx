@@ -1,8 +1,13 @@
+import Container from "@/components/Container";
+import Layout from "@/components/Layout";
+
 const News: React.FC<{}> = () => {
   return (
-    <>
-      <h1>News</h1>
-    </>
+    <Layout title={"Matko Vuković | Vesti"} content={"description"}>
+      <Container>
+        <h1>Vesti</h1>
+      </Container>
+    </Layout>
   );
 };
 
