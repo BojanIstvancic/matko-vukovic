@@ -11,7 +11,12 @@ const StyledBlogPostItem = styled.div`
 `;
 const BlogPostItemImage = styled.div`
   position: relative;
-  height: 350px;
+  height: 200px;
+  margin-bottom: 30px;
+
+  @media (min-width: 600px) {
+    height: 350px;
+  }
 `;
 
 const BlogPostItem: React.FC<{}> = () => {
