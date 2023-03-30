@@ -71,7 +71,7 @@ const BlogPostContent = styled.div`
     }
 
     @media (max-width: 599px) {
-      font-size: 15px;
+      font-size: 16px;
     }
   }
 
@@ -194,6 +194,8 @@ const Blog: React.FC<{}> = () => {
   const handlePageClick = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % itemsLength;
     setItemOffset(newOffset);
+
+    console.log(event.selected, "lala");
 
     // we need to call the APi here
   };

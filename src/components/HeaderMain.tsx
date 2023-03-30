@@ -49,7 +49,6 @@ const Contact = styled.div`
   }
 `;
 const ContactItem = styled(InfoItem)`
-  font-size: 13px;
   i {
     margin-right: 10px;
     color: var(--primary);

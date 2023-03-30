@@ -29,7 +29,7 @@ const ContactBlock = styled.div`
   }
 `;
 const ContactItem = styled.p`
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 300;
   margin-top: 10px;
   color: var(--white);

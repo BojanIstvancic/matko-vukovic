@@ -85,7 +85,7 @@ h4 {
 }
 
 p {
-  font-size: 13px;
+  font-size: 16px;
   margin-bottom: 5px;
   color: var(---gray-400);
 }
