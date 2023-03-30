@@ -22,6 +22,18 @@ const SwiperSection = styled.section`
     height: 350px;
   }
 `;
+const SwiperTitle = styled.h1`
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  padding: 10px 20px;
+  color: var(--white);
+  background-color: var(--primary);
+  font-weight: bold;
+  border: none;
+  z-index: 5;
+`;
 
 const BlogPostSection = styled.section`
   margin-bottom: 20px;
@@ -31,6 +43,16 @@ const BlogPostContainer = styled.div`
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
+  }
+
+  h3 {
+    transition: all 0.3s ease 0s;
+  }
+
+  h3:hover,
+  h3:focus {
+    cursor: pointer;
+    color: var(--primary);
   }
 `;
 const BlogPost = styled.div`
@@ -48,6 +70,10 @@ const BlogPost = styled.div`
     flex: 1 1 0%;
     display: block;
     max-width: 345px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 `;
 const BlogPostImageContainer = styled.div`
@@ -143,6 +169,7 @@ const Home: React.FC<{}> = () => {
         <StyledHome>
           <SwiperSection>
             <Swiper images={swiperImages} />
+            <SwiperTitle>Matko Vuković</SwiperTitle>
           </SwiperSection>
           <BlogPostSection>
             <h2>Vesti</h2>
@@ -173,11 +200,11 @@ const Home: React.FC<{}> = () => {
                           y2="-69"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stop-color="#0F8F8D"></stop>
+                          <stop stopColor="#0F8F8D"></stop>
                           <stop
                             offset="1"
-                            stop-color="white"
-                            stop-opacity="0"
+                            stopColor="white"
+                            stopOpacity="0"
                           ></stop>
                         </linearGradient>
                       </defs>
