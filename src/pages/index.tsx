@@ -24,7 +24,7 @@ const SwiperSection = styled.section`
 `;
 const SwiperTitle = styled.h1`
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   right: 20px;
   margin: 0;
 
@@ -221,7 +221,7 @@ const Home: React.FC<{}> = () => {
                         </linearGradient>
                       </defs>
                     </svg>
-                    <a href="/vesti/1" />
+                    <Link href="/vesti/1" />
                     <span>Pročitaj</span>
                   </BlogPostImageContainer>
                   <BlogPostContent>
