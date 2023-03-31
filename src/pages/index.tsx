@@ -221,7 +221,9 @@ const Home: React.FC<{}> = () => {
                         </linearGradient>
                       </defs>
                     </svg>
-                    <Link href="/vesti/1" />
+                    <Link href="/vesti/1">
+                      <a></a>
+                    </Link>
                     <span>Pročitaj</span>
                   </BlogPostImageContainer>
                   <BlogPostContent>
