@@ -7,7 +7,7 @@ const StyledBlog = styled.div``;
 
 const Blog: React.FC<{}> = () => {
   return (
-    <Layout title={"Blog"}>
+    <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
       <StyledBlog>
         <p>Blog</p>
       </StyledBlog>

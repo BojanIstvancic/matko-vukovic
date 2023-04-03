@@ -22,7 +22,7 @@ const Login: React.FC<{}> = () => {
     });
   };
   return (
-    <Layout title={"Uloguj se"}>
+    <Layout title={"Matko Vuković | Uloguj se"} heading={"Uloguj se"}>
       <StyledLogin>
         <Form component="form" onSubmit={handleSubmit} noValidate>
           <TextField

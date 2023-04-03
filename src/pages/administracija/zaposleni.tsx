@@ -10,7 +10,7 @@ const StyledEmployee = styled.div`
 
 const Employee: React.FC<{}> = () => {
   return (
-    <Layout title={"Zaposleni"}>
+    <Layout title={"Matko Vuković | Zaposleni"} heading={"Zaposleni"}>
       <p>Employee</p>
     </Layout>
   );
