@@ -1,15 +1,11 @@
-import Container from "@/components/Container";
 import Form from "@mui/material/Box";
-import Button from "../components/Button";
-import TextField from "../components/TextField";
-import Logo from "/public/images/logo.png";
+import Button from "../../components/Button";
+import TextField from "../../components/TextField";
+import Layout from "@/components/administration/Layout";
 
 import styled from "styled-components";
-import Image from "next/image";
 
 const StyledLogin = styled.div`
-  max-width: 400px;
-  margin: 100px auto 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -26,10 +22,8 @@ const Login: React.FC<{}> = () => {
     });
   };
   return (
-    <Container>
+    <Layout title={"Uloguj se"}>
       <StyledLogin>
-        <Image src={Logo} alt="logo" width={100} height={60} />
-        <h1 style={{ marginTop: "20px" }}>Uloguj se</h1>
         <Form component="form" onSubmit={handleSubmit} noValidate>
           <TextField
             margin="normal"
@@ -53,7 +47,7 @@ const Login: React.FC<{}> = () => {
           <Button type="submit" variant="contained" text="Uloguj se" />
         </Form>
       </StyledLogin>
-    </Container>
+    </Layout>
   );
 };
 
