@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Swiper from "../components/Swiper";
 import Image from "next/image";
 import Link from "next/link";
+import { GetStaticProps } from "next";
 
 import SwiperImage1 from "/public/images/pages/index/swiper-1.jpg";
 import SwiperImage2 from "/public/images/pages/index/swiper-2.jpg";
@@ -157,7 +158,7 @@ export interface Post {
   createdBy: string;
   createdAt: string;
   updatedAt: string;
-  _v: string;
+  __v: string;
 }
 
 export interface HomeProps {
@@ -239,7 +240,7 @@ const Home: React.FC<HomeProps> = ({ posts }) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const res = await fetch("http://localhost:3000/api/v1/posts?limit=3");
   const posts = await res.json();
 
@@ -249,6 +250,6 @@ export async function getStaticProps() {
     },
     revalidate: 600,
   };
-}
+};
 
 export default Home;

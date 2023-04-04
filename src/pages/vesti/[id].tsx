@@ -1,6 +1,8 @@
 import Container from "@/components/Container";
 import Layout from "@/components/Layout";
 import Image from "next/image";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { ParsedUrlQuery } from "querystring";
 
 import SwiperImage1 from "/public/images/pages/index/swiper-1.jpg";
 
@@ -15,17 +17,30 @@ const BlogPostItemImage = styled.div`
   margin-bottom: 30px;
 
   @media (min-width: 600px) {
-    height: 350px;
+    height: 600px;
   }
 `;
 
-const BlogPostItem: React.FC<{}> = () => {
-  const blogPost = {
-    image: SwiperImage1,
-    title: "Čitanjem do zvijezda",
-    content:
-      "Naša škola i ove godine natječe se u čitalačkom kvizu Čitanjem do zvijezda. Tradicionalno, natječu se učenici 7. i 8. razreda na razini kviza i plakata. Također tradicionalno, naša škola i ove godine pobijedila je dvjema ekipama u međuškolskoj razini u rješevanju kviza te su se time izborili za nacionalnu razinu za koju se spremamo u svibnju. Pobjedničku ekipu čine: Lea Vojnić Purčar, Andrija Matković i Valentin Čović, a drugu plasiranu ekipu čine: Ivona Stantić, Iva Francišković i Lea Vojnić. U kategoriji plakata školu je predstavljala Anđela Kutuzov koja je osvojila 2. mjesto i plasirala se na nacionalnu razinu. Čestitamo i sretno dalje!",
+export interface Post {
+  _id: string;
+  title: string;
+  content: string;
+  image: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: string;
+}
+
+export interface BlogPostItemProps {
+  post: {
+    post: Post;
   };
+}
+
+const BlogPostItem: React.FC<BlogPostItemProps> = ({ post }) => {
+  const blogPost: Post = post.post;
+
   return (
     <Layout title={"Matko Vuković | Blog Item"} content={"description"}>
       <Container>
@@ -39,6 +54,36 @@ const BlogPostItem: React.FC<{}> = () => {
       </Container>
     </Layout>
   );
+};
+
+interface IParams extends ParsedUrlQuery {
+  id: string;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await fetch(`http://localhost:3000/api/v1/posts/`);
+  const posts = await res.json();
+
+  const paths = posts.posts.map((post: any) => {
+    return {
+      params: { id: post._id },
+    };
+  });
+
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { id } = context.params as IParams;
+  const res = await fetch(`http://localhost:3000/api/v1/posts/${id}`);
+  const post = await res.json();
+
+  return {
+    props: {
+      post,
+    },
+    revalidate: 600,
+  };
 };
 
 export default BlogPostItem;
