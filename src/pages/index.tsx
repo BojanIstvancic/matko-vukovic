@@ -149,29 +149,26 @@ const BlogPostImageContainer = styled.div`
 `;
 const BlogPostContent = styled.div``;
 
-const Home: React.FC<{}> = () => {
-  const swiperImages = [SwiperImage1, SwiperImage2, SwiperImage3];
+export interface Post {
+  _id: string;
+  title: string;
+  content: string;
+  image: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  _v: string;
+}
 
-  const blogPosts = [
-    {
-      image: SwiperImage1,
-      title: "Čitanjem do zvijezda",
-      content:
-        "Naša škola i ove godine natječe se u čitalačkom kvizu Čitanjem do zvijezda. Tradicionalno, natječu se učenici 7. i 8. razreda na razini kviza i plakata. Također tradicionalno, naša škola i ove godine pobijedila je dvjema ekipama u međuškolskoj razini u rješevanju kviza te su se time izborili za nacionalnu razinu za koju se spremamo u svibnju. Pobjedničku ekipu čine: Lea Vojnić Purčar, Andrija Matković i Valentin Čović, a drugu plasiranu ekipu čine: Ivona Stantić, Iva Francišković i Lea Vojnić. U kategoriji plakata školu je predstavljala Anđela Kutuzov koja je osvojila 2. mjesto i plasirala se na nacionalnu razinu. Čestitamo i sretno dalje!",
-    },
-    {
-      image: SwiperImage2,
-      title: "Republičko takmičenje u plivanju",
-      content:
-        "28.01. i 01.03. U Kragujevcu održano je republičko takmičenje u plivanju. Našu školu su predstavila četiri učenika od kojih je tri učenika dospelo na pobedničko postolje osvojivši tri medalje. Najmlađa takmičarka je Katarina Popović 3.razred nastupila u disciplini 50m leđno i osvojila 3. mesto. Leon Milodanović 6.razred nastupio u disciplini 50m delfin i okitio se srebrnom medaljom. Ena Martić 7.razred je plivala kraul osvojivši 3.mesto. Veliki uspeh je ostvario i Leon Hemi 6.razred, osvojivši peto mesto u disciplini 50m leđno. Svim učenicima čestitamo a već u maju nastupaju na sportskoj olimpijadi u Zrenjaninu, popularnije zvanim SOŠOV.",
-    },
-    {
-      image: SwiperImage3,
-      title: "Gradsko takmičenje u odbojci",
-      content:
-        "U konkurenciji pionira, prvo mesto zauzela je O.Š. Kizur Ištvan, drugo Matko Vuković, treće Jovan Mikić. I ove godine su naši odbojkaši i odbojkašice opravdali očekivanja i našli se u samom vrhu Subotičke odbojke",
-    },
-  ];
+export interface HomeProps {
+  posts: {
+    posts: Post[];
+  };
+}
+
+const Home: React.FC<HomeProps> = ({ posts }) => {
+  const swiperImages = [SwiperImage1, SwiperImage2, SwiperImage3];
+  const blogPosts: Post[] = posts.posts;
 
   return (
     <Layout title={"Matko Vuković | Naslovna"} content={"description"}>
@@ -186,13 +183,13 @@ const Home: React.FC<{}> = () => {
               <h2>Vesti</h2>
             </Link>
             <BlogPostContainer>
-              {blogPosts.map((item, index) => (
-                <BlogPost key={index}>
+              {blogPosts.map((item) => (
+                <BlogPost key={item._id}>
                   <BlogPostImageContainer>
                     <Image
                       src={item.image}
                       layout="fill"
-                      alt={`blog-post-image-${index}`}
+                      alt={`blog-post-image-${item._id}`}
                     />
                     <svg
                       viewBox="0 0 213 212"
@@ -221,13 +218,13 @@ const Home: React.FC<{}> = () => {
                         </linearGradient>
                       </defs>
                     </svg>
-                    <Link href="/vesti/1">
+                    <Link href={`/vesti/${item._id}`}>
                       <a></a>
                     </Link>
                     <span>Pročitaj</span>
                   </BlogPostImageContainer>
                   <BlogPostContent>
-                    <Link href="/vesti/1">
+                    <Link href={`/vesti/${item._id}`}>
                       <h3>{item.title}</h3>
                     </Link>
                     <p>{item.content.substr(0, 95)}...</p>
@@ -241,5 +238,17 @@ const Home: React.FC<{}> = () => {
     </Layout>
   );
 };
+
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/api/v1/posts?limit=3");
+  const posts = await res.json();
+
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 600,
+  };
+}
 
 export default Home;
