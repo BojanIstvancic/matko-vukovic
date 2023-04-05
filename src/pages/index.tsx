@@ -3,13 +3,14 @@ import Layout from "../components/Layout";
 import Swiper from "../components/Swiper";
 import Image from "next/image";
 import Link from "next/link";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 
 import SwiperImage1 from "/public/images/pages/index/swiper-1.jpg";
 import SwiperImage2 from "/public/images/pages/index/swiper-2.jpg";
 import SwiperImage3 from "/public/images/pages/index/swiper-3.jpg";
 
 import styled from "styled-components";
+import { Post } from "../../types";
 
 const StyledHome = styled.div``;
 
@@ -150,17 +151,6 @@ const BlogPostImageContainer = styled.div`
 `;
 const BlogPostContent = styled.div``;
 
-export interface Post {
-  _id: string;
-  title: string;
-  content: string;
-  image: string;
-  createdBy: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: string;
-}
-
 export interface HomeProps {
   posts: {
     posts: Post[];
@@ -240,7 +230,7 @@ const Home: React.FC<HomeProps> = ({ posts }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch("http://localhost:3000/api/v1/posts?limit=3");
   const posts = await res.json();
 
@@ -248,7 +238,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       posts,
     },
-    revalidate: 600,
   };
 };
 
