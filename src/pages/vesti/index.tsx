@@ -10,6 +10,8 @@ import SwiperImage3 from "/public/images/pages/index/swiper-3.jpg";
 
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import { GetServerSideProps } from "next";
+import { Post } from "../../../types";
 
 const StyledBlog = styled.div`
   margin-bottom: 25px;
@@ -130,61 +132,18 @@ const PaginationContainer = styled.div`
   }
 `;
 
-const Blog: React.FC<{}> = () => {
-  const blogPosts = [
-    {
-      image: SwiperImage1,
-      title: "Čitanjem do zvijezda",
-      content:
-        "Naša škola i ove godine natječe se u čitalačkom kvizu Čitanjem do zvijezda. Tradicionalno, natječu se učenici 7. i 8. razreda na razini kviza i plakata. Također tradicionalno, naša škola i ove godine pobijedila je dvjema ekipama u međuškolskoj razini u rješevanju kviza te su se time izborili za nacionalnu razinu za koju se spremamo u svibnju. Pobjedničku ekipu čine: Lea Vojnić Purčar, Andrija Matković i Valentin Čović, a drugu plasiranu ekipu čine: Ivona Stantić, Iva Francišković i Lea Vojnić. U kategoriji plakata školu je predstavljala Anđela Kutuzov koja je osvojila 2. mjesto i plasirala se na nacionalnu razinu. Čestitamo i sretno dalje!",
-    },
-    {
-      image: SwiperImage2,
-      title: "Republičko takmičenje u plivanju",
-      content:
-        "28.01. i 01.03. U Kragujevcu održano je republičko takmičenje u plivanju. Našu školu su predstavila četiri učenika od kojih je tri učenika dospelo na pobedničko postolje osvojivši tri medalje. Najmlađa takmičarka je Katarina Popović 3.razred nastupila u disciplini 50m leđno i osvojila 3. mesto. Leon Milodanović 6.razred nastupio u disciplini 50m delfin i okitio se srebrnom medaljom. Ena Martić 7.razred je plivala kraul osvojivši 3.mesto. Veliki uspeh je ostvario i Leon Hemi 6.razred, osvojivši peto mesto u disciplini 50m leđno. Svim učenicima čestitamo a već u maju nastupaju na sportskoj olimpijadi u Zrenjaninu, popularnije zvanim SOŠOV.",
-    },
-    {
-      image: SwiperImage3,
-      title: "Gradsko takmičenje u odbojci",
-      content:
-        "U konkurenciji pionira, prvo mesto zauzela je O.Š. Kizur Ištvan, drugo Matko Vuković, treće Jovan Mikić. I ove godine su naši odbojkaši i odbojkašice opravdali očekivanja i našli se u samom vrhu Subotičke odbojke",
-    },
-    {
-      image: SwiperImage1,
-      title: "Čitanjem do zvijezda",
-      content:
-        "Naša škola i ove godine natječe se u čitalačkom kvizu Čitanjem do zvijezda. Tradicionalno, natječu se učenici 7. i 8. razreda na razini kviza i plakata. Također tradicionalno, naša škola i ove godine pobijedila je dvjema ekipama u međuškolskoj razini u rješevanju kviza te su se time izborili za nacionalnu razinu za koju se spremamo u svibnju. Pobjedničku ekipu čine: Lea Vojnić Purčar, Andrija Matković i Valentin Čović, a drugu plasiranu ekipu čine: Ivona Stantić, Iva Francišković i Lea Vojnić. U kategoriji plakata školu je predstavljala Anđela Kutuzov koja je osvojila 2. mjesto i plasirala se na nacionalnu razinu. Čestitamo i sretno dalje!",
-    },
-    {
-      image: SwiperImage2,
-      title: "Republičko takmičenje u plivanju",
-      content:
-        "28.01. i 01.03. U Kragujevcu održano je republičko takmičenje u plivanju. Našu školu su predstavila četiri učenika od kojih je tri učenika dospelo na pobedničko postolje osvojivši tri medalje. Najmlađa takmičarka je Katarina Popović 3.razred nastupila u disciplini 50m leđno i osvojila 3. mesto. Leon Milodanović 6.razred nastupio u disciplini 50m delfin i okitio se srebrnom medaljom. Ena Martić 7.razred je plivala kraul osvojivši 3.mesto. Veliki uspeh je ostvario i Leon Hemi 6.razred, osvojivši peto mesto u disciplini 50m leđno. Svim učenicima čestitamo a već u maju nastupaju na sportskoj olimpijadi u Zrenjaninu, popularnije zvanim SOŠOV.",
-    },
-    {
-      image: SwiperImage3,
-      title: "Gradsko takmičenje u odbojci",
-      content:
-        "U konkurenciji pionira, prvo mesto zauzela je O.Š. Kizur Ištvan, drugo Matko Vuković, treće Jovan Mikić. I ove godine su naši odbojkaši i odbojkašice opravdali očekivanja i našli se u samom vrhu Subotičke odbojke",
-    },
-    {
-      image: SwiperImage1,
-      title: "Čitanjem do zvijezda",
-      content:
-        "Naša škola i ove godine natječe se u čitalačkom kvizu Čitanjem do zvijezda. Tradicionalno, natječu se učenici 7. i 8. razreda na razini kviza i plakata. Također tradicionalno, naša škola i ove godine pobijedila je dvjema ekipama u međuškolskoj razini u rješevanju kviza te su se time izborili za nacionalnu razinu za koju se spremamo u svibnju. Pobjedničku ekipu čine: Lea Vojnić Purčar, Andrija Matković i Valentin Čović, a drugu plasiranu ekipu čine: Ivona Stantić, Iva Francišković i Lea Vojnić. U kategoriji plakata školu je predstavljala Anđela Kutuzov koja je osvojila 2. mjesto i plasirala se na nacionalnu razinu. Čestitamo i sretno dalje!",
-    },
-    {
-      image: SwiperImage2,
-      title: "Republičko takmičenje u plivanju",
-      content:
-        "28.01. i 01.03. U Kragujevcu održano je republičko takmičenje u plivanju. Našu školu su predstavila četiri učenika od kojih je tri učenika dospelo na pobedničko postolje osvojivši tri medalje. Najmlađa takmičarka je Katarina Popović 3.razred nastupila u disciplini 50m leđno i osvojila 3. mesto. Leon Milodanović 6.razred nastupio u disciplini 50m delfin i okitio se srebrnom medaljom. Ena Martić 7.razred je plivala kraul osvojivši 3.mesto. Veliki uspeh je ostvario i Leon Hemi 6.razred, osvojivši peto mesto u disciplini 50m leđno. Svim učenicima čestitamo a već u maju nastupaju na sportskoj olimpijadi u Zrenjaninu, popularnije zvanim SOŠOV.",
-    },
-  ];
+export interface BlogProps {
+  posts: {
+    posts: Post[];
+  };
+}
+
+const Blog: React.FC<BlogProps> = ({ posts }) => {
+  const blogPosts: Post[] = posts.posts;
 
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 8;
-  const itemsLength = 320;
+  const itemsPerPage = 6;
+  const itemsLength = blogPosts.length;
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
@@ -194,10 +153,6 @@ const Blog: React.FC<{}> = () => {
   const handlePageClick = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % itemsLength;
     setItemOffset(newOffset);
-
-    console.log(event.selected, "lala");
-
-    // we need to call the APi here
   };
 
   return (
@@ -206,24 +161,26 @@ const Blog: React.FC<{}> = () => {
         <StyledBlog>
           <h1>Vesti</h1>
           <BlogPostContainer>
-            {blogPosts.map((item, index) => (
-              <BlogPost key={index}>
-                <BlogPostImageContainer>
-                  <Image
-                    src={item.image}
-                    layout="fill"
-                    alt={`blog-post-image-${index}`}
-                  />
-                  <a href="/vesti/1" />
-                </BlogPostImageContainer>
-                <BlogPostContent>
-                  <Link href="/vesti/1">
-                    <h3>{item.title}</h3>
-                  </Link>
-                  <p>{item.content.substr(0, 95)}...</p>
-                </BlogPostContent>
-              </BlogPost>
-            ))}
+            {blogPosts
+              .slice(itemOffset, itemOffset + itemsPerPage)
+              .map((item) => (
+                <BlogPost key={item._id}>
+                  <BlogPostImageContainer>
+                    <Image
+                      src={item.image}
+                      layout="fill"
+                      alt={`blog-post-image-${item._id}`}
+                    />
+                    <a href={`/vesti/${item._id}`} />
+                  </BlogPostImageContainer>
+                  <BlogPostContent>
+                    <Link href={`/vesti/${item._id}`}>
+                      <h3>{item.title}</h3>
+                    </Link>
+                    <p>{item.content.substr(0, 95)}...</p>
+                  </BlogPostContent>
+                </BlogPost>
+              ))}
           </BlogPostContainer>
           <PaginationContainer>
             <ReactPaginate
@@ -250,6 +207,17 @@ const Blog: React.FC<{}> = () => {
       </Container>
     </Layout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch("http://localhost:3000/api/v1/posts");
+  const posts = await res.json();
+
+  return {
+    props: {
+      posts,
+    },
+  };
 };
 
 export default Blog;
