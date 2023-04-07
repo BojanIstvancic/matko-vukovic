@@ -5,6 +5,10 @@ import Layout from "@/components/Layout";
 
 import styled from "styled-components";
 import Container from "@/components/Container";
+import axios from "axios";
+import { CircularProgress } from "@mui/material";
+import { useState } from "react";
+import { setCookie } from "@/helpers/cookieStorage";
 
 const StyledLogin = styled.div`
   display: flex;
@@ -13,14 +17,29 @@ const StyledLogin = styled.div`
 `;
 
 const Login: React.FC<{}> = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
 
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        "http://localhost:3000/api/v1/auth/login",
+        {
+          name: data.get("name"),
+          password: data.get("password"),
+        }
+      );
+
+      setCookie("jwt", response.data.token, 7);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -33,9 +52,9 @@ const Login: React.FC<{}> = () => {
               margin="normal"
               required
               fullWidth
-              id="username"
+              id="name"
               label="Korisničko ime"
-              name="username"
+              name="name"
               autoFocus
             />
             <TextField
@@ -48,8 +67,18 @@ const Login: React.FC<{}> = () => {
               id="password"
               autoComplete="password"
             />
-            <Button type="submit" variant="contained" text="Uloguj se" />
+            <Button
+              type="submit"
+              variant="contained"
+              text="Uloguj se"
+              disabled={isLoading}
+            />
           </Form>
+          {isLoading && (
+            <CircularProgress
+              style={{ color: "var(--primary)", marginTop: "20px" }}
+            />
+          )}
         </StyledLogin>
       </Container>
     </Layout>
