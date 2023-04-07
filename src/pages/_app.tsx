@@ -27,6 +27,8 @@ const GlobalStyle = createGlobalStyle`
   --gray-400: #444444;
   --gray-500: #333333;
 
+  --red-500: #EA4335;
+
   --primary: var(--green-600);
   --secondary: var(--green-700);
 }

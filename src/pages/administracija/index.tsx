@@ -2,13 +2,15 @@ import Form from "@mui/material/Box";
 import Button from "../../components/Button";
 import TextField from "../../components/TextField";
 import Layout from "@/components/Layout";
-
-import styled from "styled-components";
-import Container from "@/components/Container";
-import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import Container from "@/components/Container";
+
 import { useState } from "react";
 import { setCookie } from "@/helpers/cookieStorage";
+import { apiCall } from "../../api/axios";
+import { useRouter } from "next/router";
+
+import styled from "styled-components";
 
 const StyledLogin = styled.div`
   display: flex;
@@ -18,25 +20,29 @@ const StyledLogin = styled.div`
 
 const Login: React.FC<{}> = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const data = new FormData(event.currentTarget);
+    const formData = new FormData(event.currentTarget);
 
     try {
       setIsLoading(true);
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/auth/login",
-        {
-          name: data.get("name"),
-          password: data.get("password"),
-        }
-      );
 
-      setCookie("jwt", response.data.token, 7);
+      const apiData = {
+        name: formData.get("name"),
+        password: formData.get("password"),
+      };
+
+      const response = await apiCall("auth/login", "post", apiData);
+
+      setCookie("token", response.data.token, 7);
+
+      router.push("/administracija/blog");
     } catch (e) {
-      console.error(e);
+      setErrorMessage(true);
     } finally {
       setIsLoading(false);
     }
@@ -78,6 +84,12 @@ const Login: React.FC<{}> = () => {
             <CircularProgress
               style={{ color: "var(--primary)", marginTop: "20px" }}
             />
+          )}
+
+          {errorMessage && (
+            <p style={{ color: "var(--red-500)", marginTop: "20px" }}>
+              Uneli ste pogrešno korisničko ime ili šifru
+            </p>
           )}
         </StyledLogin>
       </Container>

@@ -3,14 +3,12 @@ import { getCookie } from "./cookieStorage";
 import { useEffect } from "react";
 
 export const useAuth = () => {
-  const user = getCookie("user");
+  const token = getCookie("token");
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
+    if (!token) {
       router.push("/administracija");
     }
-  }, [router, user]);
-
-  return user;
+  }, [router, token]);
 };
