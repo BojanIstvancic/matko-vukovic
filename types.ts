@@ -16,3 +16,9 @@ export enum API_Method {
   PATCH = 'patch',
   DELETE = 'dete'
 }
+
+export enum API_URL {
+  LOGIN = 'auth/login',
+  POSTS = 'posts',
+  EMPLOYEES = 'employees',
+}

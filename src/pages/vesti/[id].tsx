@@ -5,7 +5,8 @@ import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 
 import styled from "styled-components";
-import { Post } from "../../../types";
+import { API_Method, API_URL, Post } from "../../../types";
+import { apiCall } from "@/api/axios";
 
 const StyledBlogPostItem = styled.div`
   margin-bottom: 25px;
@@ -50,8 +51,8 @@ interface IParams extends ParsedUrlQuery {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as IParams;
-  const res = await fetch(`http://localhost:3000/api/v1/posts/${id}`);
-  const post = await res.json();
+  const response = await apiCall(API_URL.POSTS, API_Method.GET, null, id);
+  const post = response.data;
 
   return {
     props: {

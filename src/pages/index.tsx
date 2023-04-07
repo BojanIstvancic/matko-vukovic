@@ -10,7 +10,8 @@ import SwiperImage2 from "/public/images/pages/index/swiper-2.jpg";
 import SwiperImage3 from "/public/images/pages/index/swiper-3.jpg";
 
 import styled from "styled-components";
-import { Post } from "../../types";
+import { API_Method, API_URL, Post } from "../../types";
+import { apiCall } from "@/api/axios";
 
 const StyledHome = styled.div``;
 
@@ -231,8 +232,15 @@ const Home: React.FC<HomeProps> = ({ posts }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch("http://localhost:3000/api/v1/posts?limit=3");
-  const posts = await res.json();
+  const response = await apiCall(
+    API_URL.POSTS,
+    API_Method.GET,
+    null,
+    undefined,
+    "limit=3"
+  );
+
+  const posts = response.data;
 
   return {
     props: {

@@ -1,12 +1,22 @@
 import axios from "axios";
 import { getCookie } from "@/helpers/cookieStorage";
 
-export const apiCall = async (url, method, data) => {
+export const apiCall = async (url, method, data, param = "", options = "") => {
   const token = getCookie("token");
+
+  let apiURL = `${process.env.NEXT_PUBLIC_API_URL}${url}`;
+
+  if (param) {
+    apiURL += `/${param}`;
+  }
+
+  if (options) {
+    apiURL += `?${options}`;
+  }
 
   const response = await axios({
     method,
-    url: `${process.env.NEXT_PUBLIC_API_URL}${url}`,
+    url: apiURL,
     data,
     headers: {
       Authorization: `Bearer ${token}`,
