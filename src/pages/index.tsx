@@ -10,7 +10,8 @@ import SwiperImage2 from "/public/images/pages/index/swiper-2.jpg";
 import SwiperImage3 from "/public/images/pages/index/swiper-3.jpg";
 
 import styled from "styled-components";
-import { API_Method, API_URL, Post } from "../../types";
+import { API_Method, API_URL } from "../constants/api";
+import { Post } from "../../types";
 import { apiCall } from "@/api/axios";
 
 const StyledHome = styled.div``;

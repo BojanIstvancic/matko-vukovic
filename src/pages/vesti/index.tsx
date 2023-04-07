@@ -4,14 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import ReactPaginate from "react-paginate";
 
-import SwiperImage1 from "/public/images/pages/index/swiper-1.jpg";
-import SwiperImage2 from "/public/images/pages/index/swiper-2.jpg";
-import SwiperImage3 from "/public/images/pages/index/swiper-3.jpg";
-
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
-import { API_Method, API_URL, Post } from "../../../types";
+import { Post } from "../../../types";
+import { API_Method, API_URL } from "../../constants/api";
 import { apiCall } from "@/api/axios";
 
 const StyledBlog = styled.div`

@@ -10,7 +10,7 @@ import { setCookie, getCookie } from "@/helpers/cookieStorage";
 import { apiCall } from "../../api/axios";
 import { useRouter } from "next/router";
 
-import { API_Method } from "../../../types";
+import { API_Method } from "../../constants/api";
 
 import styled from "styled-components";
 
