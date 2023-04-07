@@ -20,7 +20,7 @@ export const links = {
     url: `/administracija/blog`,
   },
 
-  administrationZaposleni: {
+  administrationEmployees: {
     url: `/administracija/zaposleni`,
   },
 };

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Container from "./Container";
 import Image from "next/image";
 import Logo from "/public/images/logo.png";
+import { links } from "../constants/links";
 
 const StyledHeaderMain = styled.div`
   padding: 30px 0;
@@ -61,7 +62,7 @@ const HeaderMain: React.FC<{}> = () => {
       <Container>
         <HeaderMainInner>
           <InfoContainer>
-            <Link href="/" passHref>
+            <Link href={links.index.url} passHref>
               <a>
                 <Image src={Logo} alt="logo" width={150} height={90} />
               </a>

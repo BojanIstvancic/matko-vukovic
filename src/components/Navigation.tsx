@@ -1,7 +1,10 @@
 import Link from "next/link";
+import Container from "./Container";
+
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import Container from "./Container";
+
+import { links } from "../constants/links";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -69,17 +72,23 @@ const Navigation: React.FC<NavigationProps> = ({ setDisplayMobileNav }) => {
       <Container>
         <StyledNavigationInner>
           <NavigationDesktop>
-            <Link href="/" passHref>
-              <a className={asPath === "/" ? "active" : ""}>Naslovna</a>
+            <Link href={links.index.url} passHref>
+              <a className={asPath === links.index.url ? "active" : ""}>
+                Naslovna
+              </a>
             </Link>
-            <Link href="/vesti" passHref>
-              <a className={asPath === "/vesti" ? "active" : ""}>Vesti</a>
+            <Link href={links.news.url} passHref>
+              <a className={asPath === links.news.url ? "active" : ""}>Vesti</a>
             </Link>
-            <Link href="/o-skoli" passHref>
-              <a className={asPath === "/o-skoli" ? "active" : ""}>O školi</a>
+            <Link href={links.about.url} passHref>
+              <a className={asPath === links.about.url ? "active" : ""}>
+                O školi
+              </a>
             </Link>
-            <Link href="/kontakt" passHref>
-              <a className={asPath === "/kontakt" ? "active" : ""}>Kontakt</a>
+            <Link href={links.contact.url} passHref>
+              <a className={asPath === links.contact.url ? "active" : ""}>
+                Kontakt
+              </a>
             </Link>
           </NavigationDesktop>
           <NavigationHamburger onClick={() => setDisplayMobileNav(true)}>

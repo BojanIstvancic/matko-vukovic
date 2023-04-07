@@ -13,6 +13,7 @@ import styled from "styled-components";
 import { API_Method, API_URL } from "../constants/api";
 import { Post } from "../../types";
 import { apiCall } from "@/api/axios";
+import { links } from "@/constants/links";
 
 const StyledHome = styled.div``;
 
@@ -172,7 +173,7 @@ const Home: React.FC<HomeProps> = ({ posts }) => {
             <SwiperTitle>Matko Vuković</SwiperTitle>
           </SwiperSection>
           <BlogPostSection>
-            <Link href="/vesti">
+            <Link href={links.news.url}>
               <h2>Vesti</h2>
             </Link>
             <BlogPostContainer>
@@ -211,13 +212,13 @@ const Home: React.FC<HomeProps> = ({ posts }) => {
                         </linearGradient>
                       </defs>
                     </svg>
-                    <Link href={`/vesti/${item._id}`}>
+                    <Link href={`${links.news.url}/${item._id}`}>
                       <a></a>
                     </Link>
                     <span>Pročitaj</span>
                   </BlogPostImageContainer>
                   <BlogPostContent>
-                    <Link href={`/vesti/${item._id}`}>
+                    <Link href={`${links.news.url}/${item._id}`}>
                       <h3>{item.title}</h3>
                     </Link>
                     <p>{item.content.substr(0, 95)}...</p>

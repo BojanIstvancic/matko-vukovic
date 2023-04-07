@@ -10,6 +10,7 @@ import { GetServerSideProps } from "next";
 import { Post } from "../../../types";
 import { API_Method, API_URL } from "../../constants/api";
 import { apiCall } from "@/api/axios";
+import { links } from "@/constants/links";
 
 const StyledBlog = styled.div`
   margin-bottom: 25px;
@@ -169,10 +170,10 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                       layout="fill"
                       alt={`blog-post-image-${item._id}`}
                     />
-                    <a href={`/vesti/${item._id}`} />
+                    <a href={`${links.news.url}/${item._id}`} />
                   </BlogPostImageContainer>
                   <BlogPostContent>
-                    <Link href={`/vesti/${item._id}`}>
+                    <Link href={`${links.news.url}/${item._id}`}>
                       <h3>{item.title}</h3>
                     </Link>
                     <p>{item.content.substr(0, 95)}...</p>

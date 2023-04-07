@@ -1,5 +1,6 @@
 import Container from "@/components/Container";
 import Layout from "@/components/Layout";
+import { links } from "@/constants/links";
 import Link from "next/link";
 
 import styled from "styled-components";
@@ -33,7 +34,7 @@ const Error: React.FC<{}> = () => {
       <Container>
         <>
           <h1>Stranica nije pronađena</h1>
-          <Link href="/" passHref>
+          <Link href={links.index.url} passHref>
             <LinkContent>Vrati se na početnu stranicu</LinkContent>
           </Link>
         </>

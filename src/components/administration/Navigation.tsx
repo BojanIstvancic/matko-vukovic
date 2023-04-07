@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
 import Employees from "/public/images/pages/administration/employees.png";
 import Blog from "/public/images/pages/administration/blog.png";
+import { links } from "../../constants/links";
 
 const StyledNavigation = styled.div`
   display: flex;
@@ -67,17 +69,19 @@ const Navigation: React.FC<{}> = () => {
 
   return (
     <StyledNavigation>
-      <Link href="/administracija/zaposleni">
+      <Link href={links.administrationEmployees.url}>
         <NavigationItem
-          className={asPath === "/administracija/zaposleni" ? "active" : ""}
+          className={
+            asPath === links.administrationEmployees.url ? "active" : ""
+          }
         >
           <Image src={Employees} alt="employees" width={100} height={85} />
           <NavigationText>Zaposleni</NavigationText>
         </NavigationItem>
       </Link>
-      <Link href="/administracija/blog">
+      <Link href={links.administrationBlog.url}>
         <NavigationItem
-          className={asPath === "/administracija/blog" ? "active" : ""}
+          className={asPath === links.administrationBlog.url ? "active" : ""}
         >
           <Image src={Blog} alt="blog" width={100} height={85} />
           <NavigationText>Blog</NavigationText>

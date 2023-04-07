@@ -10,9 +10,10 @@ import { setCookie, getCookie } from "@/helpers/cookieStorage";
 import { apiCall } from "../../api/axios";
 import { useRouter } from "next/router";
 
-import { API_Method } from "../../constants/api";
+import { API_Method, API_URL } from "../../constants/api";
 
 import styled from "styled-components";
+import { links } from "@/constants/links";
 
 const StyledLogin = styled.div`
   display: flex;
@@ -38,11 +39,11 @@ const Login: React.FC<{}> = () => {
         password: formData.get("password"),
       };
 
-      const response = await apiCall("auth/login", API_Method.POST, apiData);
+      const response = await apiCall(API_URL.LOGIN, API_Method.POST, apiData);
 
       setCookie("token", response.data.token, 7);
 
-      router.push("/administracija/blog");
+      router.push(links.administrationBlog.url);
     } catch (e) {
       setErrorMessage(true);
     } finally {
@@ -54,7 +55,7 @@ const Login: React.FC<{}> = () => {
     const token = getCookie("token");
 
     if (token) {
-      router.push("/administracija/blog");
+      router.push(links.administrationBlog.url);
     }
   }, [router]);
 

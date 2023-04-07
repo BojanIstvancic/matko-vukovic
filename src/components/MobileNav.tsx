@@ -1,6 +1,9 @@
 import Link from "next/link";
+
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
+
+import { links } from "../constants/links";
 
 const StyledNav = styled.div<{ displayMobileNav: boolean }>`
   position: fixed;
@@ -80,33 +83,33 @@ const MobileNav: React.FC<MobileNavProps> = ({
         <NavCloseButton onClick={() => setDisplayMobileNav(false)}>
           <i className="fa fa-times" aria-hidden="true"></i>
         </NavCloseButton>
-        <Link href="/" passHref>
+        <Link href={links.index.url} passHref>
           <NavLink
-            className={asPath === "/" ? "active" : ""}
+            className={asPath === links.index.url ? "active" : ""}
             onClick={() => setDisplayMobileNav(false)}
           >
             Naslovna
           </NavLink>
         </Link>
-        <Link href="/vesti" passHref>
+        <Link href={links.news.url} passHref>
           <NavLink
-            className={asPath === "/vesti" ? "active" : ""}
+            className={asPath === links.news.url ? "active" : ""}
             onClick={() => setDisplayMobileNav(false)}
           >
             Vesti
           </NavLink>
         </Link>
-        <Link href="/o-skoli" passHref>
+        <Link href={links.about.url} passHref>
           <NavLink
-            className={asPath === "/o-skoli" ? "active" : ""}
+            className={asPath === links.about.url ? "active" : ""}
             onClick={() => setDisplayMobileNav(false)}
           >
             O školi
           </NavLink>
         </Link>
-        <Link href="/kontakt" passHref>
+        <Link href={links.contact.url} passHref>
           <NavLink
-            className={asPath === "/kontakt" ? "active" : ""}
+            className={asPath === links.contact.url ? "active" : ""}
             onClick={() => setDisplayMobileNav(false)}
           >
             Kontakt
