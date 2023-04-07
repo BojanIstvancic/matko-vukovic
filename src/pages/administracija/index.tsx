@@ -5,10 +5,12 @@ import Layout from "@/components/Layout";
 import { CircularProgress } from "@mui/material";
 import Container from "@/components/Container";
 
-import { useState } from "react";
-import { setCookie } from "@/helpers/cookieStorage";
+import { useState, useEffect } from "react";
+import { setCookie, getCookie } from "@/helpers/cookieStorage";
 import { apiCall } from "../../api/axios";
 import { useRouter } from "next/router";
+
+import { API_Method } from "../../../types";
 
 import styled from "styled-components";
 
@@ -36,7 +38,7 @@ const Login: React.FC<{}> = () => {
         password: formData.get("password"),
       };
 
-      const response = await apiCall("auth/login", "post", apiData);
+      const response = await apiCall("auth/login", API_Method.POST, apiData);
 
       setCookie("token", response.data.token, 7);
 
@@ -47,6 +49,14 @@ const Login: React.FC<{}> = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    const token = getCookie("token");
+
+    if (token) {
+      router.push("/administracija/blog");
+    }
+  }, [router]);
 
   return (
     <Layout title={"Matko Vuković | Uloguj se"} content="uloguj se">
@@ -80,6 +90,7 @@ const Login: React.FC<{}> = () => {
               disabled={isLoading}
             />
           </Form>
+
           {isLoading && (
             <CircularProgress
               style={{ color: "var(--primary)", marginTop: "20px" }}

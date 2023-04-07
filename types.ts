@@ -8,3 +8,11 @@ export interface Post {
   updatedAt: string;
   __v: string;
 }
+
+export enum API_Method {
+  GET = 'get',
+  POST = 'post',
+  PUT = 'put',
+  PATCH = 'patch',
+  DELETE = 'dete'
+}
