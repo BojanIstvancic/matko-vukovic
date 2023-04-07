@@ -7,6 +7,8 @@ import Logo from "/public/images/logo.png";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { useAuth } from "@/helpers/auth";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const StyledContainer = styled.div`
   margin-top: 40px;
@@ -19,23 +21,25 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, title, heading }) => {
-  const { asPath } = useRouter();
+  const isAuthenticated = useAuth();
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
-      <Container>
-        <StyledContainer>
-          <Image src={Logo} alt="logo" width={100} height={60} />
-          <br />
-          <h1 style={{ marginTop: "20px", display: "inline-block" }}>
-            {heading}
-          </h1>
-          {asPath !== "/administracija" && <Navigation />}
-          {children}
-        </StyledContainer>
-      </Container>
+      {isAuthenticated && (
+        <Container>
+          <StyledContainer>
+            <Image src={Logo} alt="logo" width={100} height={60} />
+            <br />
+            <h1 style={{ marginTop: "20px", display: "inline-block" }}>
+              {heading}
+            </h1>
+            <Navigation />
+            {children}
+          </StyledContainer>
+        </Container>
+      )}
     </>
   );
 };
