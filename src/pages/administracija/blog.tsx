@@ -50,15 +50,11 @@ const BlogPostImageContainer = styled.div`
   }
 `;
 const BlogPostContent = styled.div`
-  h3 {
-    transition: all 0.3s ease 0s;
-    margin-bottom: 10px;
+  margin-right: 25px;
+  flex: 1;
 
-    &:hover,
-    &:focus {
-      cursor: pointer;
-      color: var(--primary);
-    }
+  h3 {
+    margin-bottom: 10px;
 
     @media (max-width: 599px) {
       font-size: 16px;
@@ -80,6 +76,7 @@ export interface BlogProps {
 
 const Blog: React.FC<BlogProps> = ({ posts }) => {
   const blogPosts: Post[] = posts.posts;
+
   return (
     <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
       <StyledBlog>
@@ -109,11 +106,14 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                 <a href={`${links.news.url}/${item._id}`} />
               </BlogPostImageContainer>
               <BlogPostContent>
-                <Link href={`${links.news.url}/${item._id}`}>
-                  <h3>{item.title}</h3>
-                </Link>
+                <h3>{item.title}</h3>
                 <p>{item.content.substr(0, 100)}...</p>
               </BlogPostContent>
+              <Button
+                text="Modifikuj post"
+                variant="contained"
+                className="edit"
+              />
             </BlogPost>
           ))}
         </BlogPostContainer>

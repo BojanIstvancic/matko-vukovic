@@ -10,6 +10,15 @@ const StyledButton = styled(Button)`
   &:focus {
     background-color: var(--green-700);
   }
+
+  &.edit {
+    background-color: var(--yellow-400);
+
+    &:hover,
+    &:focus {
+      background-color: var(--yellow-600);
+    }
+  }
 `;
 
 export interface ButtonWrapperProps extends ButtonProps {

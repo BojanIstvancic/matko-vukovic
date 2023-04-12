@@ -29,6 +29,13 @@ const GlobalStyle = createGlobalStyle`
 
   --red-500: #EA4335;
 
+  --yellow-100: #FFFBEE;
+  --yellow-200: #FEF2D2;
+  --yellow-300: #FFE5A0;
+  --yellow-400: #FFD752;
+  --yellow-500: #FFCD44;
+  --yellow-600: #FFC01D;
+
   --primary: var(--green-600);
   --secondary: var(--green-700);
 }
