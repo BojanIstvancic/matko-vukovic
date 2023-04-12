@@ -160,27 +160,26 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
         <StyledBlog>
           <h1>Vesti</h1>
           <BlogPostContainer>
-            {blogPosts &&
-              blogPosts
-                .slice(itemOffset, itemOffset + itemsPerPage)
-                .map((item) => (
-                  <BlogPost key={item._id}>
-                    <BlogPostImageContainer>
-                      <Image
-                        src={item.image}
-                        layout="fill"
-                        alt={`blog-post-image-${item._id}`}
-                      />
-                      <a href={`${links.news.url}/${item._id}`} />
-                    </BlogPostImageContainer>
-                    <BlogPostContent>
-                      <Link href={`${links.news.url}/${item._id}`}>
-                        <h3>{item.title}</h3>
-                      </Link>
-                      <p>{item.content.substr(0, 95)}...</p>
-                    </BlogPostContent>
-                  </BlogPost>
-                ))}
+            {blogPosts
+              .slice(itemOffset, itemOffset + itemsPerPage)
+              .map((item) => (
+                <BlogPost key={item._id}>
+                  <BlogPostImageContainer>
+                    <Image
+                      src={item.image}
+                      layout="fill"
+                      alt={`blog-post-image-${item._id}`}
+                    />
+                    <a href={`${links.news.url}/${item._id}`} />
+                  </BlogPostImageContainer>
+                  <BlogPostContent>
+                    <Link href={`${links.news.url}/${item._id}`}>
+                      <h3>{item.title}</h3>
+                    </Link>
+                    <p>{item.content.substr(0, 95)}...</p>
+                  </BlogPostContent>
+                </BlogPost>
+              ))}
           </BlogPostContainer>
           <PaginationContainer>
             <ReactPaginate

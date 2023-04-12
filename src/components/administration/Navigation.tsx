@@ -11,7 +11,7 @@ import { links } from "../../constants/links";
 const StyledNavigation = styled.div`
   display: flex;
 
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 
   a {
     font-size: 15px;
