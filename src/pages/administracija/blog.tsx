@@ -10,8 +10,8 @@ import { API_Method, API_URL } from "@/constants/api";
 import styled from "styled-components";
 import Image from "next/image";
 import { links } from "@/constants/links";
-import Link from "next/link";
 import { useState } from "react";
+import { Modal } from "@mui/material";
 
 const StyledBlog = styled.div``;
 
@@ -78,10 +78,19 @@ export interface BlogProps {
 const Blog: React.FC<BlogProps> = ({ posts }) => {
   const blogPosts: Post[] = posts.posts;
   const [search, setSearch] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [currentPost, setCurrentPost] = useState<null | string>(null);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
+
+  const handleOpenModal = (id: string | null = null) => {
+    setOpenModal(true);
+    setCurrentPost(id);
+  };
+
+  const handleCloseModal = () => setOpenModal(false);
 
   return (
     <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
@@ -99,7 +108,11 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
             }}
             onChange={handleSearch}
           />
-          <Button text="Dodaj post" variant="contained" />
+          <Button
+            text="Dodaj post"
+            variant="contained"
+            onClick={() => handleOpenModal()}
+          />
         </ButtonContainer>
         <BlogPostContainer>
           {blogPosts
@@ -126,10 +139,20 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                   text="Modifikuj post"
                   variant="contained"
                   className="edit"
+                  onClick={() => handleOpenModal(item._id)}
                 />
               </BlogPost>
             ))}
         </BlogPostContainer>
+
+        <Modal
+          open={openModal}
+          onClose={handleCloseModal}
+          aria-labelledby="parent-modal-title"
+          aria-describedby="parent-modal-description"
+        >
+          <>{currentPost ? <p>ima post</p> : <p>Nema post</p>}</>
+        </Modal>
       </StyledBlog>
     </Layout>
   );
