@@ -11,6 +11,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { links } from "@/constants/links";
 import Link from "next/link";
+import { useState } from "react";
 
 const StyledBlog = styled.div``;
 
@@ -76,6 +77,11 @@ export interface BlogProps {
 
 const Blog: React.FC<BlogProps> = ({ posts }) => {
   const blogPosts: Post[] = posts.posts;
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
 
   return (
     <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
@@ -91,31 +97,38 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
               maxWidth: 600,
               marginRight: 3,
             }}
+            onChange={handleSearch}
           />
           <Button text="Dodaj post" variant="contained" />
         </ButtonContainer>
         <BlogPostContainer>
-          {blogPosts.map((item) => (
-            <BlogPost key={item._id}>
-              <BlogPostImageContainer>
-                <Image
-                  src={item.image}
-                  layout="fill"
-                  alt={`blog-post-image-${item._id}`}
+          {blogPosts
+            .filter(
+              (item) =>
+                item.content.toLowerCase().includes(search.toLowerCase()) ||
+                item.title.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((item) => (
+              <BlogPost key={item._id}>
+                <BlogPostImageContainer>
+                  <Image
+                    src={item.image}
+                    layout="fill"
+                    alt={`blog-post-image-${item._id}`}
+                  />
+                  <a href={`${links.news.url}/${item._id}`} />
+                </BlogPostImageContainer>
+                <BlogPostContent>
+                  <h3>{item.title}</h3>
+                  <p>{item.content.substr(0, 100)}...</p>
+                </BlogPostContent>
+                <Button
+                  text="Modifikuj post"
+                  variant="contained"
+                  className="edit"
                 />
-                <a href={`${links.news.url}/${item._id}`} />
-              </BlogPostImageContainer>
-              <BlogPostContent>
-                <h3>{item.title}</h3>
-                <p>{item.content.substr(0, 100)}...</p>
-              </BlogPostContent>
-              <Button
-                text="Modifikuj post"
-                variant="contained"
-                className="edit"
-              />
-            </BlogPost>
-          ))}
+              </BlogPost>
+            ))}
         </BlogPostContainer>
       </StyledBlog>
     </Layout>
