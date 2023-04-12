@@ -22,11 +22,11 @@ const StyledButton = styled(Button)`
 `;
 
 export interface ButtonWrapperProps extends ButtonProps {
-  text: string;
+  children: JSX.Element | string;
 }
 
-const ButtonWrapper: React.FC<ButtonWrapperProps> = ({ text, ...rest }) => {
-  return <StyledButton {...rest}>{text}</StyledButton>;
+const ButtonWrapper: React.FC<ButtonWrapperProps> = ({ children, ...rest }) => {
+  return <StyledButton {...rest}>{children}</StyledButton>;
 };
 
 export default ButtonWrapper;

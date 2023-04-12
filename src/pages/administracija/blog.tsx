@@ -69,6 +69,17 @@ const BlogPostContent = styled.div`
   }
 `;
 
+const FormContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  min-width: 300px;
+  padding: 20px;
+  background-color: var(--white);
+`;
+
 export interface BlogProps {
   posts: {
     posts: Post[];
@@ -79,7 +90,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
   const blogPosts: Post[] = posts.posts;
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  const [currentPost, setCurrentPost] = useState<null | string>(null);
+  const [currentPost, setCurrentPost] = useState<undefined | Post>(undefined);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -87,7 +98,8 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
 
   const handleOpenModal = (id: string | null = null) => {
     setOpenModal(true);
-    setCurrentPost(id);
+    const filterCurrentPost = blogPosts.find((item) => item._id === id);
+    setCurrentPost(filterCurrentPost);
   };
 
   const handleCloseModal = () => setOpenModal(false);
@@ -108,11 +120,9 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
             }}
             onChange={handleSearch}
           />
-          <Button
-            text="Dodaj post"
-            variant="contained"
-            onClick={() => handleOpenModal()}
-          />
+          <Button variant="contained" onClick={() => handleOpenModal()}>
+            Dodaj post
+          </Button>
         </ButtonContainer>
         <BlogPostContainer>
           {blogPosts
@@ -136,11 +146,12 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                   <p>{item.content.substr(0, 100)}...</p>
                 </BlogPostContent>
                 <Button
-                  text="Modifikuj post"
                   variant="contained"
                   className="edit"
                   onClick={() => handleOpenModal(item._id)}
-                />
+                >
+                  <>Modifikuj post</>
+                </Button>
               </BlogPost>
             ))}
         </BlogPostContainer>
@@ -151,7 +162,44 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
           aria-labelledby="parent-modal-title"
           aria-describedby="parent-modal-description"
         >
-          <>{currentPost ? <p>ima post</p> : <p>Nema post</p>}</>
+          <FormContainer>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="title"
+              name="title"
+              label="Naslov"
+              autoFocus
+              defaultValue={currentPost?.title}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="content"
+              name="content"
+              label="Tekst"
+              multiline
+              maxRows={8}
+              autoComplete="password"
+              defaultValue={currentPost?.content}
+            />
+            <Image
+              src={currentPost?.image}
+              width={400}
+              height={200}
+              alt={`blog-post-image-${currentPost?._id}`}
+              style={{ marginBottom: "20px" }}
+            />
+            <br />
+            <Button variant="contained" component="label">
+              <>
+                Upload
+                <input hidden accept="image/*" multiple type="file" />
+              </>
+            </Button>
+          </FormContainer>
         </Modal>
       </StyledBlog>
     </Layout>

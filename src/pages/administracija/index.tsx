@@ -70,18 +70,18 @@ const Login: React.FC<{}> = () => {
               required
               fullWidth
               id="name"
-              label="Korisničko ime"
               name="name"
+              label="Korisničko ime"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
+              id="password"
               name="password"
               label="Šifra"
               type="password"
-              id="password"
               autoComplete="password"
             />
             <Button
@@ -90,9 +90,10 @@ const Login: React.FC<{}> = () => {
               }}
               type="submit"
               variant="contained"
-              text="Uloguj se"
               disabled={isLoading}
-            />
+            >
+              Uloguj se
+            </Button>
           </Form>
 
           {isLoading && (
