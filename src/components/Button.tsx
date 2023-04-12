@@ -2,9 +2,9 @@ import Button, { ButtonProps } from "@mui/material/Button";
 import styled from "styled-components";
 
 const StyledButton = styled(Button)`
-  margin-top: 20px;
-
+  font-size: 1rem;
   background-color: var(--primary);
+  text-transform: none;
 
   &:hover,
   &:focus {

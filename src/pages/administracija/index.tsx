@@ -85,6 +85,9 @@ const Login: React.FC<{}> = () => {
               autoComplete="password"
             />
             <Button
+              sx={{
+                marginTop: 2,
+              }}
               type="submit"
               variant="contained"
               text="Uloguj se"
