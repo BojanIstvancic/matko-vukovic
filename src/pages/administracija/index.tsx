@@ -14,7 +14,6 @@ import { API_Method, API_URL } from "../../constants/api";
 
 import styled from "styled-components";
 import { links } from "@/constants/links";
-import { FormikBasic } from "@/components/Form";
 
 const StyledLogin = styled.div`
   display: flex;
@@ -108,9 +107,6 @@ const Login: React.FC<{}> = () => {
               Uneli ste pogrešno korisničko ime ili šifru
             </p>
           )}
-
-          <FormikBasic />
-          {/* remove this later */}
         </StyledLogin>
       </Container>
     </Layout>
