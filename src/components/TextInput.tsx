@@ -1,6 +1,6 @@
 import { ErrorMessage, useField } from "formik";
 
-interface InputProps {
+interface TextInputProps {
   name: string;
   type: string;
   placeholder?: string;
@@ -8,7 +8,7 @@ interface InputProps {
   // if we add some custom property that's not defined already (name, type, placeholder)
 }
 
-export const CustomTextInput = ({ ...props }: InputProps) => {
+const TextInput = ({ ...props }: TextInputProps) => {
   const [field] = useField(props);
   /*
   returns an array with three positions
@@ -24,3 +24,5 @@ export const CustomTextInput = ({ ...props }: InputProps) => {
     </>
   );
 };
+
+export default TextInput;

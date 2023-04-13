@@ -19,6 +19,8 @@ const StyledLogin = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  padding-bottom: 20px;
 `;
 
 const Login: React.FC<{}> = () => {

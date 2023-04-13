@@ -1,11 +1,11 @@
 export interface InputProps {
   name: string;
-  value: string | number | boolean;
+  value: string | number;
   placeholder?: string;
   label?: string;
 
   type: "text" | "email" | "password" | "select"; // which compoonent to render
-  typeValue?: "string" | "boolean"; // what type of data to assign to instance of Yup
+  typeValue?: "string" ; // what type of data to assign to instance of Yup
   options?: Opt[]; // select options
   validations: Validation[]; // validation rules
 }
@@ -17,8 +17,8 @@ export interface Opt {
 
 export interface Validation {
   // validation rules for yup
-  type: "required" | "isEmail" | "minLength" | "isTrue";
-  value?: string | number | boolean;
+  type: "required" | "minLength";
+  value?: string | number ;
   message: string;
 }
 

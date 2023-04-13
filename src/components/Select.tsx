@@ -9,7 +9,7 @@ interface SelectProps {
 
 type Opt = { value: string | number; desc: string };
 
-export const Select = ({ label, options, name, ...props }: SelectProps) => {
+const Select = ({ label, options, name, ...props }: SelectProps) => {
   const [field] = useField(name);
 
   return (
@@ -31,3 +31,5 @@ export const Select = ({ label, options, name, ...props }: SelectProps) => {
     </>
   );
 };
+
+export default Select;
