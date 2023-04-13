@@ -2,7 +2,7 @@ import Layout from "@/components/administration/Layout";
 import Button from "../../components/Button";
 import TextField from "../../components/TextField";
 
-import { Post } from "../../../types";
+import { Post } from "../../constants/types";
 import { GetServerSideProps } from "next";
 import { apiCall } from "@/api/axios";
 import { API_Method, API_URL } from "@/constants/api";

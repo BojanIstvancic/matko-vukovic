@@ -5,7 +5,7 @@ import { GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 
 import styled from "styled-components";
-import { Post } from "../../../types";
+import { Post } from "../../constants/types";
 import { API_Method, API_URL } from "../../constants/api";
 import { apiCall } from "@/api/axios";
 

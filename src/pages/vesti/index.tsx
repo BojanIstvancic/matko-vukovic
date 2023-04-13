@@ -7,7 +7,7 @@ import ReactPaginate from "react-paginate";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
-import { Post } from "../../../types";
+import { Post } from "../../constants/types";
 import { API_Method, API_URL } from "../../constants/api";
 import { apiCall } from "@/api/axios";
 import { links } from "@/constants/links";

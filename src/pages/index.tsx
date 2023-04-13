@@ -11,7 +11,7 @@ import SwiperImage3 from "/public/images/pages/index/swiper-3.jpg";
 
 import styled from "styled-components";
 import { API_Method, API_URL } from "../constants/api";
-import { Post } from "../../types";
+import { Post } from "../constants/types";
 import { apiCall } from "@/api/axios";
 import { links } from "@/constants/links";
 
