@@ -1,4 +1,45 @@
+import styled from "@emotion/styled";
 import { ErrorMessage, useField } from "formik";
+
+const StyledTextInputContainer = styled.div`
+  position: relative;
+  padding-bottom: 5px;
+  margin-bottom: 23px;
+`;
+
+const StyledTextInput = styled.input`
+  display: block;
+  font-size: 15px;
+  padding: 15px;
+  border-radius: 4px;
+
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 5px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+
+  transition: all 500ms ease;
+
+  border: 1px solid var(--gray-300);
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: var(--green-700);
+    outline: none;
+  }
+`;
+
+const TextInputErrrorMessage = styled(ErrorMessage)`
+  position: absolute;
+  top: 100%;
+  left: 15px;
+  font-size: 12px;
+  color: var(--red-500);
+`;
 
 interface TextInputProps {
   name: string;
@@ -18,10 +59,10 @@ const TextInput = ({ ...props }: TextInputProps) => {
   */
 
   return (
-    <>
-      <input {...field} {...props} />
-      <ErrorMessage name={props.name} component="span" className="error" />
-    </>
+    <StyledTextInputContainer>
+      <StyledTextInput {...field} {...props} />
+      <TextInputErrrorMessage name={props.name} component="span" />
+    </StyledTextInputContainer>
   );
 };
 

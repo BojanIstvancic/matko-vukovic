@@ -1,5 +1,4 @@
-import Form from "@mui/material/Box";
-import Button from "../../components/Button";
+import Form from "../../components/Form";
 import TextField from "../../components/TextField";
 import Layout from "@/components/Layout";
 import { CircularProgress } from "@mui/material";
@@ -23,22 +22,23 @@ const StyledLogin = styled.div`
   padding-bottom: 20px;
 `;
 
+type formValues = {
+  name: string;
+  password: string;
+};
+
 const Login: React.FC<{}> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
+  const handleSubmit = async ({ name, password }: formValues) => {
     try {
       setIsLoading(true);
 
       const apiData = {
-        name: formData.get("name"),
-        password: formData.get("password"),
+        name,
+        password,
       };
 
       const response = await apiCall(API_URL.LOGIN, API_Method.POST, apiData);
@@ -65,39 +65,12 @@ const Login: React.FC<{}> = () => {
     <Layout title={"Matko Vuković | Uloguj se"} content="uloguj se">
       <Container>
         <StyledLogin>
-          <h1 style={{ width: "100%" }}>Uloguj se</h1>
-          <Form component="form" onSubmit={handleSubmit} noValidate>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              name="name"
-              label="Korisničko ime"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="password"
-              name="password"
-              label="Šifra"
-              type="password"
-              autoComplete="password"
-            />
-            <Button
-              sx={{
-                marginTop: 2,
-              }}
-              type="submit"
-              variant="contained"
-              disabled={isLoading}
-            >
-              Uloguj se
-            </Button>
-          </Form>
-
+          <Form
+            formName="Uloguj se"
+            formType="login"
+            buttonName="Uloguj se"
+            handleSubmit={handleSubmit}
+          />
           {isLoading && (
             <CircularProgress
               style={{ color: "var(--primary)", marginTop: "20px" }}

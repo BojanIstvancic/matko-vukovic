@@ -46,7 +46,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 html {
-  font-family: 'open sans', arial, sans-serif;
+  font-family: "open sans", arial, sans-serif;
   color: var(--gray-500);
 }
 
