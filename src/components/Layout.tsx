@@ -13,7 +13,7 @@ const StyledLayout = styled.div`
 `;
 
 interface LayoutProps {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
   title: string;
   content: string;
 }
