@@ -7,8 +7,12 @@ const generateValidations = (field: InputProps) => {
 
   for (const rule of field.validations) {
     switch (rule.type) {
-        case "minLength": schema.min(rule?.value as number, rule.message); break;
-        default: schema = schema.required(rule.message); break;
+        case "minLength": 
+          schema = schema.min(rule.value as number, rule.message); 
+        break;
+        default: 
+          schema = schema.required(rule.message); 
+        break;
     }
   }
 

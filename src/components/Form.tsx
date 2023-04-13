@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import Select from "./Select";
 import TextInput from "./TextInput";
 import { getInputs } from "@/utils/getInputs";
+import Button from "./Button";
 
 export interface FormikDynamicProps {
   formName: string;
@@ -55,9 +56,7 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
               }
             })}
 
-            <button className="btn" type="submit">
-              {buttonName}
-            </button>
+            <Button>{buttonName}</Button>
           </Form>
         )}
       </Formik>

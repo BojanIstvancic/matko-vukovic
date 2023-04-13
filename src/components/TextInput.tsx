@@ -15,7 +15,6 @@ const StyledTextInput = styled.input`
 
   width: 100%;
   max-width: 400px;
-  margin-bottom: 5px;
   border-top-style: hidden;
   border-right-style: hidden;
   border-left-style: hidden;

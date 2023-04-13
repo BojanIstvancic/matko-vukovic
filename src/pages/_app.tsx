@@ -45,7 +45,7 @@ const GlobalStyle = createGlobalStyle`
     color: var(--white);
 }
 
-html {
+html, input {
   font-family: "open sans", arial, sans-serif;
   color: var(--gray-500);
 }

@@ -1,6 +1,6 @@
 import Layout from "@/components/administration/Layout";
 import Button from "../../components/Button";
-import TextField from "../../components/TextField";
+import TextInput from "../../components/TextInput";
 
 import { Post } from "../../constants/types";
 import { GetServerSideProps } from "next";
@@ -107,23 +107,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
   return (
     <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
       <StyledBlog>
-        <ButtonContainer>
-          <TextField
-            name="search"
-            label="Pronađi post"
-            type="text"
-            id="search"
-            sx={{
-              flexGrow: 1,
-              maxWidth: 600,
-              marginRight: 3,
-            }}
-            onChange={handleSearch}
-          />
-          <Button variant="contained" onClick={() => handleOpenModal()}>
-            Dodaj post
-          </Button>
-        </ButtonContainer>
+        <ButtonContainer></ButtonContainer>
         <BlogPostContainer>
           {blogPosts
             .filter(
@@ -145,11 +129,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                   <h3>{item.title}</h3>
                   <p>{item.content.substr(0, 100)}...</p>
                 </BlogPostContent>
-                <Button
-                  variant="contained"
-                  className="edit"
-                  onClick={() => handleOpenModal(item._id)}
-                >
+                <Button>
                   <>Modifikuj post</>
                 </Button>
               </BlogPost>
@@ -163,37 +143,8 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
           aria-describedby="parent-modal-description"
         >
           <FormContainer>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="title"
-              name="title"
-              label="Naslov"
-              autoFocus
-              defaultValue={currentPost?.title}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="content"
-              name="content"
-              label="Tekst"
-              multiline
-              maxRows={8}
-              autoComplete="password"
-              defaultValue={currentPost?.content}
-            />
-            <Image
-              src={currentPost?.image}
-              width={400}
-              height={200}
-              alt={`blog-post-image-${currentPost?._id}`}
-              style={{ marginBottom: "20px" }}
-            />
             <br />
-            <Button variant="contained" component="label">
+            <Button>
               <>
                 Upload
                 <input hidden accept="image/*" multiple type="file" />

@@ -52,7 +52,7 @@ export const forms: { [x: string]: InputProps[] } =
             validations: [
                 {
                     type: "minLength",
-                    value: 5,
+                    value: 8,
                     message: "Min. 8 karaktera",
                 },
                 {

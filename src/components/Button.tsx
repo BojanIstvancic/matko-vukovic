@@ -1,32 +1,37 @@
-import Button, { ButtonProps } from "@mui/material/Button";
 import styled from "styled-components";
 
-const StyledButton = styled(Button)`
-  font-size: 1rem;
+const StyledButton = styled.button`
+  font-size: 15px;
+  color: var(--white);
+
+  min-height: 30px;
+  min-width: 64px;
+  padding: 6px 8px;
+
+  border-radius: 4px;
   background-color: var(--primary);
-  text-transform: none;
+
+  outline: 0;
+  border: 0;
+  transition: all 500ms ease;
+  cursor: pointer;
 
   &:hover,
   &:focus {
     background-color: var(--green-700);
   }
-
-  &.edit {
-    background-color: var(--yellow-400);
-
-    &:hover,
-    &:focus {
-      background-color: var(--yellow-600);
-    }
-  }
 `;
 
-export interface ButtonWrapperProps extends ButtonProps {
+export interface ButtonProps {
   children: JSX.Element | string;
 }
 
-const ButtonWrapper: React.FC<ButtonWrapperProps> = ({ children, ...rest }) => {
-  return <StyledButton {...rest}>{children}</StyledButton>;
+const Button: React.FC<ButtonProps> = ({ children, ...rest }) => {
+  return (
+    <StyledButton {...rest} type="submit">
+      {children}
+    </StyledButton>
+  );
 };
 
-export default ButtonWrapper;
+export default Button;
