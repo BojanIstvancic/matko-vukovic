@@ -20,15 +20,31 @@ const StyledButton = styled.button`
   &:focus {
     background-color: var(--green-700);
   }
+
+  &.edit {
+    background-color: var(--yellow-400);
+
+    &:hover,
+    &:focus {
+      background-color: var(--yellow-600);
+    }
+  }
 `;
 
 export interface ButtonProps {
   children: JSX.Element | string;
+  type?: "button" | "submit";
+  buttonType?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, ...rest }) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  type = "button",
+  buttonType,
+  ...rest
+}) => {
   return (
-    <StyledButton {...rest} type="submit">
+    <StyledButton className={buttonType} type={type} {...rest}>
       {children}
     </StyledButton>
   );

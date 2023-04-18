@@ -56,7 +56,7 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
               }
             })}
 
-            <Button>{buttonName}</Button>
+            <Button type="submit">{buttonName}</Button>
           </Form>
         )}
       </Formik>

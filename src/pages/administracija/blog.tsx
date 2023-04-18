@@ -1,6 +1,5 @@
 import Layout from "@/components/administration/Layout";
 import Button from "../../components/Button";
-import TextInput from "../../components/TextInput";
 
 import { Post } from "../../constants/types";
 import { GetServerSideProps } from "next";
@@ -107,7 +106,9 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
   return (
     <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
       <StyledBlog>
-        <ButtonContainer></ButtonContainer>
+        <ButtonContainer>
+          <Button>Dodaj post</Button>
+        </ButtonContainer>
         <BlogPostContainer>
           {blogPosts
             .filter(
@@ -129,9 +130,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                   <h3>{item.title}</h3>
                   <p>{item.content.substr(0, 100)}...</p>
                 </BlogPostContent>
-                <Button>
-                  <>Modifikuj post</>
-                </Button>
+                <Button buttonType="edit">Modifikuj post</Button>
               </BlogPost>
             ))}
         </BlogPostContainer>
