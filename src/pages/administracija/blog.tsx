@@ -68,6 +68,10 @@ const BlogPostContent = styled.div`
   }
 `;
 
+const BlogTextInput = styled.input`
+  margin-right: 25px;
+`;
+
 const FormContainer = styled.div`
   position: absolute;
   top: 50%;
@@ -107,6 +111,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
       <StyledBlog>
         <ButtonContainer>
+          <BlogTextInput placeholder="Pronađi post" onChange={handleSearch} />
           <Button>Dodaj post</Button>
         </ButtonContainer>
         <BlogPostContainer>

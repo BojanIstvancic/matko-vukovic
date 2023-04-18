@@ -9,27 +9,7 @@ const StyledTextInputContainer = styled.div`
 
 const StyledTextInput = styled.input`
   display: block;
-  font-size: 15px;
-  padding: 15px;
-  border-radius: 4px;
-
-  width: 100%;
   max-width: 400px;
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: hidden;
-
-  transition: all 500ms ease;
-
-  border: 1px solid var(--gray-300);
-
-  &:hover,
-  &:active,
-  &:focus {
-    border-color: var(--green-700);
-    outline: none;
-  }
 `;
 
 const TextInputErrrorMessage = styled(ErrorMessage)`

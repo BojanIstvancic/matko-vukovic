@@ -98,6 +98,30 @@ p {
   margin-bottom: 5px;
   color: var(---gray-400);
 }
+
+input {
+  font-size: 15px;
+  padding: 15px;
+  border-radius: 4px;
+
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+
+  width: 100%;
+
+  transition: all 500ms ease;
+
+  border: 1px solid var(--gray-300);
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: var(--green-700);
+    outline: none;
+  }
+}
 `;
 
 export default function App({ Component, pageProps }: AppProps) {
