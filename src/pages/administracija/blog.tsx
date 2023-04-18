@@ -135,7 +135,9 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                   <h3>{item.title}</h3>
                   <p>{item.content.substr(0, 100)}...</p>
                 </BlogPostContent>
-                <Button buttonType="edit">Modifikuj post</Button>
+                <Button buttonType="edit" clickFunction={handleOpenModal}>
+                  Modifikuj post
+                </Button>
               </BlogPost>
             ))}
         </BlogPostContainer>
@@ -146,15 +148,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
           aria-labelledby="parent-modal-title"
           aria-describedby="parent-modal-description"
         >
-          <FormContainer>
-            <br />
-            <Button>
-              <>
-                Upload
-                <input hidden accept="image/*" multiple type="file" />
-              </>
-            </Button>
-          </FormContainer>
+          <FormContainer></FormContainer>
         </Modal>
       </StyledBlog>
     </Layout>

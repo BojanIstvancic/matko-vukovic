@@ -36,16 +36,23 @@ export interface ButtonProps {
   children: JSX.Element | string;
   type?: "button" | "submit";
   buttonType?: string;
+  clickFunction?: (arg: any) => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   type = "button",
   buttonType,
+  clickFunction,
   ...rest
 }) => {
   return (
-    <StyledButton className={buttonType} type={type} {...rest}>
+    <StyledButton
+      className={buttonType}
+      type={type}
+      onClick={clickFunction}
+      {...rest}
+    >
       {children}
     </StyledButton>
   );
