@@ -10,6 +10,9 @@ const generateValidations = (field: InputProps) => {
         case "minLength": 
           schema = schema.min(rule.value as number, rule.message); 
         break;
+        case "maxLength": 
+        schema = schema.max(rule.value as number, rule.message); 
+      break;
         default: 
           schema = schema.required(rule.message); 
         break;

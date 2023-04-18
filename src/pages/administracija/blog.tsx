@@ -1,5 +1,7 @@
 import Layout from "@/components/administration/Layout";
 import Button from "../../components/Button";
+import { Modal } from "@mui/material";
+import Form from "../../components/Form";
 
 import { Post } from "../../constants/types";
 import { GetServerSideProps } from "next";
@@ -10,7 +12,6 @@ import styled from "styled-components";
 import Image from "next/image";
 import { links } from "@/constants/links";
 import { useState } from "react";
-import { Modal } from "@mui/material";
 
 const StyledBlog = styled.div``;
 
@@ -148,7 +149,15 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
           aria-labelledby="parent-modal-title"
           aria-describedby="parent-modal-description"
         >
-          <FormContainer></FormContainer>
+          <FormContainer>
+            <Form
+              formName="Doradi post"
+              formType="editPost"
+              buttonName="Sačuvaj izmene"
+              buttonType="edit"
+              handleSubmit={() => console.log("yo")}
+            />
+          </FormContainer>
         </Modal>
       </StyledBlog>
     </Layout>

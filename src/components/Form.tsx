@@ -9,6 +9,7 @@ export interface FormikDynamicProps {
   formType: string;
   handleSubmit: (values: any) => void;
   buttonName: string;
+  buttonType?: string;
 }
 
 const FormikDynamic: React.FC<FormikDynamicProps> = ({
@@ -16,6 +17,7 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
   formType,
   handleSubmit,
   buttonName,
+  buttonType,
 }) => {
   const { initialValues, inputs, validationSchema } = getInputs(formType);
   // create getInputs function
@@ -56,7 +58,9 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
               }
             })}
 
-            <Button type="submit">{buttonName}</Button>
+            <Button type="submit" buttonType={buttonType}>
+              {buttonName}
+            </Button>
           </Form>
         )}
       </Formik>

@@ -17,8 +17,8 @@ export interface Opt {
 
 export interface Validation {
   // validation rules for yup
-  type: "required" | "minLength";
-  value?: string | number ;
+  type: "required" | "minLength" | "maxLength";
+  value?: string | number;
   message: string;
 }
 
@@ -63,4 +63,40 @@ export const forms: { [x: string]: InputProps[] } =
 
         }
     ],
+    editPost: [
+        {
+            type: "text",
+            name: "title",
+            placeholder: "Naslov",
+            value: "",
+            validations: [
+                {
+                    type: "maxLength",
+                    value: 50,
+                    message: "Max. 50 karaktera",
+                },
+                {
+                    type: "required",
+                    message: "Naslov je obavezan"
+                },
+            ],
+        },
+        {
+            type: "text",
+            name: "content",
+            placeholder: "Sadržaj",
+            value: "",
+            validations: [
+                {
+                    type: "minLength",
+                    value: 300,
+                    message: "Min. 300 karaktera",
+                },
+                {
+                    type: "required",
+                    message: "Sadržaj je obavezan"
+                },
+            ],
+        },
+    ]
 }
