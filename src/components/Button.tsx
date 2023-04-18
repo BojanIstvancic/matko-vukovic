@@ -30,6 +30,16 @@ const StyledButton = styled.button`
       background-color: var(--yellow-600);
     }
   }
+
+  &.delete {
+    margin-right: 10px;
+    background-color: var(--red-500);
+
+    &:hover,
+    &:focus {
+      background-color: var(--red-600);
+    }
+  }
 `;
 
 export interface ButtonProps {

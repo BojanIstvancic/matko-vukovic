@@ -78,10 +78,13 @@ const FormContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
-  min-width: 300px;
   padding: 20px;
   background-color: var(--white);
+
+  &:not(.delete) {
+    width: 50%;
+    min-width: 300px;
+  }
 `;
 
 export interface BlogProps {
@@ -95,25 +98,32 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [currentPost, setCurrentPost] = useState<undefined | Post>(undefined);
+  const [currentAction, setCurrentAction] = useState("");
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
 
-  const handleOpenModal = (id: string | null = null) => {
-    setOpenModal(true);
+  const handleOpenModal = (id: string | null = null, action: string) => {
     const filterCurrentPost = blogPosts.find((item) => item._id === id);
     setCurrentPost(filterCurrentPost);
+
+    setCurrentAction(action);
+    setOpenModal(true);
   };
 
   const handleCloseModal = () => setOpenModal(false);
+
+  const handleDeletePost = () => {
+    console.log(currentPost, "delete post");
+  };
 
   return (
     <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
       <StyledBlog>
         <ButtonContainer>
           <BlogTextInput placeholder="Pronađi post" onChange={handleSearch} />
-          <Button>Dodaj</Button>
+          <Button>Napravi nov post</Button>
         </ButtonContainer>
         <BlogPostContainer>
           {blogPosts
@@ -137,8 +147,14 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                   <p>{item.content.substr(0, 100)}...</p>
                 </BlogPostContent>
                 <Button
+                  buttonType="delete"
+                  clickFunction={() => handleOpenModal(item._id, "delete")}
+                >
+                  Obrisi
+                </Button>
+                <Button
                   buttonType="edit"
-                  clickFunction={() => handleOpenModal(item._id)}
+                  clickFunction={() => handleOpenModal(item._id, "edit")}
                 >
                   Modifikuj
                 </Button>
@@ -152,15 +168,29 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
           aria-labelledby="parent-modal-title"
           aria-describedby="parent-modal-description"
         >
-          <FormContainer>
-            <Form
-              formName="Doradi post"
-              formType="editPost"
-              buttonName="Sačuvaj izmene"
-              buttonType="edit"
-              customInitialValues={currentPost}
-              handleSubmit={() => console.log("yo")}
-            />
+          <FormContainer className={currentAction}>
+            {currentAction === "edit" && (
+              <Form
+                formName="Doradi post"
+                formType="editPost"
+                buttonName="Sačuvaj izmene"
+                buttonType="edit"
+                customInitialValues={currentPost}
+                handleSubmit={() => console.log("yo")}
+              />
+            )}
+
+            {currentAction === "delete" && (
+              <>
+                <h3>Potvrdite brisanje posta</h3>
+                <Button
+                  buttonType="delete"
+                  clickFunction={() => handleDeletePost()}
+                >
+                  Potvrdi
+                </Button>
+              </>
+            )}
           </FormContainer>
         </Modal>
       </StyledBlog>
