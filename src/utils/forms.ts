@@ -4,7 +4,7 @@ export interface InputProps {
   placeholder?: string;
   label?: string;
 
-  type: "text" | "password" | "select"; // which compoonent to render
+  type: "text" | "password" | "select" | "textarea"; // which compoonent to render
   typeValue?: "string" ; // what type of data to assign to instance of Yup
   options?: Opt[]; // select options
   validations: Validation[]; // validation rules
@@ -82,7 +82,7 @@ export const forms: { [x: string]: InputProps[] } =
             ],
         },
         {
-            type: "text",
+            type: "textarea",
             name: "content",
             placeholder: "Sadržaj",
             value: "",

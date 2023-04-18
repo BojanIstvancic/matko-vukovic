@@ -99,7 +99,8 @@ p {
   color: var(---gray-400);
 }
 
-input {
+input,
+textarea {
   font-size: 15px;
   padding: 15px;
   border-radius: 4px;

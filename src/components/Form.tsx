@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import Select from "./Select";
 import TextInput from "./TextInput";
+import TextArea from "./TextArea";
 import { getInputs } from "@/utils/getInputs";
 import Button from "./Button";
 
@@ -44,6 +45,15 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
                       label={props.label!}
                       name={name}
                       options={props.options!}
+                    />
+                  );
+                case "textarea":
+                  return (
+                    <TextArea
+                      key={name}
+                      name={name}
+                      placeholder={props.placeholder}
+                      type={type}
                     />
                   );
                 default:
