@@ -104,7 +104,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     setSearch(event.target.value);
   };
 
-  const handleOpenModal = (id: string | null = null, action: string) => {
+  const handleOpenModal = (action: string, id: string | null = null) => {
     const filterCurrentPost = blogPosts.find((item) => item._id === id);
     setCurrentPost(filterCurrentPost);
 
@@ -123,7 +123,9 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
       <StyledBlog>
         <ButtonContainer>
           <BlogTextInput placeholder="Pronađi post" onChange={handleSearch} />
-          <Button>Napravi nov post</Button>
+          <Button clickFunction={() => handleOpenModal("add")}>
+            Napravi nov post
+          </Button>
         </ButtonContainer>
         <BlogPostContainer>
           {blogPosts
@@ -148,13 +150,13 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                 </BlogPostContent>
                 <Button
                   buttonType="delete"
-                  clickFunction={() => handleOpenModal(item._id, "delete")}
+                  clickFunction={() => handleOpenModal("delete", item._id)}
                 >
                   Obrisi
                 </Button>
                 <Button
                   buttonType="edit"
-                  clickFunction={() => handleOpenModal(item._id, "edit")}
+                  clickFunction={() => handleOpenModal("edit", item._id)}
                 >
                   Modifikuj
                 </Button>
@@ -169,6 +171,14 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
           aria-describedby="parent-modal-description"
         >
           <FormContainer className={currentAction}>
+            {currentAction === "add" && (
+              <Form
+                formName="Napravi nov post"
+                formType="addPost"
+                buttonName="Napravi post"
+                handleSubmit={() => console.log("yo")}
+              />
+            )}
             {currentAction === "edit" && (
               <Form
                 formName="Doradi post"
