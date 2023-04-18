@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import Select from "./Select";
 import TextInput from "./TextInput";
 import TextArea from "./TextArea";
+import UploadInput from "./UploadInput";
 import { getInputs } from "@/utils/getInputs";
 import Button from "./Button";
 
@@ -28,7 +29,6 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
   // create handle Submit o
   // add create dynamic add Image input
 
-  console.log(customInitialValues, "llal");
   if (customInitialValues) {
     initialValues = customInitialValues;
   }
@@ -64,6 +64,8 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
                       type={type}
                     />
                   );
+                case "file":
+                  return <UploadInput key={name} name={name} type={type} />;
                 default:
                   return (
                     <TextInput
