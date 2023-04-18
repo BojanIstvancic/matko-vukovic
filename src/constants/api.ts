@@ -3,7 +3,7 @@ export enum API_Method {
   POST = "post",
   PUT = "put",
   PATCH = "patch",
-  DELETE = "dete"
+  DELETE = "delete"
 }
 
 export enum API_URL {

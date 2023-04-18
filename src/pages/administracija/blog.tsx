@@ -94,7 +94,7 @@ export interface BlogProps {
 }
 
 const Blog: React.FC<BlogProps> = ({ posts }) => {
-  const blogPosts: Post[] = posts.posts;
+  const [blogPosts, setBlogPosts] = useState<Post[]>(posts.posts);
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [currentPost, setCurrentPost] = useState<undefined | Post>(undefined);
@@ -114,8 +114,26 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
 
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleDeletePost = () => {
-    console.log(currentPost, "delete post");
+  const handleDeletePost = async () => {
+    try {
+      const response = await apiCall(
+        API_URL.POSTS,
+        API_Method.DELETE,
+        null,
+        currentPost?._id
+      );
+
+      const post = response.data.post;
+
+      const blogPostsWithoutDeletedItem = blogPosts.filter(
+        (item) => item._id !== post._id
+      );
+      setBlogPosts(blogPostsWithoutDeletedItem);
+
+      setOpenModal(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -180,23 +198,22 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
               />
             )}
             {currentAction === "edit" && (
-              <Form
-                formName="Doradi post"
-                formType="editPost"
-                buttonName="Sačuvaj izmene"
-                buttonType="edit"
-                customInitialValues={currentPost}
-                handleSubmit={() => console.log("yo")}
-              />
+              <>
+                <Form
+                  formName="Doradi post"
+                  formType="editPost"
+                  buttonName="Sačuvaj izmene"
+                  buttonType="edit"
+                  customInitialValues={currentPost}
+                  handleSubmit={() => console.log("yo")}
+                />
+              </>
             )}
 
             {currentAction === "delete" && (
               <>
                 <h3>Potvrdite brisanje posta</h3>
-                <Button
-                  buttonType="delete"
-                  clickFunction={() => handleDeletePost()}
-                >
+                <Button buttonType="delete" clickFunction={handleDeletePost}>
                   Potvrdi
                 </Button>
               </>
