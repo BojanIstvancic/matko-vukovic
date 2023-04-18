@@ -113,7 +113,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
       <StyledBlog>
         <ButtonContainer>
           <BlogTextInput placeholder="Pronađi post" onChange={handleSearch} />
-          <Button>Dodaj post</Button>
+          <Button>Dodaj</Button>
         </ButtonContainer>
         <BlogPostContainer>
           {blogPosts
@@ -136,8 +136,11 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                   <h3>{item.title}</h3>
                   <p>{item.content.substr(0, 100)}...</p>
                 </BlogPostContent>
-                <Button buttonType="edit" clickFunction={handleOpenModal}>
-                  Modifikuj post
+                <Button
+                  buttonType="edit"
+                  clickFunction={() => handleOpenModal(item._id)}
+                >
+                  Modifikuj
                 </Button>
               </BlogPost>
             ))}
@@ -155,6 +158,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
               formType="editPost"
               buttonName="Sačuvaj izmene"
               buttonType="edit"
+              customInitialValues={currentPost}
               handleSubmit={() => console.log("yo")}
             />
           </FormContainer>

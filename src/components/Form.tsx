@@ -11,6 +11,7 @@ export interface FormikDynamicProps {
   handleSubmit: (values: any) => void;
   buttonName: string;
   buttonType?: string;
+  customInitialValues?: { [key: string]: any } | undefined;
 }
 
 const FormikDynamic: React.FC<FormikDynamicProps> = ({
@@ -19,11 +20,18 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
   handleSubmit,
   buttonName,
   buttonType,
+  customInitialValues,
 }) => {
-  const { initialValues, inputs, validationSchema } = getInputs(formType);
+  const { inputs, validationSchema } = getInputs(formType);
+  let { initialValues } = getInputs(formType);
   // create getInputs function
   // create handle Submit o
   // add create dynamic add Image input
+
+  console.log(customInitialValues, "llal");
+  if (customInitialValues) {
+    initialValues = customInitialValues;
+  }
 
   return (
     <>

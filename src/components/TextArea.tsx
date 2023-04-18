@@ -9,7 +9,6 @@ const StyledTextAreaContainer = styled.div`
 
 const StyledTextArea = styled.textarea`
   display: block;
-  max-width: 400px;
 `;
 
 const TextAreaErrrorMessage = styled(ErrorMessage)`
