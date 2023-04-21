@@ -114,6 +114,35 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
 
   const handleCloseModal = () => setOpenModal(false);
 
+  const createPost = async (values: Post) => {
+    const data = {
+      content: values.content,
+      title: values.title,
+      file: values.image,
+    };
+
+    try {
+      const response = await apiCall(API_URL.POSTS, API_Method.POST, data);
+
+      const post = response.data.post;
+
+      console.log(post, "lala");
+
+      // const blogPostsWithoutDeletedItem = blogPosts.filter(
+      //   (item) => item._id !== post._id
+      // );
+      // setBlogPosts(blogPostsWithoutDeletedItem);
+
+      // setOpenModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editPost = (values: Post) => {
+    console.log(values, "values");
+  };
+
   const handleDeletePost = async () => {
     try {
       const response = await apiCall(
@@ -134,10 +163,6 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const editPost = (values: Post) => {
-    console.log(values, "values");
   };
 
   return (
@@ -198,7 +223,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                 formName="Napravi nov post"
                 formType="addPost"
                 buttonName="Napravi post"
-                handleSubmit={() => console.log("yo")}
+                handleSubmit={createPost}
               />
             )}
             {currentAction === "edit" && (

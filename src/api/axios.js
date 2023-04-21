@@ -14,12 +14,14 @@ export const apiCall = async (url, method, data, param = "", options = "") => {
     apiURL += `?${options}`;
   }
 
+  const contentType = data?.file ? "multipart/form-data" : "text/plain";
   const response = await axios({
     method,
     url: apiURL,
     data,
     headers: {
       Authorization: `Bearer ${token}`,
+      contentType,
     },
   });
 

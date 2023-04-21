@@ -48,7 +48,9 @@ const UploadInput = ({ ...props }: UploadInputProps) => {
         ref={fileRef}
         onChange={handleChange}
       />
-      <Image src={inputImage} alt="upload-image" width={400} height={200} />
+      {inputImage && (
+        <Image src={inputImage} alt="upload-image" width={400} height={200} />
+      )}
       <UploadInputErrrorMessage name={props.name} component="span" />
     </StyledUploadInputContainer>
   );
