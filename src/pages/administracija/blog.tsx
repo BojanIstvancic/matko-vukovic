@@ -2,6 +2,7 @@ import Layout from "@/components/administration/Layout";
 import Button from "../../components/Button";
 import { Modal } from "@mui/material";
 import Form from "../../components/Form";
+import Loading from "@/components/Loading";
 
 import { Post } from "../../constants/types";
 import { GetServerSideProps } from "next";
@@ -95,6 +96,7 @@ export interface BlogProps {
 
 const Blog: React.FC<BlogProps> = ({ posts }) => {
   const [blogPosts, setBlogPosts] = useState<Post[]>(posts.posts);
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [currentPost, setCurrentPost] = useState<undefined | Post>(undefined);
@@ -122,6 +124,8 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     };
 
     try {
+      setIsLoading(true);
+
       const response = await apiCall(API_URL.POSTS, API_Method.POST, data);
 
       const post = response.data.post;
@@ -132,6 +136,8 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     } catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   };
 
   const editPost = (values: Post) => {
@@ -140,6 +146,8 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
 
   const handleDeletePost = async () => {
     try {
+      setIsLoading(true);
+
       const response = await apiCall(
         API_URL.POSTS,
         API_Method.DELETE,
@@ -157,6 +165,8 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     } catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -241,6 +251,8 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                 </Button>
               </>
             )}
+
+            {!isLoading && <Loading />}
           </FormContainer>
         </Modal>
       </StyledBlog>

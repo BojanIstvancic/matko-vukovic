@@ -1,7 +1,7 @@
 import Form from "../../components/Form";
 import Layout from "@/components/Layout";
-import { CircularProgress } from "@mui/material";
 import Container from "@/components/Container";
+import Loading from "@/components/Loading";
 
 import { useState, useEffect } from "react";
 import { setCookie, getCookie } from "@/helpers/cookieStorage";
@@ -70,11 +70,7 @@ const Login: React.FC<{}> = () => {
             buttonName="Uloguj se"
             handleSubmit={handleSubmit}
           />
-          {isLoading && (
-            <CircularProgress
-              style={{ color: "var(--primary)", marginTop: "20px" }}
-            />
-          )}
+          {isLoading && <Loading />}
 
           {errorMessage && (
             <p style={{ color: "var(--red-500)", marginTop: "20px" }}>
