@@ -12,6 +12,9 @@ const nextConfig = {
         port: "3000",
         pathname: "/images/**",
       },
+      {
+        hostname: "",
+      },
     ],
   },
 };

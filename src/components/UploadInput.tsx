@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import { ErrorMessage, useField } from "formik";
+import { ErrorMessage, useField, useFormikContext } from "formik";
 import Image from "next/image";
+import { useRef, useState } from "react";
 
 const StyledUploadInputContainer = styled.div`
   position: relative;
@@ -27,15 +28,27 @@ interface UploadInputProps {
   [x: string]: any;
 }
 
-const UploadInput = ({ image, ...props }: UploadInputProps) => {
+const UploadInput = ({ ...props }: UploadInputProps) => {
   const [field] = useField(props);
+  const fileRef = useRef(field.value);
+  const [inputImage, setInputImage] = useState(field.value);
+
+  const { setFieldValue } = useFormikContext();
+
+  const handleChange = () => {
+    setFieldValue(field.name, fileRef.current.files[0]);
+    setInputImage(URL.createObjectURL(fileRef.current.files[0]));
+  };
 
   return (
     <StyledUploadInputContainer>
-      <StyledUploadInput {...props} />
-      {field.value && (
-        <Image src={field.value} alt="upload-image" width={400} height={200} />
-      )}
+      <StyledUploadInput
+        {...props}
+        name={field.name}
+        ref={fileRef}
+        onChange={handleChange}
+      />
+      <Image src={inputImage} alt="upload-image" width={400} height={200} />
       <UploadInputErrrorMessage name={props.name} component="span" />
     </StyledUploadInputContainer>
   );

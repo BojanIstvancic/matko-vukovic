@@ -136,6 +136,10 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     }
   };
 
+  const editPost = (values: Post) => {
+    console.log(values, "values");
+  };
+
   return (
     <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
       <StyledBlog>
@@ -205,7 +209,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                   buttonName="Sačuvaj izmene"
                   buttonType="edit"
                   customInitialValues={currentPost}
-                  handleSubmit={() => console.log("yo")}
+                  handleSubmit={editPost}
                 />
               </>
             )}
