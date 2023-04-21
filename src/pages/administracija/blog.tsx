@@ -118,22 +118,17 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     const data = {
       content: values.content,
       title: values.title,
-      file: values.image,
+      post_image: values.image,
     };
 
     try {
       const response = await apiCall(API_URL.POSTS, API_Method.POST, data);
 
       const post = response.data.post;
+      const blogPostsWithCreatedItem = [post, ...blogPosts];
+      setBlogPosts(blogPostsWithCreatedItem);
 
-      console.log(post, "lala");
-
-      // const blogPostsWithoutDeletedItem = blogPosts.filter(
-      //   (item) => item._id !== post._id
-      // );
-      // setBlogPosts(blogPostsWithoutDeletedItem);
-
-      // setOpenModal(false);
+      setOpenModal(false);
     } catch (error) {
       console.log(error);
     }
@@ -152,8 +147,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
         currentPost?._id
       );
 
-      const post = response.data.post;
-
+      const post = response?.data.post;
       const blogPostsWithoutDeletedItem = blogPosts.filter(
         (item) => item._id !== post._id
       );

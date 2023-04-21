@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getCookie } from "@/helpers/cookieStorage";
+import FormData from "form-data";
 
 export const apiCall = async (url, method, data, param = "", options = "") => {
   const token = getCookie("token");
@@ -14,11 +15,20 @@ export const apiCall = async (url, method, data, param = "", options = "") => {
     apiURL += `?${options}`;
   }
 
-  const contentType = data?.file ? "multipart/form-data" : "text/plain";
+  const formData = new FormData();
+
+  if (data) {
+    for (const [key, value] of Object.entries(data)) {
+      formData.append(key, value);
+    }
+  }
+
+  const contentType = data ? "multipart/form-data" : "text/plain";
+
   const response = await axios({
     method,
     url: apiURL,
-    data,
+    data: formData,
     headers: {
       Authorization: `Bearer ${token}`,
       contentType,
