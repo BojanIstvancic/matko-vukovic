@@ -5,6 +5,9 @@ export const links = {
   news: {
     url: `/vesti`,
   },
+  staff: {
+    url: `/zaposleni`,
+  },
   about: {
     url: `/o-skoli`,
   },

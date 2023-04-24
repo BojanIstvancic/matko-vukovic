@@ -80,6 +80,11 @@ const Navigation: React.FC<NavigationProps> = ({ setDisplayMobileNav }) => {
             <Link href={links.news.url} passHref>
               <a className={asPath === links.news.url ? "active" : ""}>Vesti</a>
             </Link>
+            <Link href={links.staff.url} passHref>
+              <a className={asPath === links.staff.url ? "active" : ""}>
+                Zaposleni
+              </a>
+            </Link>
             <Link href={links.about.url} passHref>
               <a className={asPath === links.about.url ? "active" : ""}>
                 O školi

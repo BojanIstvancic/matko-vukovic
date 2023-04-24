@@ -99,6 +99,14 @@ const MobileNav: React.FC<MobileNavProps> = ({
             Vesti
           </NavLink>
         </Link>
+        <Link href={links.staff.url} passHref>
+          <NavLink
+            className={asPath === links.staff.url ? "active" : ""}
+            onClick={() => setDisplayMobileNav(false)}
+          >
+            Zaposleni
+          </NavLink>
+        </Link>
         <Link href={links.about.url} passHref>
           <NavLink
             className={asPath === links.about.url ? "active" : ""}
