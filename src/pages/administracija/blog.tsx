@@ -140,8 +140,39 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     setIsLoading(false);
   };
 
-  const editPost = (values: Post) => {
-    console.log(values, "values");
+  const editPost = async (values: Post) => {
+    const data = {
+      content: values.content,
+      title: values.title,
+      post_image: values.image,
+    };
+
+    const param = values._id;
+
+    try {
+      setIsLoading(true);
+
+      const response = await apiCall(
+        API_URL.POSTS,
+        API_Method.PATCH,
+        data,
+        param
+      );
+
+      const post = response.data.post;
+
+      const blogPostsWithEditeddItem = blogPosts.map((item) =>
+        item._id === post._id ? post : item
+      );
+
+      setBlogPosts(blogPostsWithEditeddItem);
+
+      setOpenModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setIsLoading(false);
   };
 
   const handleDeletePost = async () => {
@@ -252,7 +283,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
               </>
             )}
 
-            {!isLoading && <Loading />}
+            {isLoading && <Loading />}
           </FormContainer>
         </Modal>
       </StyledBlog>
