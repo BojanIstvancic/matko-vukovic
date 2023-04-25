@@ -1,6 +1,9 @@
 import Layout from "@/components/administration/Layout";
 import Button from "../../components/Button";
 import Image from "next/image";
+import Loading from "@/components/Loading";
+import { Modal } from "@mui/material";
+import Form from "../../components/Form";
 
 import { useState } from "react";
 import { GetServerSideProps } from "next";
@@ -55,6 +58,20 @@ const ItemName = styled.p`
 `;
 const ItemRole = styled.p``;
 
+const FormContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: var(--white);
+
+  &:not(.delete) {
+    width: 50%;
+    min-width: 300px;
+  }
+`;
+
 const Staff: React.FC<StaffProps> = ({ employees }) => {
   const staffMembers: Employee[] = employees.employees;
   const [isLoading, setIsLoading] = useState(false);
@@ -77,6 +94,8 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
     setCurrentAction(action);
     setOpenModal(true);
   };
+
+  const handleCloseModal = () => setOpenModal(false);
 
   return (
     <Layout title={"Matko Vuković | Zaposleni"} heading={"Zaposleni"}>
@@ -112,6 +131,29 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
               </Item>
             ))}
         </ItemContainer>
+        <Modal
+          open={openModal}
+          onClose={handleCloseModal}
+          aria-labelledby="parent-modal-title"
+          aria-describedby="parent-modal-description"
+        >
+          <FormContainer className={currentAction}>
+            {currentAction === "add" && (
+              // <Form
+              //   formName="Napravi nov post"
+              //   formType="addPost"
+              //   buttonName="Napravi post"
+              //   handleSubmit={createPost}
+              // />
+              <p>add employee</p>
+            )}
+            {currentAction === "edit" && <p>edit emoloyee</p>}
+
+            {currentAction === "delete" && <p>delete emoloyee</p>}
+
+            {isLoading && <Loading />}
+          </FormContainer>
+        </Modal>
       </StyledEmployee>
     </Layout>
   );

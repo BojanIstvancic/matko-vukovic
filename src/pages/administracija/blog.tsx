@@ -262,16 +262,14 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
               />
             )}
             {currentAction === "edit" && (
-              <>
-                <Form
-                  formName="Doradi post"
-                  formType="editPost"
-                  buttonName="Sačuvaj izmene"
-                  buttonType="edit"
-                  customInitialValues={currentPost}
-                  handleSubmit={editPost}
-                />
-              </>
+              <Form
+                formName="Doradi post"
+                formType="editPost"
+                buttonName="Sačuvaj izmene"
+                buttonType="edit"
+                customInitialValues={currentPost}
+                handleSubmit={editPost}
+              />
             )}
 
             {currentAction === "delete" && (
