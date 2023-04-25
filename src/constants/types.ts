@@ -37,4 +37,8 @@ export enum Administration {
   SECRETARY = EmployeeRoles.SECRETARY,
 }
 
+export enum ProfessionalService {
+  PEDAGOGUE = EmployeeRoles.PEDAGOGUE,
+  PSYCHOLOGIST = EmployeeRoles.PSYCHOLOGIST,
+}
 

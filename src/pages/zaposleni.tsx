@@ -8,7 +8,12 @@ import Portrait from "/public/images/portrait.png";
 import { GetServerSideProps } from "next";
 import { apiCall } from "@/api/axios";
 import { API_Method, API_URL } from "@/constants/api";
-import { Administration, Employee } from "@/constants/types";
+import {
+  Administration,
+  Employee,
+  ProfessionalService,
+} from "@/constants/types";
+import { staffRoles } from "@/constants/helpers";
 
 const StyledStaff = styled.section``;
 
@@ -39,10 +44,6 @@ const Item = styled.div`
 const ItemImage = styled.div`
   position: relative;
   margin-bottom: 10px;
-
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  overflow: hidden;
 `;
 const ItemName = styled.p`
   font-weight: bold;
@@ -62,6 +63,12 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
     (member) =>
       member.role.includes(Administration.DIRECTOR) ||
       member.role.includes(Administration.SECRETARY)
+  );
+
+  const professionalService = staffMembers.filter(
+    (member) =>
+      member.role.includes(ProfessionalService.PEDAGOGUE) ||
+      member.role.includes(ProfessionalService.PSYCHOLOGIST)
   );
 
   return (
@@ -84,7 +91,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                       />
                     </ItemImage>
                     <ItemName>{`${member.firstName} ${member.lastName}`}</ItemName>
-                    <ItemRole>{member.role}</ItemRole>
+                    <ItemRole>{staffRoles[member.role]}</ItemRole>
                   </Item>
                 ))}
               </ItemContainer>
@@ -93,30 +100,20 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
           <StaffBlock>
             <StaffHeading>Stručna služba</StaffHeading>
             <ItemContainer>
-              <Item>
-                <ItemImage>
-                  <Image
-                    src={Portrait}
-                    alt="velika-skola"
-                    width={640}
-                    height={640}
-                  />
-                </ItemImage>
-                <ItemName>Svetlana Prezime</ItemName>
-                <ItemRole>Pedagog</ItemRole>
-              </Item>
-              <Item>
-                <ItemImage>
-                  <Image
-                    src={Portrait}
-                    alt="velika-skola"
-                    width={640}
-                    height={640}
-                  />
-                </ItemImage>
-                <ItemName>Ceca Prezime</ItemName>
-                <ItemRole>Psiholog</ItemRole>
-              </Item>
+              {professionalService.map((member) => (
+                <Item key={member._id}>
+                  <ItemImage>
+                    <Image
+                      src={member.image || Portrait}
+                      alt={member.firstName}
+                      width={640}
+                      height={639}
+                    />
+                  </ItemImage>
+                  <ItemName>{`${member.firstName} ${member.lastName}`}</ItemName>
+                  <ItemRole>{staffRoles[member.role]}</ItemRole>
+                </Item>
+              ))}
             </ItemContainer>
           </StaffBlock>
         </StyledStaff>
