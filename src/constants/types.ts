@@ -17,14 +17,17 @@ export enum EmployeeRoles {
   SECRETARY = "secretary",
   JANITOR = "janitor",
   PEDAGOGUE = "pedagogue",
-  PSYCHOLOGIST = "psychologist"
+  PSYCHOLOGIST = "psychologist",
+  LAWYER = 'lawyer',
+  CLEANER = 'cleaner',
+  LIBRARIAN = 'librarian'
 }
 
 export interface Employee {
   _id: string;
   firstName: string;
   lastName: string;
-  role: EmployeeRoles.DIRECTOR | EmployeeRoles.DEPUTY | EmployeeRoles.PROFESSOR | EmployeeRoles.SECRETARY | EmployeeRoles.JANITOR | EmployeeRoles.PEDAGOGUE | EmployeeRoles.PSYCHOLOGIST,
+  role: EmployeeRoles.DIRECTOR | EmployeeRoles.DEPUTY | EmployeeRoles.PROFESSOR | EmployeeRoles.SECRETARY | EmployeeRoles.JANITOR | EmployeeRoles.PEDAGOGUE | EmployeeRoles.PSYCHOLOGIST | EmployeeRoles.LAWYER | EmployeeRoles.CLEANER | EmployeeRoles.LIBRARIAN,
   image: string;
   createdBy: string;
   createdAt: string;

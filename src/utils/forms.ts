@@ -156,6 +156,14 @@ export const forms: { [x: string]: InputProps[] } =
                     desc: "profesor"
                 },
                 {
+                    value: "cleaner",
+                    desc: "spremač"
+                },
+                {
+                    value: "lawyer",
+                    desc: "pravnik"
+                },
+                {
                     value: "pedagogue",
                     desc: "pedagog"
                 },
@@ -170,6 +178,10 @@ export const forms: { [x: string]: InputProps[] } =
                 {
                     value: "deputy",
                     desc: "zamenik"
+                },
+                {
+                    value: "librarian",
+                    desc: "bibliotekar"
                 },
                 {
                     value: "janitor",

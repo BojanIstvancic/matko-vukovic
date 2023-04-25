@@ -23,7 +23,7 @@ export const apiCall = async (url, method, data, param = "", options = "") => {
     }
   }
 
-  const contentType = data ? "multipart/form-data" : "text/plain";
+  const contentType = data ? "multipart/form-data" : "application/json";
 
   const response = await axios({
     method,

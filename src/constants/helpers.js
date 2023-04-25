@@ -6,4 +6,7 @@ export const staffRoles = {
   janitor: "domar",
   pedagogue: "pedagog",
   psychologist: "psiholog",
+  lawyer: "pravnik",
+  cleaner: "spremač",
+  librarian: "bibliotekar",
 };
