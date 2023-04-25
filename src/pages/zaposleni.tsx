@@ -2,9 +2,6 @@ import Container from "@/components/Container";
 import Layout from "@/components/Layout";
 import Image from "next/image";
 
-import styled from "styled-components";
-
-import Portrait from "/public/images/portrait.png";
 import { GetServerSideProps } from "next";
 import { apiCall } from "@/api/axios";
 import { API_Method, API_URL } from "@/constants/api";
@@ -14,6 +11,9 @@ import {
   ProfessionalService,
 } from "@/constants/types";
 import { staffRoles } from "@/constants/helpers";
+
+import Portrait from "/public/images/portrait.png";
+import styled from "styled-components";
 
 const StyledStaff = styled.section``;
 
