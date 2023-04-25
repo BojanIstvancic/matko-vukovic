@@ -42,7 +42,7 @@ const ItemContainer = styled.div`
   }
 
   @media (min-width: 900px) {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 40px;
   }
 `;
@@ -56,7 +56,10 @@ const ItemImage = styled.div`
 const ItemName = styled.p`
   font-weight: bold;
 `;
-const ItemRole = styled.p``;
+const ItemRole = styled.p`
+  margin-bottom: 10px;
+`;
+const ItemButtonContainer = styled.div``;
 
 const FormContainer = styled.div`
   position: absolute;
@@ -128,6 +131,20 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                 </ItemImage>
                 <ItemName>{`${member.firstName} ${member.lastName}`}</ItemName>
                 <ItemRole>{staffRoles[member.role]}</ItemRole>
+                <ItemButtonContainer>
+                  <Button
+                    buttonType="delete"
+                    clickFunction={() => handleOpenModal("delete", member._id)}
+                  >
+                    Obrisi
+                  </Button>
+                  <Button
+                    buttonType="edit"
+                    clickFunction={() => handleOpenModal("edit", member._id)}
+                  >
+                    Modifikuj
+                  </Button>
+                </ItemButtonContainer>
               </Item>
             ))}
         </ItemContainer>
