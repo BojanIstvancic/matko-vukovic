@@ -72,9 +72,10 @@ const FormContainer = styled.div`
   &:not(.delete) {
     width: 50%;
     min-width: 300px;
+    max-width: 500px;
   }
 
-  span {
+  h3 span {
     color: var(--primary);
     font-weight: bold;
   }
@@ -106,6 +107,10 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
   };
 
   const handleCloseModal = () => setOpenModal(false);
+
+  const createPost = async (values) => {
+    console.log(values);
+  };
 
   const handleDeleteEmployee = async () => {
     try {
@@ -141,7 +146,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
             onChange={handleSearch}
           />
           <Button clickFunction={() => handleOpenModal("add")}>
-            Napravi novog zaposlenog
+            Napravi zaposlenog
           </Button>
         </ButtonContainer>
         <ItemContainer>
@@ -188,13 +193,12 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
         >
           <FormContainer className={currentAction}>
             {currentAction === "add" && (
-              // <Form
-              //   formName="Napravi nov post"
-              //   formType="addPost"
-              //   buttonName="Napravi post"
-              //   handleSubmit={createPost}
-              // />
-              <p>add employee</p>
+              <Form
+                formName="Napravi novog zaposlenog"
+                formType="addEmployee"
+                buttonName="Napravi zaposlenog"
+                handleSubmit={createPost}
+              />
             )}
             {currentAction === "edit" && <p>edit emoloyee</p>}
 

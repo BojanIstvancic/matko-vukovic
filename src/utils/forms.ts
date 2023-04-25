@@ -156,5 +156,52 @@ export const forms: { [x: string]: InputProps[] } =
                 },
             ],
         },
+    ],
+    addEmployee: [
+        {
+            type: "text",
+            name: "firstName",
+            placeholder: "Ime",
+            value: "",
+            validations: [
+                {
+                    type: "maxLength",
+                    value: 20,
+                    message: "Max. 20 karaktera",
+                },
+                {
+                    type: "required",
+                    message: "Ime je obavezno"
+                },
+            ],
+        },
+        {
+            type: "text",
+            name: "lastName",
+            placeholder: "Prezime",
+            value: "",
+            validations: [
+                {
+                    type: "maxLength",
+                    value: 20,
+                    message: "Max. 20 karaktera",
+                },
+                {
+                    type: "required",
+                    message: "Prezime je obavezno"
+                },
+            ],
+        },
+        {
+            type: "file",
+            name: "image",
+            value: "",
+            validations: [
+                {
+                    type: "required",
+                    message: "Slika je obavezna"
+                },
+            ],
+        },
     ]
 }

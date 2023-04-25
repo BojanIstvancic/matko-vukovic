@@ -87,7 +87,7 @@ const FormContainer = styled.div`
     min-width: 300px;
   }
 
-  span {
+  h3 span {
     color: var(--primary);
     font-weight: bold;
   }
@@ -211,7 +211,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
         <ButtonContainer>
           <BlogTextInput placeholder="Pronađi post" onChange={handleSearch} />
           <Button clickFunction={() => handleOpenModal("add")}>
-            Napravi nov post
+            Napravi post
           </Button>
         </ButtonContainer>
         <BlogPostContainer>
