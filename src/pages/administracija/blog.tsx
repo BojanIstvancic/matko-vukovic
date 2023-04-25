@@ -261,7 +261,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
             {currentAction === "add" && (
               <Form
                 formName="Napravi nov post"
-                formType="addPost"
+                formType="post"
                 buttonName="Napravi post"
                 handleSubmit={createPost}
               />
@@ -269,7 +269,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
             {currentAction === "edit" && (
               <Form
                 formName="Doradi post"
-                formType="editPost"
+                formType="post"
                 buttonName="Sačuvaj izmene"
                 buttonType="edit"
                 customInitialValues={currentPost}

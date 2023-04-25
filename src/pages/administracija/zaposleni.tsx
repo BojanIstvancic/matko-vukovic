@@ -133,6 +133,42 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
     setIsLoading(false);
   };
 
+  const editEmployee = async (values: Employee) => {
+    const data = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      staff_image: values.image,
+      role: values.role,
+    };
+
+    const param = values._id;
+
+    try {
+      setIsLoading(true);
+
+      const response = await apiCall(
+        API_URL.EMPLOYEES,
+        API_Method.PATCH,
+        data,
+        param
+      );
+
+      const employee = response.data.employee;
+
+      const staffWithEditedEmployee = staffMembers.map((item) =>
+        item._id === employee._id ? employee : item
+      );
+
+      setStaffMembers(staffWithEditedEmployee);
+
+      setOpenModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setIsLoading(false);
+  };
+
   const handleDeleteEmployee = async () => {
     try {
       setIsLoading(true);
@@ -216,12 +252,21 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
             {currentAction === "add" && (
               <Form
                 formName="Napravi novog zaposlenog"
-                formType="addEmployee"
+                formType="employee"
                 buttonName="Napravi zaposlenog"
                 handleSubmit={createEmployee}
               />
             )}
-            {currentAction === "edit" && <p>edit emoloyee</p>}
+            {currentAction === "edit" && (
+              <Form
+                formName="Modifikus zaposlenog"
+                formType="employee"
+                buttonName="Sačuvaj izmene"
+                buttonType="edit"
+                customInitialValues={currentEmployee}
+                handleSubmit={editEmployee}
+              />
+            )}
 
             {currentAction === "delete" && (
               <>

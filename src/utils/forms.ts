@@ -63,7 +63,7 @@ export const forms: { [x: string]: InputProps[] } =
 
         }
     ],
-    editPost: [
+    post: [
         {
             type: "text",
             name: "title",
@@ -110,54 +110,7 @@ export const forms: { [x: string]: InputProps[] } =
             ],
         },
     ],
-    addPost: [
-        {
-            type: "text",
-            name: "title",
-            placeholder: "Naslov",
-            value: "",
-            validations: [
-                {
-                    type: "maxLength",
-                    value: 50,
-                    message: "Max. 50 karaktera",
-                },
-                {
-                    type: "required",
-                    message: "Naslov je obavezan"
-                },
-            ],
-        },
-        {
-            type: "textarea",
-            name: "content",
-            placeholder: "Sadržaj",
-            value: "",
-            validations: [
-                {
-                    type: "minLength",
-                    value: 300,
-                    message: "Min. 300 karaktera",
-                },
-                {
-                    type: "required",
-                    message: "Sadržaj je obavezan"
-                },
-            ],
-        },
-        {
-            type: "file",
-            name: "image",
-            value: "",
-            validations: [
-                {
-                    type: "required",
-                    message: "Slika je obavezna"
-                },
-            ],
-        },
-    ],
-    addEmployee: [
+    employee: [
         {
             type: "text",
             name: "firstName",
@@ -241,5 +194,6 @@ export const forms: { [x: string]: InputProps[] } =
                 },
             ],
         },
-    ]
+    ],
+    
 }
