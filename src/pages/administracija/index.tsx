@@ -40,7 +40,14 @@ const Login: React.FC<{}> = () => {
         password,
       };
 
-      const response = await apiCall(API_URL.LOGIN, API_Method.POST, apiData);
+      const response = await apiCall(
+        API_URL.LOGIN,
+        API_Method.POST,
+        apiData,
+        "",
+        "",
+        "application/json"
+      );
 
       setCookie("token", response.data.token, 7);
 

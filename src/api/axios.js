@@ -2,7 +2,14 @@ import axios from "axios";
 import { getCookie } from "@/helpers/cookieStorage";
 import FormData from "form-data";
 
-export const apiCall = async (url, method, data, param = "", options = "") => {
+export const apiCall = async (
+  url,
+  method,
+  data,
+  param = "",
+  options = "",
+  contentType = "multipart/form-data"
+) => {
   const token = getCookie("token");
 
   let apiURL = `${process.env.NEXT_PUBLIC_API_URL}${url}`;
@@ -15,15 +22,14 @@ export const apiCall = async (url, method, data, param = "", options = "") => {
     apiURL += `?${options}`;
   }
 
-  const formData = new FormData();
+  let formData = data;
 
-  if (data) {
+  if (data && contentType !== "application/json") {
+    formData = new FormData();
     for (const [key, value] of Object.entries(data)) {
       formData.append(key, value);
     }
   }
-
-  const contentType = data ? "multipart/form-data" : "application/json";
 
   const response = await axios({
     method,
