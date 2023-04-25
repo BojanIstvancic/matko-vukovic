@@ -259,7 +259,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
             )}
             {currentAction === "edit" && (
               <Form
-                formName="Modifikus zaposlenog"
+                formName="Modifikuj zaposlenog"
                 formType="employee"
                 buttonName="Sačuvaj izmene"
                 buttonType="edit"
