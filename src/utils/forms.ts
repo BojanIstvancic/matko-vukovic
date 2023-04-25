@@ -193,6 +193,44 @@ export const forms: { [x: string]: InputProps[] } =
             ],
         },
         {
+            type: "select",
+            name: "role",
+            label: "Radno mesto: ",
+            value: "",
+            options: [
+                {
+                    value: "professor",
+                    desc: "profesor"
+                },
+                {
+                    value: "pedagogue",
+                    desc: "pedagog"
+                },
+                {
+                    value: "psychologist",
+                    desc: "psiholog"
+                },
+                {
+                    value: "director",
+                    desc: "direktor",
+                },
+                {
+                    value: "deputy",
+                    desc: "zamenik"
+                },
+                {
+                    value: "janitor",
+                    desc: "domar"
+                }
+            ],
+            validations: [
+                {
+                    type: "required",
+                    message: "Radno mesto je obavezno"
+                }
+            ]
+        },
+        {
             type: "file",
             name: "image",
             value: "",

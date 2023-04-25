@@ -1,4 +1,36 @@
+import styled from "@emotion/styled";
 import { ErrorMessage, useField } from "formik";
+
+const StyledSelectContainer = styled.div`
+  position: relative;
+  padding-bottom: 5px;
+  margin-bottom: 23px;
+`;
+
+const SelectErrorMessage = styled(ErrorMessage)`
+  position: absolute;
+  top: 100%;
+  left: 15px;
+  font-size: 12px;
+  color: var(--red-500);
+`;
+
+const StyledSelect = styled.select`
+  font-size: 15px;
+  padding: 15px;
+  margin-left: 15px;
+  border-radius: 4px;
+`;
+
+const StyledOption = styled.option`
+  padding: 10px;
+
+  &:hover,
+  &:focus {
+    background: var(--primary) !important;
+    color: var(--white) !important;
+  }
+`;
 
 interface SelectProps {
   options: Opt[];
@@ -13,22 +45,22 @@ const Select = ({ label, options, name, ...props }: SelectProps) => {
   const [field] = useField(name);
 
   return (
-    <>
+    <StyledSelectContainer>
       <div>
         <label htmlFor={name || props.id}> {label} </label>
 
-        <select {...field} {...props}>
-          <option value="">--- Select ---</option>
+        <StyledSelect {...field} {...props} className="selector">
+          <StyledOption value="">--- Odaberi ---</StyledOption>
 
           {options.map(({ desc, value }) => (
-            <option value={value} key={value}>
+            <StyledOption value={value} key={value}>
               {desc}
-            </option>
+            </StyledOption>
           ))}
-        </select>
+        </StyledSelect>
       </div>
-      <ErrorMessage name={name} component="span" className="error" />
-    </>
+      <SelectErrorMessage name={name} component="span" className="error" />
+    </StyledSelectContainer>
   );
 };
 

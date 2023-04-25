@@ -108,8 +108,29 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
 
   const handleCloseModal = () => setOpenModal(false);
 
-  const createPost = async (values) => {
-    console.log(values);
+  const createEmployee = async (values: Employee) => {
+    const data = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      staff_image: values.image,
+      role: values.role,
+    };
+
+    try {
+      setIsLoading(true);
+
+      const response = await apiCall(API_URL.EMPLOYEES, API_Method.POST, data);
+
+      const employee = response.data.employee;
+      const staffWithNewEmployee = [employee, ...staffMembers];
+      setStaffMembers(staffWithNewEmployee);
+
+      setOpenModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setIsLoading(false);
   };
 
   const handleDeleteEmployee = async () => {
@@ -197,7 +218,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                 formName="Napravi novog zaposlenog"
                 formType="addEmployee"
                 buttonName="Napravi zaposlenog"
-                handleSubmit={createPost}
+                handleSubmit={createEmployee}
               />
             )}
             {currentAction === "edit" && <p>edit emoloyee</p>}
