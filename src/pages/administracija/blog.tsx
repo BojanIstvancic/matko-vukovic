@@ -86,6 +86,11 @@ const FormContainer = styled.div`
     width: 50%;
     min-width: 300px;
   }
+
+  span {
+    color: var(--primary);
+    font-weight: bold;
+  }
 `;
 
 export interface BlogProps {
@@ -274,7 +279,9 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
 
             {currentAction === "delete" && (
               <>
-                <h3>Potvrdite brisanje posta</h3>
+                <h3>
+                  Potvrdite brisanje posta <span>{currentPost?.title}</span>
+                </h3>
                 <Button buttonType="delete" clickFunction={handleDeletePost}>
                   Potvrdi
                 </Button>

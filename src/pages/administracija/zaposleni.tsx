@@ -73,10 +73,17 @@ const FormContainer = styled.div`
     width: 50%;
     min-width: 300px;
   }
+
+  span {
+    color: var(--primary);
+    font-weight: bold;
+  }
 `;
 
 const Staff: React.FC<StaffProps> = ({ employees }) => {
-  const staffMembers: Employee[] = employees.employees;
+  const [staffMembers, setStaffMembers] = useState<Employee[]>(
+    employees.employees
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -99,6 +106,31 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
   };
 
   const handleCloseModal = () => setOpenModal(false);
+
+  const handleDeleteEmployee = async () => {
+    try {
+      setIsLoading(true);
+
+      const response = await apiCall(
+        API_URL.EMPLOYEES,
+        API_Method.DELETE,
+        null,
+        currentEmployee?._id
+      );
+
+      const employee = response?.data.employee;
+      const blogPostsWithoutDeletedItem = staffMembers.filter(
+        (item) => item._id !== employee._id
+      );
+      setStaffMembers(blogPostsWithoutDeletedItem);
+
+      setOpenModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setIsLoading(false);
+  };
 
   return (
     <Layout title={"Matko Vuković | Zaposleni"} heading={"Zaposleni"}>
@@ -166,7 +198,22 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
             )}
             {currentAction === "edit" && <p>edit emoloyee</p>}
 
-            {currentAction === "delete" && <p>delete emoloyee</p>}
+            {currentAction === "delete" && (
+              <>
+                <h3>
+                  Potvrdite brisanje zaposlenog{" "}
+                  <span>
+                    {currentEmployee?.firstName} {currentEmployee?.lastName}
+                  </span>
+                </h3>
+                <Button
+                  buttonType="delete"
+                  clickFunction={handleDeleteEmployee}
+                >
+                  Potvrdi
+                </Button>
+              </>
+            )}
 
             {isLoading && <Loading />}
           </FormContainer>
