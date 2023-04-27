@@ -6,7 +6,6 @@ import Logo from "/public/images/logo.png";
 
 import styled from "styled-components";
 import Head from "next/head";
-import { useAuth } from "@/helpers/auth";
 
 const StyledContainer = styled.div`
   margin-top: 40px;
@@ -19,8 +18,6 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, title, heading }) => {
-  useAuth();
-
   return (
     <>
       <Head>
