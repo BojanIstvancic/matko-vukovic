@@ -7,6 +7,7 @@ const StyledButton = styled.button`
   min-height: 30px;
   flex-shrink: 0;
   padding: 6px 8px;
+  margin: 5px;
 
   border-radius: 4px;
   background-color: var(--primary);
@@ -31,7 +32,6 @@ const StyledButton = styled.button`
   }
 
   &.delete {
-    margin-right: 10px;
     background-color: var(--red-500);
 
     &:hover,

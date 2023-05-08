@@ -37,9 +37,18 @@ const BlogPostContainer = styled.div`
     grid-gap: 20px;
   }
 `;
+const BlogPostInnerWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto;
+`;
 
 const BlogPostButtonContainer = styled.div`
-  margin-top: 10px;
+  margin-left: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 const BlogTextInput = styled.input`
@@ -197,7 +206,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                 post.title.toLowerCase().includes(search.toLowerCase())
             )
             .map((post) => (
-              <div key={post._id}>
+              <BlogPostInnerWrapper key={post._id}>
                 <BlogPost post={post} />
                 <BlogPostButtonContainer>
                   <Button
@@ -219,7 +228,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                     />
                   </Button>
                 </BlogPostButtonContainer>
-              </div>
+              </BlogPostInnerWrapper>
             ))}
         </BlogPostContainer>
 
