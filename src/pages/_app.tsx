@@ -2,6 +2,11 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
 
+import "@fortawesome/fontawesome-svg-core/styles.css";
+
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
 const GlobalStyle = createGlobalStyle`
 :root {
   --white: #fff;

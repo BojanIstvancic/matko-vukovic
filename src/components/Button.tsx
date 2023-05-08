@@ -5,7 +5,6 @@ const StyledButton = styled.button`
   color: var(--white);
 
   min-height: 30px;
-  min-width: 64px;
   flex-shrink: 0;
   padding: 6px 8px;
 

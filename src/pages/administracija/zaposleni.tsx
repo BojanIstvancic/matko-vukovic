@@ -3,6 +3,7 @@ import Button from "../../components/Button";
 import Loading from "@/components/Loading";
 import { Modal } from "@mui/material";
 import Form from "../../components/Form";
+import StaffItem from "@/components/StaffItem";
 
 import { useState } from "react";
 import { GetServerSideProps } from "next";
@@ -11,7 +12,12 @@ import { API_Method, API_URL } from "@/constants/api";
 import { Employee } from "@/constants/types";
 
 import styled from "styled-components";
-import StaffItem from "@/components/StaffItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleMinus,
+  faPen,
+  faCirclePlus,
+} from "@fortawesome/free-solid-svg-icons";
 
 const StyledEmployee = styled.div``;
 const StaffItemContainer = styled.div``;
@@ -191,7 +197,10 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
             onChange={handleSearch}
           />
           <Button clickFunction={() => handleOpenModal("add")}>
-            Napravi zaposlenog
+            <FontAwesomeIcon
+              icon={faCirclePlus}
+              style={{ fontSize: 20, color: "white" }}
+            />
           </Button>
         </ButtonContainer>
         <StaffContainer>
@@ -209,13 +218,19 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                     buttonType="delete"
                     clickFunction={() => handleOpenModal("delete", member._id)}
                   >
-                    Obrisi
+                    <FontAwesomeIcon
+                      icon={faCircleMinus}
+                      style={{ fontSize: 20, color: "white" }}
+                    />
                   </Button>
                   <Button
                     buttonType="edit"
                     clickFunction={() => handleOpenModal("edit", member._id)}
                   >
-                    Modifikuj
+                    <FontAwesomeIcon
+                      icon={faPen}
+                      style={{ fontSize: 20, color: "white" }}
+                    />
                   </Button>
                 </StaffItemFooter>
               </StaffItemContainer>

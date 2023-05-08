@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Layout from "@/components/administration/Layout";
 import Button from "../../components/Button";
 import { Modal } from "@mui/material";
@@ -11,7 +13,12 @@ import { apiCall } from "@/api/axios";
 import { API_Method, API_URL } from "@/constants/api";
 
 import styled from "styled-components";
-import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleMinus,
+  faPen,
+  faCirclePlus,
+} from "@fortawesome/free-solid-svg-icons";
 
 const StyledBlog = styled.div``;
 
@@ -176,7 +183,10 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
         <ButtonContainer>
           <BlogTextInput placeholder="Pronađi post" onChange={handleSearch} />
           <Button clickFunction={() => handleOpenModal("add")}>
-            Napravi post
+            <FontAwesomeIcon
+              icon={faCirclePlus}
+              style={{ fontSize: 20, color: "white" }}
+            />
           </Button>
         </ButtonContainer>
         <BlogPostContainer>
@@ -194,13 +204,19 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                     buttonType="delete"
                     clickFunction={() => handleOpenModal("delete", post._id)}
                   >
-                    Obrisi
+                    <FontAwesomeIcon
+                      icon={faCircleMinus}
+                      style={{ fontSize: 20, color: "white" }}
+                    />
                   </Button>
                   <Button
                     buttonType="edit"
                     clickFunction={() => handleOpenModal("edit", post._id)}
                   >
-                    Modifikuj
+                    <FontAwesomeIcon
+                      icon={faPen}
+                      style={{ fontSize: 20, color: "white" }}
+                    />
                   </Button>
                 </BlogPostButtonContainer>
               </div>
