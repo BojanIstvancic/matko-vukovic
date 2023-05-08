@@ -1,7 +1,5 @@
 import Container from "@/components/Container";
 import Layout from "@/components/Layout";
-import Image from "next/image";
-import Link from "next/link";
 import ReactPaginate from "react-paginate";
 
 import styled from "styled-components";
@@ -10,7 +8,7 @@ import { GetServerSideProps } from "next";
 import { Post } from "../../constants/types";
 import { API_Method, API_URL } from "../../constants/api";
 import { apiCall } from "@/api/axios";
-import { links } from "@/constants/links";
+import BlogPost from "@/components/BlogPost";
 
 const StyledBlog = styled.div`
   margin-bottom: 25px;
@@ -23,63 +21,6 @@ const BlogPostContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 40px 20px;
-  }
-`;
-const BlogPost = styled.div`
-  height: 100px;
-  max-width: 550px;
-  margin-bottom: 25px;
-
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-
-  @media (min-width: 1200px) {
-    margin-bottom: 0;
-  }
-`;
-const BlogPostImageContainer = styled.div`
-  position: relative;
-  height: 100%;
-  width: 120px;
-  flex-shrink: 0;
-  margin-right: 25px;
-
-  border-radius: 15px;
-  overflow: hidden;
-
-  @media (min-width: 600px) {
-    width: 150px;
-  }
-
-  a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-`;
-const BlogPostContent = styled.div`
-  h3 {
-    transition: all 0.3s ease 0s;
-    margin-bottom: 10px;
-
-    &:hover,
-    &:focus {
-      cursor: pointer;
-      color: var(--primary);
-    }
-
-    @media (max-width: 599px) {
-      font-size: 16px;
-    }
-  }
-
-  p {
-    @media (max-width: 599px) {
-      display: none;
-    }
   }
 `;
 
@@ -162,23 +103,8 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
           <BlogPostContainer>
             {blogPosts
               .slice(itemOffset, itemOffset + itemsPerPage)
-              .map((item) => (
-                <BlogPost key={item._id}>
-                  <BlogPostImageContainer>
-                    <Image
-                      src={item.image}
-                      layout="fill"
-                      alt={`blog-post-image-${item._id}`}
-                    />
-                    <a href={`${links.news.url}/${item._id}`} />
-                  </BlogPostImageContainer>
-                  <BlogPostContent>
-                    <Link href={`${links.news.url}/${item._id}`}>
-                      <h3>{item.title}</h3>
-                    </Link>
-                    <p>{item.content.substr(0, 95)}...</p>
-                  </BlogPostContent>
-                </BlogPost>
+              .map((post) => (
+                <BlogPost key={post._id} post={post} />
               ))}
           </BlogPostContainer>
           <PaginationContainer>

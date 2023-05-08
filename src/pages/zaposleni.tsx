@@ -97,25 +97,27 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
               </ItemContainer>
             </StaffBlock>
           )}
-          <StaffBlock>
-            <StaffHeading>Stručna služba</StaffHeading>
-            <ItemContainer>
-              {professionalService.map((member) => (
-                <Item key={member._id}>
-                  <ItemImage>
-                    <Image
-                      src={member.image || Portrait}
-                      alt={member.firstName}
-                      width={640}
-                      height={639}
-                    />
-                  </ItemImage>
-                  <ItemName>{`${member.firstName} ${member.lastName}`}</ItemName>
-                  <ItemRole>{staffRoles[member.role]}</ItemRole>
-                </Item>
-              ))}
-            </ItemContainer>
-          </StaffBlock>
+          {professionalService && (
+            <StaffBlock>
+              <StaffHeading>Stručna služba</StaffHeading>
+              <ItemContainer>
+                {professionalService.map((member) => (
+                  <Item key={member._id}>
+                    <ItemImage>
+                      <Image
+                        src={member.image || Portrait}
+                        alt={member.firstName}
+                        width={640}
+                        height={639}
+                      />
+                    </ItemImage>
+                    <ItemName>{`${member.firstName} ${member.lastName}`}</ItemName>
+                    <ItemRole>{staffRoles[member.role]}</ItemRole>
+                  </Item>
+                ))}
+              </ItemContainer>
+            </StaffBlock>
+          )}
         </StyledStaff>
       </Container>
     </Layout>
