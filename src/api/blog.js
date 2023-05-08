@@ -52,6 +52,7 @@ const createBlogPostItem = async (formData) => {
 };
 
 const editBlogPostItem = async (formData, id) => {
+  // EDIT IS NOT WORKING - might be cors
   const token = getCookie("token");
   const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.POSTS}/${id}`;
 

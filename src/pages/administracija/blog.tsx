@@ -9,8 +9,6 @@ import BlogPost from "@/components/BlogPost";
 
 import { Post } from "../../constants/types";
 import { GetServerSideProps } from "next";
-import { apiCall } from "@/api/axios";
-import { API_Method, API_URL } from "@/constants/api";
 
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
