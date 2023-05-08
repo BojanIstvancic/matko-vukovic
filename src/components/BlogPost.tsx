@@ -1,10 +1,11 @@
+import { memo } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
 import { links } from "@/constants/links";
 import { Post } from "@/constants/types";
 import styled from "styled-components";
-import { memo } from "react";
 
 const StyledBlogPost = styled.div`
   height: 100px;

@@ -14,6 +14,7 @@ import { staffRoles } from "@/constants/helpers";
 
 import Portrait from "/public/images/portrait.png";
 import styled from "styled-components";
+import StaffItem from "@/components/StaffItem";
 
 const StyledStaff = styled.section``;
 
@@ -38,17 +39,6 @@ const ItemContainer = styled.div`
     grid-gap: 40px;
   }
 `;
-const Item = styled.div`
-  text-align: center;
-`;
-const ItemImage = styled.div`
-  position: relative;
-  margin-bottom: 10px;
-`;
-const ItemName = styled.p`
-  font-weight: bold;
-`;
-const ItemRole = styled.p``;
 
 export interface StaffProps {
   employees: {
@@ -81,18 +71,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
               <StaffHeading>Uprava škole</StaffHeading>
               <ItemContainer>
                 {administration.map((member) => (
-                  <Item key={member._id}>
-                    <ItemImage>
-                      <Image
-                        src={member.image || Portrait}
-                        alt={member.firstName}
-                        width={640}
-                        height={639}
-                      />
-                    </ItemImage>
-                    <ItemName>{`${member.firstName} ${member.lastName}`}</ItemName>
-                    <ItemRole>{staffRoles[member.role]}</ItemRole>
-                  </Item>
+                  <StaffItem item={member} key={member._id} />
                 ))}
               </ItemContainer>
             </StaffBlock>
@@ -102,18 +81,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
               <StaffHeading>Stručna služba</StaffHeading>
               <ItemContainer>
                 {professionalService.map((member) => (
-                  <Item key={member._id}>
-                    <ItemImage>
-                      <Image
-                        src={member.image || Portrait}
-                        alt={member.firstName}
-                        width={640}
-                        height={639}
-                      />
-                    </ItemImage>
-                    <ItemName>{`${member.firstName} ${member.lastName}`}</ItemName>
-                    <ItemRole>{staffRoles[member.role]}</ItemRole>
-                  </Item>
+                  <StaffItem item={member} key={member._id} />
                 ))}
               </ItemContainer>
             </StaffBlock>

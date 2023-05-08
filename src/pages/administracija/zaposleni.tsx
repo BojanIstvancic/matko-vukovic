@@ -1,6 +1,5 @@
 import Layout from "@/components/administration/Layout";
 import Button from "../../components/Button";
-import Image from "next/image";
 import Loading from "@/components/Loading";
 import { Modal } from "@mui/material";
 import Form from "../../components/Form";
@@ -10,13 +9,12 @@ import { GetServerSideProps } from "next";
 import { apiCall } from "@/api/axios";
 import { API_Method, API_URL } from "@/constants/api";
 import { Employee } from "@/constants/types";
-import { staffRoles } from "@/constants/helpers";
-
-import Portrait from "/public/images/portrait.png";
 
 import styled from "styled-components";
+import StaffItem from "@/components/StaffItem";
 
 const StyledEmployee = styled.div``;
+const StaffItemWrapper = styled.div``;
 const ButtonContainer = styled.div`
   display: flex;
 
@@ -26,13 +24,7 @@ const EmployeeTextInput = styled.input`
   margin-right: 25px;
 `;
 
-export interface StaffProps {
-  employees: {
-    employees: Employee[];
-  };
-}
-
-const ItemContainer = styled.div`
+const StaffContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
@@ -46,20 +38,10 @@ const ItemContainer = styled.div`
     grid-gap: 40px;
   }
 `;
-const Item = styled.div`
-  text-align: center;
+const StaffItemFooter = styled.div`
+  display: flex;
+  justify-content: center;
 `;
-const ItemImage = styled.div`
-  position: relative;
-  margin-bottom: 10px;
-`;
-const ItemName = styled.p`
-  font-weight: bold;
-`;
-const ItemRole = styled.p`
-  margin-bottom: 10px;
-`;
-const ItemButtonContainer = styled.div``;
 
 const FormContainer = styled.div`
   position: absolute;
@@ -80,6 +62,12 @@ const FormContainer = styled.div`
     font-weight: bold;
   }
 `;
+
+export interface StaffProps {
+  employees: {
+    employees: Employee[];
+  };
+}
 
 const Staff: React.FC<StaffProps> = ({ employees }) => {
   const [staffMembers, setStaffMembers] = useState<Employee[]>(
@@ -206,7 +194,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
             Napravi zaposlenog
           </Button>
         </ButtonContainer>
-        <ItemContainer>
+        <StaffContainer>
           {staffMembers
             .filter(
               (member) =>
@@ -214,18 +202,9 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                 member.lastName.toLowerCase().includes(search.toLowerCase())
             )
             .map((member) => (
-              <Item key={member._id}>
-                <ItemImage>
-                  <Image
-                    src={member.image || Portrait}
-                    alt={member.firstName}
-                    width={640}
-                    height={639}
-                  />
-                </ItemImage>
-                <ItemName>{`${member.firstName} ${member.lastName}`}</ItemName>
-                <ItemRole>{staffRoles[member.role]}</ItemRole>
-                <ItemButtonContainer>
+              <StaffItemWrapper key={member._id}>
+                <StaffItem item={member} />
+                <StaffItemFooter>
                   <Button
                     buttonType="delete"
                     clickFunction={() => handleOpenModal("delete", member._id)}
@@ -238,10 +217,10 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                   >
                     Modifikuj
                   </Button>
-                </ItemButtonContainer>
-              </Item>
+                </StaffItemFooter>
+              </StaffItemWrapper>
             ))}
-        </ItemContainer>
+        </StaffContainer>
         <Modal
           open={openModal}
           onClose={handleCloseModal}
