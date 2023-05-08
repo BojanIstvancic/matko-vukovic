@@ -14,7 +14,7 @@ import styled from "styled-components";
 import StaffItem from "@/components/StaffItem";
 
 const StyledEmployee = styled.div``;
-const StaffItemWrapper = styled.div``;
+const StaffItemContainer = styled.div``;
 const ButtonContainer = styled.div`
   display: flex;
 
@@ -202,7 +202,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                 member.lastName.toLowerCase().includes(search.toLowerCase())
             )
             .map((member) => (
-              <StaffItemWrapper key={member._id}>
+              <StaffItemContainer key={member._id}>
                 <StaffItem item={member} />
                 <StaffItemFooter>
                   <Button
@@ -218,7 +218,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                     Modifikuj
                   </Button>
                 </StaffItemFooter>
-              </StaffItemWrapper>
+              </StaffItemContainer>
             ))}
         </StaffContainer>
         <Modal

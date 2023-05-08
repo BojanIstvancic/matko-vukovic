@@ -25,7 +25,7 @@ const StaffHeading = styled.h2`
   margin-bottom: 30px;
 `;
 
-const ItemContainer = styled.div`
+const StaffItemContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
@@ -69,21 +69,21 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
           {administration && (
             <StaffBlock>
               <StaffHeading>Uprava škole</StaffHeading>
-              <ItemContainer>
+              <StaffItemContainer>
                 {administration.map((member) => (
                   <StaffItem item={member} key={member._id} />
                 ))}
-              </ItemContainer>
+              </StaffItemContainer>
             </StaffBlock>
           )}
           {professionalService && (
             <StaffBlock>
               <StaffHeading>Stručna služba</StaffHeading>
-              <ItemContainer>
+              <StaffItemContainer>
                 {professionalService.map((member) => (
                   <StaffItem item={member} key={member._id} />
                 ))}
-              </ItemContainer>
+              </StaffItemContainer>
             </StaffBlock>
           )}
         </StyledStaff>
