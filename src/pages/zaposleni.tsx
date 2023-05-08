@@ -8,6 +8,7 @@ import { API_Method, API_URL } from "@/constants/api";
 import {
   Administration,
   Employee,
+  EmployeeRoles,
   ProfessionalService,
 } from "@/constants/types";
 import styled from "styled-components";
@@ -48,13 +49,19 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
   const administration = staffMembers.filter(
     (member) =>
       member.role.includes(Administration.DIRECTOR) ||
-      member.role.includes(Administration.SECRETARY)
+      member.role.includes(Administration.SECRETARY) ||
+      member.role.includes(Administration.DEPUTY) ||
+      member.role.includes(Administration.LAWYER)
   );
 
   const professionalService = staffMembers.filter(
     (member) =>
       member.role.includes(ProfessionalService.PEDAGOGUE) ||
       member.role.includes(ProfessionalService.PSYCHOLOGIST)
+  );
+
+  const professors = staffMembers.filter((member) =>
+    member.role.includes(EmployeeRoles.PROFESSOR)
   );
 
   return (
@@ -77,6 +84,16 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
               <StaffHeading>Stručna služba</StaffHeading>
               <StaffItemContainer>
                 {professionalService.map((member) => (
+                  <StaffItem item={member} key={member._id} />
+                ))}
+              </StaffItemContainer>
+            </StaffBlock>
+          )}
+          {professors && (
+            <StaffBlock>
+              <StaffHeading>Profesori</StaffHeading>
+              <StaffItemContainer>
+                {professors.map((member) => (
                   <StaffItem item={member} key={member._id} />
                 ))}
               </StaffItemContainer>

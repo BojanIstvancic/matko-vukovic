@@ -39,11 +39,11 @@ const BlogPostContainer = styled.div`
 `;
 const BlogPostInnerWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr;
 `;
 
 const BlogPostButtonContainer = styled.div`
-  margin-left: 10px;
+  margin-right: 10px;
 
   display: flex;
   flex-direction: column;
@@ -207,7 +207,6 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
             )
             .map((post) => (
               <BlogPostInnerWrapper key={post._id}>
-                <BlogPost post={post} />
                 <BlogPostButtonContainer>
                   <Button
                     buttonType="delete"
@@ -228,6 +227,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
                     />
                   </Button>
                 </BlogPostButtonContainer>
+                <BlogPost post={post} />
               </BlogPostInnerWrapper>
             ))}
         </BlogPostContainer>

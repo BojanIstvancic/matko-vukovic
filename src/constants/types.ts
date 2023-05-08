@@ -18,9 +18,9 @@ export enum EmployeeRoles {
   JANITOR = "janitor",
   PEDAGOGUE = "pedagogue",
   PSYCHOLOGIST = "psychologist",
-  LAWYER = 'lawyer',
-  CLEANER = 'cleaner',
-  LIBRARIAN = 'librarian'
+  LAWYER = "lawyer",
+  CLEANER = "cleaner",
+  LIBRARIAN = "librarian"
 }
 
 export interface Employee {
@@ -38,6 +38,8 @@ export interface Employee {
 export enum Administration {
   DIRECTOR = EmployeeRoles.DIRECTOR,
   SECRETARY = EmployeeRoles.SECRETARY,
+  DEPUTY = EmployeeRoles.DEPUTY,
+  LAWYER = EmployeeRoles.LAWYER
 }
 
 export enum ProfessionalService {
