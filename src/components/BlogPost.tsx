@@ -1,7 +1,8 @@
-import { links } from "@/constants/links";
-import { Post } from "@/constants/types";
 import Image from "next/image";
 import Link from "next/link";
+
+import { links } from "@/constants/links";
+import { Post } from "@/constants/types";
 import styled from "styled-components";
 
 const StyledBlogPost = styled.div`

@@ -3,6 +3,7 @@ import Button from "../../components/Button";
 import { Modal } from "@mui/material";
 import Form from "../../components/Form";
 import Loading from "@/components/Loading";
+import BlogPost from "@/components/BlogPost";
 
 import { Post } from "../../constants/types";
 import { GetServerSideProps } from "next";
@@ -10,10 +11,7 @@ import { apiCall } from "@/api/axios";
 import { API_Method, API_URL } from "@/constants/api";
 
 import styled from "styled-components";
-import Image from "next/image";
-import { links } from "@/constants/links";
 import { useState } from "react";
-import BlogPost from "@/components/BlogPost";
 
 const StyledBlog = styled.div``;
 
