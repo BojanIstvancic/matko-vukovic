@@ -19,7 +19,12 @@ import {
   faPen,
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { getBlogPostItems } from "@/api/blog";
+import {
+  createBlogPostItem,
+  deleteBlogPostItem,
+  editBlogPostItem,
+  getBlogPostItems,
+} from "@/api/blog";
 
 const StyledBlog = styled.div``;
 
@@ -113,7 +118,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     try {
       setIsLoading(true);
 
-      const response = await apiCall(API_URL.POSTS, API_Method.POST, data);
+      const response = await createBlogPostItem(data);
 
       const post = response.data.post;
       const blogPostsWithCreatedItem = [post, ...blogPosts];
@@ -134,17 +139,12 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
       post_image: values.image,
     };
 
-    const param = values._id;
+    const id = values._id;
 
     try {
       setIsLoading(true);
 
-      const response = await apiCall(
-        API_URL.POSTS,
-        API_Method.PATCH,
-        data,
-        param
-      );
+      const response = await editBlogPostItem(data, id);
 
       const post = response.data.post;
 
@@ -166,12 +166,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
     try {
       setIsLoading(true);
 
-      const response = await apiCall(
-        API_URL.POSTS,
-        API_Method.DELETE,
-        null,
-        currentPost?._id
-      );
+      const response = await deleteBlogPostItem(currentPost?._id);
 
       const post = response?.data.post;
       const blogPostsWithoutDeletedItem = blogPosts.filter(
