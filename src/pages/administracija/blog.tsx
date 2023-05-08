@@ -19,6 +19,7 @@ import {
   faPen,
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
+import { getBlogPostItems } from "@/api/blog";
 
 const StyledBlog = styled.div``;
 
@@ -280,7 +281,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
 export default Blog;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await apiCall(API_URL.POSTS, API_Method.GET);
+  const response = await getBlogPostItems();
 
   const posts = response.data;
 

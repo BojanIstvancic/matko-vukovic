@@ -6,7 +6,7 @@ import { ParsedUrlQuery } from "querystring";
 
 import styled from "styled-components";
 import { Post } from "../../constants/types";
-import { getPostBlogItem } from "@/api/blog";
+import { getBlogPostItem } from "@/api/blog";
 
 const StyledBlogPostItem = styled.div`
   margin-bottom: 25px;
@@ -51,7 +51,7 @@ interface IParams extends ParsedUrlQuery {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as IParams;
-  const response = await getPostBlogItem(id);
+  const response = await getBlogPostItem(id);
   const post = response.data;
 
   return {
