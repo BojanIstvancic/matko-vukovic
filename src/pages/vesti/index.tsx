@@ -6,9 +6,8 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { Post } from "../../constants/types";
-import { API_Method, API_URL } from "../../constants/api";
-import { apiCall } from "@/api/axios";
 import BlogPost from "@/components/BlogPost";
+import { getBlogPostItems } from "@/api/blog";
 
 const StyledBlog = styled.div`
   margin-bottom: 25px;
@@ -135,7 +134,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await apiCall(API_URL.POSTS, API_Method.GET);
+  const response = await getBlogPostItems();
 
   const posts = response.data;
 
