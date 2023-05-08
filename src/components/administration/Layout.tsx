@@ -11,6 +11,18 @@ const StyledContainer = styled.div`
   margin-top: 40px;
 `;
 
+const LayoutHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+`;
+
+const Title = styled.h1`
+  padding: 0;
+  margin-bottom: 0;
+  margin-left: 30px;
+`;
+
 interface LayoutProps {
   children: JSX.Element | JSX.Element[];
   title: string;
@@ -25,11 +37,10 @@ const Layout: React.FC<LayoutProps> = ({ children, title, heading }) => {
       </Head>
       <Container>
         <StyledContainer>
-          <Image src={Logo} alt="logo" width={100} height={60} />
-          <br />
-          <h1 style={{ marginTop: "20px", display: "inline-block" }}>
-            {heading}
-          </h1>
+          <LayoutHeader>
+            <Image src={Logo} alt="logo" width={100} height={60} />
+            <Title>Matko Vuković - administracija</Title>
+          </LayoutHeader>
           <Navigation />
           {children}
         </StyledContainer>

@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { memo } from "react";
 
 import Employees from "/public/images/pages/administration/employees.png";
 import Blog from "/public/images/pages/administration/blog.png";
@@ -93,4 +94,4 @@ const Navigation: React.FC<{}> = () => {
   );
 };
 
-export default Navigation;
+export default memo(Navigation);
