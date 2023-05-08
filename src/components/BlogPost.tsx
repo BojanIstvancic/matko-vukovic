@@ -8,7 +8,7 @@ import { Post } from "@/constants/types";
 import styled from "styled-components";
 
 const StyledBlogPost = styled.div`
-  height: 100px;
+  height: 120px;
   max-width: 550px;
   margin-bottom: 25px;
 
