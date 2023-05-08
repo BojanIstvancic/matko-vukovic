@@ -27,7 +27,7 @@ const BlogPostContainer = styled.div`
   @media (min-width: 1200px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 40px 20px;
+    grid-gap: 20px;
   }
 `;
 
