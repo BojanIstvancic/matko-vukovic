@@ -67,7 +67,7 @@ export interface BlogPostprops {
 }
 
 const BlogPost: React.FC<BlogPostprops> = ({ post }) => (
-  <StyledBlogPost key={post._id}>
+  <StyledBlogPost>
     <BlogPostImageContainer>
       <Image
         src={post.image}

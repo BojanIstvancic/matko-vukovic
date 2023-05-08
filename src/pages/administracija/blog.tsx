@@ -13,6 +13,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { links } from "@/constants/links";
 import { useState } from "react";
+import BlogPost from "@/components/BlogPost";
 
 const StyledBlog = styled.div``;
 
@@ -24,50 +25,16 @@ const ButtonContainer = styled.div`
 
 const BlogPostContainer = styled.div`
   margin-bottom: 25px;
-`;
-const BlogPost = styled.div`
-  height: 100px;
-  margin-bottom: 25px;
 
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-`;
-const BlogPostImageContainer = styled.div`
-  position: relative;
-  height: 100%;
-  width: 120px;
-  flex-shrink: 0;
-  margin-right: 25px;
-
-  border-radius: 15px;
-  overflow: hidden;
-
-  a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  @media (min-width: 1200px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40px 20px;
   }
 `;
-const BlogPostContent = styled.div`
-  margin-right: 25px;
-  flex: 1;
 
-  h3 {
-    margin-bottom: 10px;
-
-    @media (max-width: 599px) {
-      font-size: 16px;
-    }
-  }
-
-  p {
-    @media (max-width: 599px) {
-      display: none;
-    }
-  }
+const BlogPostButtonContainer = styled.div`
+  margin-top: 10px;
 `;
 
 const BlogTextInput = styled.input`
@@ -217,37 +184,28 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
         <BlogPostContainer>
           {blogPosts
             .filter(
-              (item) =>
-                item.content.toLowerCase().includes(search.toLowerCase()) ||
-                item.title.toLowerCase().includes(search.toLowerCase())
+              (post) =>
+                post.content.toLowerCase().includes(search.toLowerCase()) ||
+                post.title.toLowerCase().includes(search.toLowerCase())
             )
-            .map((item) => (
-              <BlogPost key={item._id}>
-                <BlogPostImageContainer>
-                  <Image
-                    src={item.image}
-                    layout="fill"
-                    alt={`blog-post-image-${item._id}`}
-                  />
-                  <a href={`${links.news.url}/${item._id}`} />
-                </BlogPostImageContainer>
-                <BlogPostContent>
-                  <h3>{item.title}</h3>
-                  <p>{item.content.substr(0, 100)}...</p>
-                </BlogPostContent>
-                <Button
-                  buttonType="delete"
-                  clickFunction={() => handleOpenModal("delete", item._id)}
-                >
-                  Obrisi
-                </Button>
-                <Button
-                  buttonType="edit"
-                  clickFunction={() => handleOpenModal("edit", item._id)}
-                >
-                  Modifikuj
-                </Button>
-              </BlogPost>
+            .map((post) => (
+              <div key={post._id}>
+                <BlogPost post={post} />
+                <BlogPostButtonContainer>
+                  <Button
+                    buttonType="delete"
+                    clickFunction={() => handleOpenModal("delete", post._id)}
+                  >
+                    Obrisi
+                  </Button>
+                  <Button
+                    buttonType="edit"
+                    clickFunction={() => handleOpenModal("edit", post._id)}
+                  >
+                    Modifikuj
+                  </Button>
+                </BlogPostButtonContainer>
+              </div>
             ))}
         </BlogPostContainer>
 
