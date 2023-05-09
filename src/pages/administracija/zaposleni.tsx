@@ -7,8 +7,6 @@ import StaffItem from "@/components/StaffItem";
 
 import { useState } from "react";
 import { GetServerSideProps } from "next";
-import { apiCall } from "@/api/axios";
-import { API_Method, API_URL } from "@/constants/api";
 import { Employee } from "@/constants/types";
 
 import styled from "styled-components";
@@ -18,6 +16,12 @@ import {
   faPen,
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  createEmployee,
+  deleteEmployee,
+  editEmployee,
+  getEmployees,
+} from "@/api/employees";
 
 const StyledEmployee = styled.div``;
 const StaffItemContainer = styled.div``;
@@ -102,7 +106,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
 
   const handleCloseModal = () => setOpenModal(false);
 
-  const createEmployee = async (values: Employee) => {
+  const handleCreateEmployee = async (values: Employee) => {
     const data = {
       firstName: values.firstName,
       lastName: values.lastName,
@@ -113,7 +117,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
     try {
       setIsLoading(true);
 
-      const response = await apiCall(API_URL.EMPLOYEES, API_Method.POST, data);
+      const response = await createEmployee(data);
 
       const employee = response.data.employee;
       const staffWithNewEmployee = [employee, ...staffMembers];
@@ -127,7 +131,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
     setIsLoading(false);
   };
 
-  const editEmployee = async (values: Employee) => {
+  const handleEditEmployee = async (values: Employee) => {
     const data = {
       firstName: values.firstName,
       lastName: values.lastName,
@@ -135,17 +139,12 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
       role: values.role,
     };
 
-    const param = values._id;
+    const id = values._id;
 
     try {
       setIsLoading(true);
 
-      const response = await apiCall(
-        API_URL.EMPLOYEES,
-        API_Method.PATCH,
-        data,
-        param
-      );
+      const response = await editEmployee(data, id);
 
       const employee = response.data.employee;
 
@@ -167,12 +166,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
     try {
       setIsLoading(true);
 
-      const response = await apiCall(
-        API_URL.EMPLOYEES,
-        API_Method.DELETE,
-        null,
-        currentEmployee?._id
-      );
+      const response = await deleteEmployee(currentEmployee?._id);
 
       const employee = response?.data.employee;
       const blogPostsWithoutDeletedItem = staffMembers.filter(
@@ -184,7 +178,6 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
     } catch (error) {
       console.log(error);
     }
-
     setIsLoading(false);
   };
 
@@ -248,7 +241,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                 formName="Napravi novog zaposlenog"
                 formType="employee"
                 buttonName="Napravi zaposlenog"
-                handleSubmit={createEmployee}
+                handleSubmit={handleCreateEmployee}
               />
             )}
             {currentAction === "edit" && (
@@ -258,7 +251,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
                 buttonName="Sačuvaj izmene"
                 buttonType="edit"
                 customInitialValues={currentEmployee}
-                handleSubmit={editEmployee}
+                handleSubmit={handleEditEmployee}
               />
             )}
 
@@ -290,7 +283,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
 export default Staff;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await apiCall(API_URL.EMPLOYEES, API_Method.GET);
+  const response = await getEmployees();
 
   const employees = response.data;
 

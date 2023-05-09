@@ -2,15 +2,16 @@ import Container from "@/components/Container";
 import Layout from "@/components/Layout";
 import StaffItem from "@/components/StaffItem";
 import { GetServerSideProps } from "next";
-import { apiCall } from "@/api/axios";
 
-import { API_Method, API_URL } from "@/constants/api";
 import {
   Administration,
   Employee,
   EmployeeRoles,
   ProfessionalService,
 } from "@/constants/types";
+
+import { getEmployees } from "@/api/employees";
+
 import styled from "styled-components";
 
 const StyledStaff = styled.section``;
@@ -106,7 +107,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await apiCall(API_URL.EMPLOYEES, API_Method.GET);
+  const response = await getEmployees();
 
   const employees = response.data;
 

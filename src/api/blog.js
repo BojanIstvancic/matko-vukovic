@@ -10,7 +10,7 @@ const getBlogPostItems = async (options = "") => {
   }
 
   const response = await axios({
-    methid: API_Method.GET,
+    method: API_Method.GET,
     url,
   });
 
