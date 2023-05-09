@@ -5,13 +5,11 @@ import Loading from "@/components/Loading";
 
 import { useState, useEffect } from "react";
 import { setCookie, getCookie } from "@/helpers/cookieStorage";
-import { apiCall } from "../../api/axios";
 import { useRouter } from "next/router";
-
-import { API_Method, API_URL } from "../../constants/api";
 
 import styled from "styled-components";
 import { links } from "@/constants/links";
+import { loginUser } from "@/api/login";
 
 const StyledLogin = styled.div`
   display: flex;
@@ -35,19 +33,12 @@ const Login: React.FC<{}> = () => {
     try {
       setIsLoading(true);
 
-      const apiData = {
+      const data = {
         name,
         password,
       };
 
-      const response = await apiCall(
-        API_URL.LOGIN,
-        API_Method.POST,
-        apiData,
-        "",
-        "",
-        "application/json"
-      );
+      const response = await loginUser(data);
 
       setCookie("token", response.data.token, 7);
 
