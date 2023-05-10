@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import Layout from "@/components/Layout";
 import Container from "@/components/Container";
 import Staff from "../components/presentation/Staff";
@@ -10,7 +12,6 @@ import {
 } from "@/constants/types";
 
 import { getEmployees } from "@/api/employees";
-import { useEffect, useState } from "react";
 
 const StaffContainer: React.FC = () => {
   const [staffMembers, setStaffMembers] = useState<Employee[]>([]);
