@@ -1,7 +1,6 @@
-import Container from "@/components/Container";
 import Layout from "@/components/Layout";
+import Container from "@/components/Container";
 import Staff from "../components/presentation/Staff";
-import { GetServerSideProps } from "next";
 
 import {
   Administration,
