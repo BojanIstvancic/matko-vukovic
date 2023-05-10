@@ -1,5 +1,3 @@
-import Container from "@/components/Container";
-import Layout from "@/components/Layout";
 import Image from "next/image";
 
 import styled from "styled-components";
@@ -11,17 +9,14 @@ import SchoolThree from "/public/images/pages/o-skoli/mala-skola-2.jpg";
 const StyledAboutUs = styled.section`
   padding-bottom: 20px;
 `;
-
 const AboutBlock = styled.div`
   margin-bottom: 30px;
 `;
-
 const AboutBlockContent = styled.div`
   @media (min-width: 768px) {
     display: flex;
   }
 `;
-
 const AboutBlockContentImage = styled.div`
   position: relative;
   margin-bottom: 10px;

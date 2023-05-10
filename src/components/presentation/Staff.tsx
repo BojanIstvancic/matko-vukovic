@@ -5,14 +5,12 @@ import { Employee } from "@/constants/types";
 import styled from "styled-components";
 
 const StyledStaff = styled.section``;
-
 const StaffBlock = styled.div`
   margin-bottom: 20px;
 `;
 const StaffHeading = styled.h2`
   margin-bottom: 30px;
 `;
-
 const StaffItemContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
