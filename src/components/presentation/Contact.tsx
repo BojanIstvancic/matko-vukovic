@@ -1,5 +1,3 @@
-import Container from "@/components/Container";
-import Layout from "@/components/Layout";
 import Image from "next/image";
 
 import styled from "styled-components";
