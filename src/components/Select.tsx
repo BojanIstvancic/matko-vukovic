@@ -1,5 +1,6 @@
-import styled from "@emotion/styled";
 import { ErrorMessage, useField } from "formik";
+
+import styled from "@emotion/styled";
 
 const StyledSelectContainer = styled.div`
   position: relative;

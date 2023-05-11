@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import Container from "./Container";
+
+import styled from "styled-components";
 
 const StyledFooterContact = styled.div`
   padding: 20px 0;

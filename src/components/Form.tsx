@@ -1,9 +1,10 @@
 import { Form, Formik } from "formik";
+import { getInputs } from "@/utils/getInputs";
+
 import Select from "./Select";
 import TextInput from "./TextInput";
 import TextArea from "./TextArea";
 import UploadInput from "./UploadInput";
-import { getInputs } from "@/utils/getInputs";
 import Button from "./Button";
 
 export interface FormikDynamicProps {

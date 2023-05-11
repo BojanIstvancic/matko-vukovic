@@ -1,7 +1,9 @@
 import Link from "next/link";
-import styled from "styled-components";
-import Container from "./Container";
 import Image from "next/image";
+import Container from "./Container";
+
+import styled from "styled-components";
+
 import Logo from "/public/images/logo.png";
 import { links } from "../constants/links";
 

@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import Container from "./Container";
+
+import styled from "styled-components";
 
 const StyledTopBar = styled.div`
   display: none;

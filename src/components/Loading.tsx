@@ -1,4 +1,5 @@
 import { CircularProgress } from "@mui/material";
+
 import styled from "styled-components";
 
 const StyledLoading = styled(CircularProgress)`

@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 import Container from "./Container";
 
-import { useRouter } from "next/router";
 import styled from "styled-components";
-
 import { links } from "../constants/links";
 
 const StyledNavigation = styled.div`

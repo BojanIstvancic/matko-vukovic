@@ -1,6 +1,7 @@
-import styled from "styled-components";
 import BottomBar from "./BottomBar";
 import FooterContact from "./FooterContact";
+
+import styled from "styled-components";
 
 const StyledFooter = styled.div`
   color: var(--white);

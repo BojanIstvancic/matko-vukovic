@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import Image from "next/image";
 import Container from "../Container";
 import Navigation from "./Navigation";
@@ -5,7 +7,6 @@ import Navigation from "./Navigation";
 import Logo from "/public/images/logo.png";
 
 import styled from "styled-components";
-import Head from "next/head";
 
 const StyledContainer = styled.div`
   margin-top: 40px;
@@ -26,10 +27,9 @@ const Title = styled.h1`
 interface LayoutProps {
   children: JSX.Element | JSX.Element[];
   title: string;
-  heading: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, title, heading }) => {
+const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   return (
     <>
       <Head>

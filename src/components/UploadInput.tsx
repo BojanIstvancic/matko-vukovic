@@ -1,7 +1,8 @@
-import styled from "@emotion/styled";
-import { ErrorMessage, useField, useFormikContext } from "formik";
-import Image from "next/image";
 import { useRef, useState } from "react";
+import { ErrorMessage, useField, useFormikContext } from "formik";
+
+import Image from "next/image";
+import styled from "@emotion/styled";
 
 const StyledUploadInputContainer = styled.div`
   position: relative;

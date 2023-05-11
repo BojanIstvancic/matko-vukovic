@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Container from "./Container";
+import styled from "styled-components";
 
 const StyledBottomBar = styled.div`
   background-color: var(--gray-500);

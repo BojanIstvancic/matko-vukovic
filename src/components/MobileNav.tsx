@@ -1,8 +1,8 @@
+import { useRouter } from "next/router";
+
 import Link from "next/link";
 
-import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
-
 import { links } from "../constants/links";
 
 const StyledNav = styled.div<{ displayMobileNav: boolean }>`

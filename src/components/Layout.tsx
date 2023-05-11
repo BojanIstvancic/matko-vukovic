@@ -1,10 +1,12 @@
-import Head from "next/head";
 import { useState } from "react";
-import styled from "styled-components";
+import Head from "next/head";
+
 import Header from "./Header";
 import MobileNav from "./MobileNav";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
+
+import styled from "styled-components";
 
 const StyledLayout = styled.div`
   min-height: 100vh;
