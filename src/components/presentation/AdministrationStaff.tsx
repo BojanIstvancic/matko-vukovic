@@ -75,7 +75,6 @@ export interface AdministrationStaffProps {
   isLoading: boolean;
   staffMembersToRender: Employee[];
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  search: string;
 }
 
 const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
@@ -90,7 +89,6 @@ const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
   isLoading,
   staffMembersToRender,
   handleSearch,
-  search,
 }) => (
   <StyledAdministrationStaff>
     <ButtonContainer>

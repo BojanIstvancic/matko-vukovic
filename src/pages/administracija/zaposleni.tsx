@@ -139,7 +139,6 @@ const AdministrationStaffContainer: React.FC = ({}) => {
         isLoading={isLoading}
         staffMembersToRender={staffMembersToRender}
         handleSearch={handleSearch}
-        search={search}
       />
     </Layout>
   );
