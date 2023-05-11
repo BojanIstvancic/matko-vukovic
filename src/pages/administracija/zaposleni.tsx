@@ -182,7 +182,7 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
   };
 
   return (
-    <Layout title={"Matko Vuković | Zaposleni"} heading={"Zaposleni"}>
+    <Layout title={"Matko Vuković | Zaposleni"}>
       <StyledEmployee>
         <ButtonContainer>
           <EmployeeTextInput

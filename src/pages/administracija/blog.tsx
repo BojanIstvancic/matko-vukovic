@@ -181,7 +181,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
   };
 
   return (
-    <Layout title={"Matko Vuković | Blog"} heading={"Blog"}>
+    <Layout title={"Matko Vuković | Blog"}>
       <StyledBlog>
         <ButtonContainer>
           <BlogTextInput placeholder="Pronađi post" onChange={handleSearch} />
