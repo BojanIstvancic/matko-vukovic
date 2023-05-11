@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Layout from "@/components/administration/Layout";
+import Layout from "@/components/AdministrationLayout";
 import Button from "../../components/Button";
 import { Modal } from "@mui/material";
 import Form from "../../components/Form";

@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 import Employees from "/public/images/pages/administration/employees.png";
 import Blog from "/public/images/pages/administration/blog.png";
-import { links } from "../../constants/links";
+import { links } from "../constants/links";
 
 const StyledNavigation = styled.div`
   display: flex;

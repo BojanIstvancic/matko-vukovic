@@ -1,4 +1,4 @@
-import Layout from "@/components/administration/Layout";
+import Layout from "@/components/AdministrationLayout";
 import Button from "../../components/Button";
 import Loading from "@/components/Loading";
 import { Modal } from "@mui/material";

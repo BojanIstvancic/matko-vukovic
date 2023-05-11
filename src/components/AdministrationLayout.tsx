@@ -1,8 +1,8 @@
 import Head from "next/head";
 
 import Image from "next/image";
-import Container from "../Container";
-import Navigation from "./Navigation";
+import Container from "./Container";
+import Navigation from "./AdministrationNavigation";
 
 import Logo from "/public/images/logo.png";
 
