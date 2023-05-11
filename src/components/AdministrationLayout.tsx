@@ -43,7 +43,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
         <StyledContainer>
           <LayoutHeader>
             <Image src={Logo} alt="logo" width={100} height={60} />
-            <Title>Matko Vuković - administracija</Title>
+            <Title>Administracija</Title>
           </LayoutHeader>
           <Navigation />
           {children}

@@ -1,21 +1,9 @@
+import { useState, useEffect } from "react";
+
 import Layout from "@/components/AdministrationLayout";
-import Button from "../../components/Button";
-import Loading from "@/components/Loading";
-import { Modal } from "@mui/material";
-import Form from "../../components/Form";
-import StaffItem from "@/components/StaffItem";
+import AdministrationStaff from "@/components/presentation/AdministrationStaff";
 
-import { useState } from "react";
-import { GetServerSideProps } from "next";
 import { Employee } from "@/constants/types";
-
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleMinus,
-  faPen,
-  faCirclePlus,
-} from "@fortawesome/free-solid-svg-icons";
 import {
   createEmployee,
   deleteEmployee,
@@ -23,66 +11,19 @@ import {
   getEmployees,
 } from "@/api/employees";
 
-const StyledEmployee = styled.div``;
-const StaffItemContainer = styled.div``;
-const ButtonContainer = styled.div`
-  display: flex;
+const AdministrationStaffContainer: React.FC = ({}) => {
+  // move all these crapy actions to the redux
+  const [staffMembers, setStaffMembers] = useState<Employee[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getEmployees();
 
-  margin-bottom: 30px;
-`;
-const EmployeeTextInput = styled.input`
-  margin-right: 25px;
-`;
+      setStaffMembers(response.data.employees);
+    };
 
-const StaffContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 30px;
+    fetchData();
+  }, []);
 
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (min-width: 900px) {
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 40px;
-  }
-`;
-const StaffItemFooter = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const FormContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: var(--white);
-
-  &:not(.delete) {
-    width: 50%;
-    min-width: 300px;
-    max-width: 500px;
-  }
-
-  h3 span {
-    color: var(--primary);
-    font-weight: bold;
-  }
-`;
-
-export interface StaffProps {
-  employees: {
-    employees: Employee[];
-  };
-}
-
-const Staff: React.FC<StaffProps> = ({ employees }) => {
-  const [staffMembers, setStaffMembers] = useState<Employee[]>(
-    employees.employees
-  );
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -147,7 +88,6 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
       const response = await editEmployee(data, id);
 
       const employee = response.data.employee;
-
       const staffWithEditedEmployee = staffMembers.map((item) =>
         item._id === employee._id ? employee : item
       );
@@ -181,115 +121,30 @@ const Staff: React.FC<StaffProps> = ({ employees }) => {
     setIsLoading(false);
   };
 
+  const staffMembersToRender = staffMembers.filter(
+    (member: Employee) =>
+      member.firstName.toLowerCase().includes(search.toLowerCase()) ||
+      member.lastName.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <Layout title={"Matko Vuković | Zaposleni"}>
-      <StyledEmployee>
-        <ButtonContainer>
-          <EmployeeTextInput
-            placeholder="Pronađi zaposlenog"
-            onChange={handleSearch}
-          />
-          <Button clickFunction={() => handleOpenModal("add")}>
-            <FontAwesomeIcon
-              icon={faCirclePlus}
-              style={{ fontSize: 20, color: "white" }}
-            />
-          </Button>
-        </ButtonContainer>
-        <StaffContainer>
-          {staffMembers
-            .filter(
-              (member) =>
-                member.firstName.toLowerCase().includes(search.toLowerCase()) ||
-                member.lastName.toLowerCase().includes(search.toLowerCase())
-            )
-            .map((member) => (
-              <StaffItemContainer key={member._id}>
-                <StaffItem item={member} />
-                <StaffItemFooter>
-                  <Button
-                    buttonType="delete"
-                    clickFunction={() => handleOpenModal("delete", member._id)}
-                  >
-                    <FontAwesomeIcon
-                      icon={faCircleMinus}
-                      style={{ fontSize: 20, color: "white" }}
-                    />
-                  </Button>
-                  <Button
-                    buttonType="edit"
-                    clickFunction={() => handleOpenModal("edit", member._id)}
-                  >
-                    <FontAwesomeIcon
-                      icon={faPen}
-                      style={{ fontSize: 20, color: "white" }}
-                    />
-                  </Button>
-                </StaffItemFooter>
-              </StaffItemContainer>
-            ))}
-        </StaffContainer>
-        <Modal
-          open={openModal}
-          onClose={handleCloseModal}
-          aria-labelledby="parent-modal-title"
-          aria-describedby="parent-modal-description"
-        >
-          <FormContainer className={currentAction}>
-            {currentAction === "add" && (
-              <Form
-                formName="Napravi novog zaposlenog"
-                formType="employee"
-                buttonName="Napravi zaposlenog"
-                handleSubmit={handleCreateEmployee}
-              />
-            )}
-            {currentAction === "edit" && (
-              <Form
-                formName="Modifikuj zaposlenog"
-                formType="employee"
-                buttonName="Sačuvaj izmene"
-                buttonType="edit"
-                customInitialValues={currentEmployee}
-                handleSubmit={handleEditEmployee}
-              />
-            )}
-
-            {currentAction === "delete" && (
-              <>
-                <h3>
-                  Potvrdite brisanje zaposlenog{" "}
-                  <span>
-                    {currentEmployee?.firstName} {currentEmployee?.lastName}
-                  </span>
-                </h3>
-                <Button
-                  buttonType="delete"
-                  clickFunction={handleDeleteEmployee}
-                >
-                  Potvrdi
-                </Button>
-              </>
-            )}
-
-            {isLoading && <Loading />}
-          </FormContainer>
-        </Modal>
-      </StyledEmployee>
+      <AdministrationStaff
+        handleCreateEmployee={handleCreateEmployee}
+        handleEditEmployee={handleEditEmployee}
+        handleDeleteEmployee={handleDeleteEmployee}
+        handleOpenModal={handleOpenModal}
+        handleCloseModal={handleCloseModal}
+        openModal={openModal}
+        currentAction={currentAction}
+        currentEmployee={currentEmployee}
+        isLoading={isLoading}
+        staffMembersToRender={staffMembersToRender}
+        handleSearch={handleSearch}
+        search={search}
+      />
     </Layout>
   );
 };
 
-export default Staff;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await getEmployees();
-
-  const employees = response.data;
-
-  return {
-    props: {
-      employees,
-    },
-  };
-};
+export default AdministrationStaffContainer;

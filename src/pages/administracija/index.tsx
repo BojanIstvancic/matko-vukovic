@@ -10,7 +10,7 @@ import { loginUser } from "@/api/login";
 import { loginFormValues } from "@/utils/forms";
 import { links } from "@/constants/links";
 
-const Login: React.FC<{}> = () => {
+const AdministrationLoginContainer: React.FC<{}> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [displayErrorMessage, setDisplayErrorMessage] = useState(false);
@@ -58,4 +58,4 @@ const Login: React.FC<{}> = () => {
   );
 };
 
-export default Login;
+export default AdministrationLoginContainer;
