@@ -91,7 +91,6 @@ const AdministrationStaffContainer: React.FC = ({}) => {
       const staffWithEditedEmployee = staffMembers.map((item) =>
         item._id === employee._id ? employee : item
       );
-
       setStaffMembers(staffWithEditedEmployee);
 
       setOpenModal(false);
@@ -107,7 +106,6 @@ const AdministrationStaffContainer: React.FC = ({}) => {
       setIsLoading(true);
 
       const response = await deleteEmployee(currentEmployee?._id);
-
       const employee = response?.data.employee;
       const blogPostsWithoutDeletedItem = staffMembers.filter(
         (item) => item._id !== employee._id

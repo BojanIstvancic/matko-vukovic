@@ -143,9 +143,7 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
       setIsLoading(true);
 
       const response = await editBlogPostItem(data, id);
-
       const post = response.data.post;
-
       const blogPostsWithEditeddItem = blogPosts.map((item) =>
         item._id === post._id ? post : item
       );
@@ -165,7 +163,6 @@ const Blog: React.FC<BlogProps> = ({ posts }) => {
       setIsLoading(true);
 
       const response = await deleteBlogPostItem(currentPost?._id);
-
       const post = response?.data.post;
       const blogPostsWithoutDeletedItem = blogPosts.filter(
         (item) => item._id !== post._id
