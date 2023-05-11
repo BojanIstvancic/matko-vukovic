@@ -7,7 +7,7 @@ import Blog from "@/components/presentation/Blog";
 import { Post } from "../../constants/types";
 import { getBlogPostItems } from "@/api/blog";
 
-const BlogPostContainer: React.FC<{}> = ({}) => {
+const BlogContainer: React.FC<{}> = ({}) => {
   const [blogPosts, setBlogPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -53,4 +53,4 @@ const BlogPostContainer: React.FC<{}> = ({}) => {
   );
 };
 
-export default BlogPostContainer;
+export default BlogContainer;

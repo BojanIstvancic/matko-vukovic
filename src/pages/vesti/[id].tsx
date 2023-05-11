@@ -1,64 +1,38 @@
-import Container from "@/components/Container";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
 import Layout from "@/components/Layout";
-import Image from "next/image";
-import { GetServerSideProps } from "next";
-import { ParsedUrlQuery } from "querystring";
+import Container from "@/components/Container";
 
-import styled from "styled-components";
-import { Post } from "../../constants/types";
 import { getBlogPostItem } from "@/api/blog";
+import BlogPostItem from "@/components/presentation/BlogItem";
+import { Post } from "@/constants/types";
 
-const StyledBlogPostItem = styled.div`
-  margin-bottom: 25px;
-`;
-const BlogPostItemImage = styled.div`
-  position: relative;
-  height: 200px;
-  margin-bottom: 30px;
+const BlogPostItemContainer: React.FC = ({}) => {
+  const [post, setPost] = useState<Post>({});
+  const router = useRouter();
+  const id = router.query.id;
 
-  @media (min-width: 600px) {
-    height: 600px;
-  }
-`;
+  useEffect(() => {
+    // put this in redux later
+    const fetchData = async () => {
+      const response = await getBlogPostItem(id);
 
-export interface BlogPostItemProps {
-  post: {
-    post: Post;
-  };
-}
+      setPost(response.data.post);
+    };
 
-const BlogPostItem: React.FC<BlogPostItemProps> = ({ post }) => {
-  const blogPost: Post = post.post;
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
 
   return (
-    <Layout title={"Matko Vuković | Blog Item"} content={"description"}>
+    <Layout title={"Matko Vuković | Blog"} content={"description"}>
       <Container>
-        <StyledBlogPostItem>
-          <h1>{blogPost.title}</h1>
-          <BlogPostItemImage>
-            <Image src={blogPost.image} layout="fill" alt={"blog-post-image"} />
-          </BlogPostItemImage>
-          <p>{blogPost.content}</p>
-        </StyledBlogPostItem>
+        <BlogPostItem post={post} />
       </Container>
     </Layout>
   );
 };
 
-interface IParams extends ParsedUrlQuery {
-  id: string;
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params as IParams;
-  const response = await getBlogPostItem(id);
-  const post = response.data;
-
-  return {
-    props: {
-      post,
-    },
-  };
-};
-
-export default BlogPostItem;
+export default BlogPostItemContainer;

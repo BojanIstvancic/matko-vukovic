@@ -75,39 +75,37 @@ const Blog: React.FC<BlogProps> = ({
   blogPostsToRender,
   handlePageClick,
   pageCount,
-}) => {
-  return (
-    <StyledBlog>
-      <h1>Vesti</h1>
-      <BlogPostContainer>
-        {!!blogPostsToRender.length &&
-          blogPostsToRender.map((post) => (
-            <BlogPost key={post._id} post={post} />
-          ))}
-      </BlogPostContainer>
-      <PaginationContainer>
-        <ReactPaginate
-          nextLabel="Sledeća >"
-          previousLabel="< Prethodna"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={1}
-          pageCount={pageCount}
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakLabel="..."
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-        />
-      </PaginationContainer>
-    </StyledBlog>
-  );
-};
+}) => (
+  <StyledBlog>
+    <h1>Vesti</h1>
+    <BlogPostContainer>
+      {!!blogPostsToRender.length &&
+        blogPostsToRender.map((post) => (
+          <BlogPost key={post._id} post={post} />
+        ))}
+    </BlogPostContainer>
+    <PaginationContainer>
+      <ReactPaginate
+        nextLabel="Sledeća >"
+        previousLabel="< Prethodna"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
+        pageCount={pageCount}
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+      />
+    </PaginationContainer>
+  </StyledBlog>
+);
 
 export default Blog;
