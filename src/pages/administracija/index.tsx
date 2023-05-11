@@ -1,35 +1,22 @@
-import Form from "../../components/Form";
-import Layout from "@/components/Layout";
-import Container from "@/components/Container";
-import Loading from "@/components/Loading";
-
 import { useState, useEffect } from "react";
-import { setCookie, getCookie } from "@/helpers/cookieStorage";
 import { useRouter } from "next/router";
 
-import styled from "styled-components";
-import { links } from "@/constants/links";
+import Layout from "@/components/Layout";
+import Container from "@/components/Container";
+import AdministrationLogin from "@/components/presentation/AdministrationLogin";
+
+import { setCookie, getCookie } from "@/helpers/cookieStorage";
 import { loginUser } from "@/api/login";
-
-const StyledLogin = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  padding-bottom: 20px;
-`;
-
-type formValues = {
-  name: string;
-  password: string;
-};
+import { loginFormValues } from "@/utils/forms";
+import { links } from "@/constants/links";
 
 const Login: React.FC<{}> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [displayErrorMessage, setDisplayErrorMessage] = useState(false);
 
-  const handleSubmit = async ({ name, password }: formValues) => {
+  const handleSubmit = async ({ name, password }: loginFormValues) => {
+    // move this logic to redux
     try {
       setIsLoading(true);
 
@@ -44,7 +31,7 @@ const Login: React.FC<{}> = () => {
 
       router.push(links.administrationBlog.url);
     } catch (e) {
-      setErrorMessage(true);
+      setDisplayErrorMessage(true);
     } finally {
       setIsLoading(false);
     }
@@ -61,21 +48,11 @@ const Login: React.FC<{}> = () => {
   return (
     <Layout title={"Matko Vuković | Uloguj se"} content="uloguj se">
       <Container>
-        <StyledLogin>
-          <Form
-            formName="Uloguj se"
-            formType="login"
-            buttonName="Uloguj se"
-            handleSubmit={handleSubmit}
-          />
-          {isLoading && <Loading />}
-
-          {errorMessage && (
-            <p style={{ color: "var(--red-500)", marginTop: "20px" }}>
-              Uneli ste pogrešno korisničko ime ili šifru
-            </p>
-          )}
-        </StyledLogin>
+        <AdministrationLogin
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+          displayErrorMessage={displayErrorMessage}
+        />
       </Container>
     </Layout>
   );

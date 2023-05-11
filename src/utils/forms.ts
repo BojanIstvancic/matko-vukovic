@@ -22,6 +22,11 @@ export interface Validation {
   message: string;
 }
 
+export type loginFormValues = {
+    name: string;
+    password: string;
+};
+
 
 export const forms: { [x: string]: InputProps[] } =
 {
