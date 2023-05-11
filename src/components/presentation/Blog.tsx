@@ -66,7 +66,7 @@ const PaginationContainer = styled.div`
 `;
 
 export interface BlogProps {
-  blogPostsToRender: Post[];
+  blogPostsToRender: Post[] | null;
   handlePageClick: (event: any) => void;
   pageCount: number;
 }
@@ -79,7 +79,8 @@ const Blog: React.FC<BlogProps> = ({
   <StyledBlog>
     <h1>Vesti</h1>
     <BlogPostContainer>
-      {!!blogPostsToRender.length &&
+      {blogPostsToRender &&
+        !!blogPostsToRender.length &&
         blogPostsToRender.map((post) => (
           <BlogPost key={post._id} post={post} />
         ))}

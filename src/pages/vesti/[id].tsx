@@ -9,7 +9,7 @@ import BlogPostItem from "@/components/presentation/BlogItem";
 import { Post } from "@/constants/types";
 
 const BlogPostItemContainer: React.FC = ({}) => {
-  const [post, setPost] = useState<Post>({});
+  const [post, setPost] = useState<Post | null>(null);
   const router = useRouter();
   const id = router.query.id;
 

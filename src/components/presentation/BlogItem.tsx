@@ -17,12 +17,12 @@ const BlogPostItemImage = styled.div`
 `;
 
 export interface BlogPostItemProps {
-  post: Post;
+  post: Post | null;
 }
 
 const BlogPostItem: React.FC<BlogPostItemProps> = ({ post }) => (
   <StyledBlogPostItem>
-    {Object.keys(post).length !== 0 && (
+    {post && Object.keys(post).length !== 0 && (
       <>
         <h1>{post.title}</h1>
         <BlogPostItemImage>
