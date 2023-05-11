@@ -43,6 +43,10 @@ const BlogPostImageContainer = styled.div`
   }
 `;
 const BlogPostContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   h3 {
     transition: all 0.3s ease 0s;
     margin-bottom: 10px;

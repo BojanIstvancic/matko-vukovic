@@ -22,6 +22,10 @@ const Title = styled.h1`
   padding: 0;
   margin-bottom: 0;
   margin-left: 30px;
+
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
 `;
 
 interface LayoutProps {
