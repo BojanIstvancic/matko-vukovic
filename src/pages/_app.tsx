@@ -1,6 +1,8 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { createGlobalStyle } from "styled-components";
+import { Provider } from "react-redux";
+import store from "../store";
 
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
@@ -133,13 +135,13 @@ textarea {
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <Provider store={store}>
       <GlobalStyle />
       <Head>
         <title key="title">Matko Vuković</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Component {...pageProps} />
-    </>
+    </Provider>
   );
 }
