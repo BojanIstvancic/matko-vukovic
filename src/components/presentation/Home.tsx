@@ -221,6 +221,9 @@ const Home: React.FC<HomeProps> = ({ posts, status }) => {
               </BlogPost>
             ))}
           {status === "loading" && <Loading />}
+          {!postsToRender && (
+            <h1>Doslo je do greske prilikom konekcije na bazu podataka.</h1>
+          )}
         </BlogPostContainer>
       </BlogPostSection>
     </StyledHome>

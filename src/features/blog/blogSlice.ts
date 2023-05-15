@@ -24,7 +24,7 @@ export const getBlogPostItemsAsync = createAsyncThunk(
 );
 
 export const blogSlice = createSlice({
-  name: "user",
+  name: "blog",
   initialState,
   reducers: {
   },

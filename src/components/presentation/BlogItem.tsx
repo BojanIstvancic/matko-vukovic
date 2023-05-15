@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import styled from "styled-components";
 import { Post } from "../../constants/types";
+import Loading from "../Loading";
 
 const StyledBlogPostItem = styled.div`
   margin-bottom: 25px;
@@ -18,9 +19,10 @@ const BlogPostItemImage = styled.div`
 
 export interface BlogPostItemProps {
   post: Post | null;
+  status: "loading" | "idle" | "failed";
 }
 
-const BlogPostItem: React.FC<BlogPostItemProps> = ({ post }) => (
+const BlogPostItem: React.FC<BlogPostItemProps> = ({ post, status }) => (
   <StyledBlogPostItem>
     {post && Object.keys(post).length !== 0 && (
       <>
@@ -31,6 +33,8 @@ const BlogPostItem: React.FC<BlogPostItemProps> = ({ post }) => (
         <p>{post.content}</p>
       </>
     )}
+    {status === "loading" && <Loading />}
+    {status === "failed" && <h1>Trazeni post ne postoji</h1>}
   </StyledBlogPostItem>
 );
 
