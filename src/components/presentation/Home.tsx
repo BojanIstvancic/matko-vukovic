@@ -10,6 +10,7 @@ import { links } from "@/constants/links";
 import SwiperImage1 from "/public/images/pages/index/swiper-1.jpg";
 import SwiperImage2 from "/public/images/pages/index/swiper-2.jpg";
 import SwiperImage3 from "/public/images/pages/index/swiper-3.jpg";
+import Loading from "../Loading";
 
 const StyledHome = styled.div``;
 
@@ -151,11 +152,13 @@ const BlogPostImageContainer = styled.div`
 const BlogPostContent = styled.div``;
 
 export interface HomeProps {
-  blogPosts: Post[];
+  posts: Post[] | null;
+  status: "loading" | "idle" | "failed";
 }
 
-const Home: React.FC<HomeProps> = ({ blogPosts }) => {
+const Home: React.FC<HomeProps> = ({ posts, status }) => {
   const swiperImages = [SwiperImage1, SwiperImage2, SwiperImage3];
+  const postsToRender = posts?.slice(0, 3);
 
   return (
     <StyledHome>
@@ -168,8 +171,8 @@ const Home: React.FC<HomeProps> = ({ blogPosts }) => {
           <h2>Vesti</h2>
         </Link>
         <BlogPostContainer>
-          {!!blogPosts.length &&
-            blogPosts.map((item: Post) => (
+          {postsToRender &&
+            postsToRender.map((item: Post) => (
               <BlogPost key={item._id}>
                 <BlogPostImageContainer>
                   <Image
@@ -217,6 +220,7 @@ const Home: React.FC<HomeProps> = ({ blogPosts }) => {
                 </BlogPostContent>
               </BlogPost>
             ))}
+          {status === "loading" && <Loading />}
         </BlogPostContainer>
       </BlogPostSection>
     </StyledHome>

@@ -18,7 +18,7 @@ const ErrorMessage = styled.p`
 
 export interface AdministrationLoginProps {
   handleSubmit: ({ name, password }: loginFormValues) => Promise<void>;
-  status: string;
+  status: "loading" | "idle" | "failed";
 }
 
 const AdministrationLogin: React.FC<AdministrationLoginProps> = ({

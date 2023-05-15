@@ -4,13 +4,13 @@ import type { AppState } from "../../store";
 import { loginUser } from "./userAPI";
 import { setCookie } from "@/helpers/cookieStorage";
 
-export interface CounterState {
+export interface UserSlice {
   isLogedIn: boolean;
   token: string | null; // change this to user info
   status: "idle" | "loading" | "failed";
 }
 
-const initialState: CounterState = {
+const initialState: UserSlice = {
   isLogedIn: false,
   token: null,
   status: "idle",
@@ -23,7 +23,6 @@ export const loginUserAsync = createAsyncThunk(
     password: string,
   }) => {
     const response = await loginUser(data);
-
 
     setCookie("token", response.data.token, 7);
     
