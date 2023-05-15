@@ -18,14 +18,12 @@ const ErrorMessage = styled.p`
 
 export interface AdministrationLoginProps {
   handleSubmit: ({ name, password }: loginFormValues) => Promise<void>;
-  isLoading: boolean;
-  displayErrorMessage: boolean;
+  status: string;
 }
 
 const AdministrationLogin: React.FC<AdministrationLoginProps> = ({
   handleSubmit,
-  isLoading,
-  displayErrorMessage,
+  status,
 }) => (
   <StyledAdministrationLogin>
     <Form
@@ -34,9 +32,9 @@ const AdministrationLogin: React.FC<AdministrationLoginProps> = ({
       buttonName="Uloguj se"
       handleSubmit={handleSubmit}
     />
-    {isLoading && <Loading />}
+    {status === "loading" && <Loading />}
 
-    {displayErrorMessage && (
+    {status === "failed" && (
       <ErrorMessage>Uneli ste pogrešno korisničko ime ili šifru</ErrorMessage>
     )}
   </StyledAdministrationLogin>
