@@ -4,7 +4,6 @@ import Layout from "@/components/AdministrationLayout";
 import AdministrationStaff from "@/components/presentation/AdministrationStaff";
 
 import { Employee, EmployeeData } from "@/constants/types";
-import { deleteEmployee, editEmployee } from "@/api/employees";
 
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
@@ -18,6 +17,7 @@ import {
 const AdministrationStaffContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
   const employees = useAppSelector(selectEmployees);
+
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState<undefined | Employee>(
@@ -77,10 +77,10 @@ const AdministrationStaffContainer: React.FC = ({}) => {
     dispatch(deleteEmployeeAsync(currentEmployee?._id as string));
   };
 
-  const staffMembersToRender = employees.employees?.filter(
-    (member: Employee) =>
-      member.firstName.toLowerCase().includes(search.toLowerCase()) ||
-      member.lastName.toLowerCase().includes(search.toLowerCase())
+  const employeesToRender = employees.employees?.filter(
+    (employee: Employee) =>
+      employee.firstName.toLowerCase().includes(search.toLowerCase()) ||
+      employee.lastName.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -94,7 +94,7 @@ const AdministrationStaffContainer: React.FC = ({}) => {
         openModal={openModal}
         currentAction={currentAction}
         currentEmployee={currentEmployee}
-        employees={staffMembersToRender}
+        employees={employeesToRender}
         handleSearch={handleSearch}
         status={employees.status}
       />
