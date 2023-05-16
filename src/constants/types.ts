@@ -67,3 +67,16 @@ export enum ProfessionalService {
   PSYCHOLOGIST = EmployeeRoles.PSYCHOLOGIST,
 }
 
+export enum AdministrationLevel {
+  BASIC = 'basic',
+  ADMIN = 'admin',
+  SUPER = 'super',
+}
+
+export interface User {
+  _id: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  administrationLevel: AdministrationLevel.BASIC | AdministrationLevel.ADMIN | AdministrationLevel.SUPER;
+}

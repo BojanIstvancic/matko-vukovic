@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { loginUserAsync, selectUser } from "@/features/user/userSlice";

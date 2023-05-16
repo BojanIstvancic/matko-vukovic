@@ -5,15 +5,16 @@ import { loginUser } from "./userAPI";
 import { setCookie } from "@/helpers/cookieStorage";
 
 import { API_LOADING_STATUS } from "@/constants/api";
+import { User } from "@/constants/types";
 
 export interface UserSlice {
-  isLogedIn: boolean;
+  user: User | null;
   token: string | null; // change this to user info
   status: API_LOADING_STATUS
 }
 
 const initialState: UserSlice = {
-  isLogedIn: false,
+  user: null,
   token: null,
   status: "idle",
 };
@@ -26,9 +27,9 @@ export const loginUserAsync = createAsyncThunk(
   }) => {
     const response = await loginUser(data);
 
-    setCookie("token", response.data.token, 7);
-    
-    return response.data.token;
+    setCookie("token", response.data.token, 7);  
+  
+    return response.data;
   }
 );
 
@@ -44,8 +45,8 @@ export const userSlice = createSlice({
       })
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.token = action.payload;
-        state.isLogedIn = true;
+        state.token = action.payload.token;
+        state.user = action.payload.user;
       })
       .addCase(loginUserAsync.rejected, (state) => {
         state.status = "failed";
