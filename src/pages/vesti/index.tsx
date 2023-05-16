@@ -39,6 +39,7 @@ const BlogContainer: React.FC<{}> = ({}) => {
     itemOffset + itemsPerPage
   );
 
+  // REFACTOR THIS AND EXTRACT THIS LOGIC IN SELECTOR
   return (
     <Layout title={"Matko Vuković | Vesti"} content={"description"}>
       <Container>
