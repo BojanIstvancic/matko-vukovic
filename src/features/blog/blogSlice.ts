@@ -46,5 +46,10 @@ export const blogSlice = createSlice({
 export const { } = blogSlice.actions;
 
 export const selectBlog = (state: AppState) => state.blog;
+export const selectBlogThreeItems = (state: AppState) => {
+  return {
+    posts: state.blog.posts?.slice(0,3),
+    status: state.blog.status
+  }}
 
 export default blogSlice.reducer;

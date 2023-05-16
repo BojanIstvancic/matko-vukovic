@@ -1,8 +1,10 @@
 import Image from "next/image";
 
+import Loading from "../Loading";
+
 import styled from "styled-components";
 import { Post } from "../../constants/types";
-import Loading from "../Loading";
+import { API_LOADING_STATE } from "@/constants/api";
 
 const StyledBlogPostItem = styled.div`
   margin-bottom: 25px;
@@ -19,7 +21,7 @@ const BlogPostItemImage = styled.div`
 
 export interface BlogPostItemProps {
   post: Post | null;
-  status: "loading" | "idle" | "failed";
+  status: API_LOADING_STATE;
 }
 
 const BlogPostItem: React.FC<BlogPostItemProps> = ({ post, status }) => (

@@ -5,11 +5,14 @@ import Layout from "../components/Layout";
 import Container from "@/components/Container";
 import Home from "@/components/presentation/Home";
 
-import { getBlogPostItemsAsync, selectBlog } from "@/features/blog/blogSlice";
+import {
+  getBlogPostItemsAsync,
+  selectBlogThreeItems,
+} from "@/features/blog/blogSlice";
 
 const HomeContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
-  const blog = useAppSelector(selectBlog);
+  const blog = useAppSelector(selectBlogThreeItems);
 
   useEffect(() => {
     if (!blog.posts) {

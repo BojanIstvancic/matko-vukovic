@@ -9,22 +9,18 @@ import {
 import Layout from "@/components/Layout";
 import Container from "@/components/Container";
 
-import { getBlogPostItem } from "@/api/blog";
 import BlogPostItem from "@/components/presentation/BlogItem";
-import { Post } from "@/constants/types";
 
 const BlogPostItemContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
   const blogItem = useAppSelector(selectBlogItem);
 
   const router = useRouter();
-  const id = router.query.id;
+  const id = router.query.id as string;
 
   useEffect(() => {
-    if (!blogItem.post || blogItem.post._id !== id) {
+    if (id !== undefined && blogItem.post?._id !== id) {
       dispatch(getBlogPostItemAsync(id));
-      // FIX THIS PROBLEM
-      // create status interface
     }
   }, [blogItem.post, dispatch, id]);
 
