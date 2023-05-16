@@ -1,4 +1,5 @@
 import { API_Method, API_URL } from "@/constants/api";
+import { EmployeeData } from "@/constants/types";
 import { getCookie } from "@/helpers/cookieStorage";
 import axios from "axios";
 
@@ -13,14 +14,18 @@ const getEmployees = async () => {
   return response;
 };
 
-const createEmployee = async (formData) => {
+const createEmployee = async (formData: EmployeeData) => {
   const token = getCookie("token");
   const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.EMPLOYEES}`;
 
   const data = new FormData();
 
   for (const [key, value] of Object.entries(formData)) {
-    data.append(key, value);
+    if(key === 'image') {
+      data.append('staff_image', value)
+    } else {
+      data.append(key, value);
+    }
   }
 
   const response = await axios({

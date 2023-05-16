@@ -15,10 +15,9 @@ export interface BlogPostData {
   image: string,
 }
 
-export interface BlogPostDataWithId extends BlogPostData{
+export interface BlogPostDataWithId extends BlogPostData {
   id: string;
 }
-
 
 export enum EmployeeRoles {
   DIRECTOR = "director",
@@ -43,6 +42,13 @@ export interface Employee {
   createdAt: string;
   updatedAt: string;
   __v: string;
+}
+
+export interface EmployeeData {
+  firstName: string;
+  lastName: string;
+  role: EmployeeRoles.DIRECTOR | EmployeeRoles.DEPUTY | EmployeeRoles.PROFESSOR | EmployeeRoles.SECRETARY | EmployeeRoles.JANITOR | EmployeeRoles.PEDAGOGUE | EmployeeRoles.PSYCHOLOGIST | EmployeeRoles.LAWYER | EmployeeRoles.CLEANER | EmployeeRoles.LIBRARIAN, 
+  image: string;
 }
 
 export enum Administration {

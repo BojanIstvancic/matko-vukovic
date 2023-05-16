@@ -3,15 +3,12 @@ import { useState, useEffect } from "react";
 import Layout from "@/components/AdministrationLayout";
 import AdministrationStaff from "@/components/presentation/AdministrationStaff";
 
-import { Employee } from "@/constants/types";
-import {
-  createEmployee,
-  deleteEmployee,
-  editEmployee,
-  getEmployees,
-} from "@/api/employees";
+import { Employee, EmployeeData } from "@/constants/types";
+import { deleteEmployee, editEmployee } from "@/api/employees";
+
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
+  createEmployeeAsync,
   getEmployeesAsync,
   selectEmployees,
 } from "@/features/employees/employeesSlice";
@@ -30,6 +27,8 @@ const AdministrationStaffContainer: React.FC = ({}) => {
     if (!employees.employees) {
       dispatch(getEmployeesAsync());
     }
+
+    setOpenModal(false);
   }, [employees.employees, dispatch]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,29 +48,15 @@ const AdministrationStaffContainer: React.FC = ({}) => {
 
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleCreateEmployee = async (values: Employee) => {
+  const handleCreateEmployee = async (values: EmployeeData) => {
     const data = {
       firstName: values.firstName,
       lastName: values.lastName,
-      staff_image: values.image,
+      image: values.image,
       role: values.role,
     };
 
-    try {
-      setIsLoading(true);
-
-      const response = await createEmployee(data);
-
-      const employee = response.data.employee;
-      const staffWithNewEmployee = [employee, ...staffMembers];
-      setStaffMembers(staffWithNewEmployee);
-
-      setOpenModal(false);
-    } catch (error) {
-      console.log(error);
-    }
-
-    setIsLoading(false);
+    dispatch(createEmployeeAsync(data));
   };
 
   const handleEditEmployee = async (values: Employee) => {
