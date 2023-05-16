@@ -13,6 +13,7 @@ import {
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { Employee } from "@/constants/types";
+import { API_LOADING_STATUS } from "@/constants/api";
 
 const StyledAdministrationStaff = styled.div``;
 const StaffItemContainer = styled.div``;
@@ -72,9 +73,9 @@ export interface AdministrationStaffProps {
   openModal: boolean;
   currentAction: string;
   currentEmployee: Employee | undefined;
-  isLoading: boolean;
-  staffMembersToRender: Employee[];
+  employees: Employee[] | undefined;
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  status: API_LOADING_STATUS;
 }
 
 const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
@@ -86,9 +87,9 @@ const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
   openModal,
   currentAction,
   currentEmployee,
-  isLoading,
-  staffMembersToRender,
+  employees,
   handleSearch,
+  status,
 }) => (
   <StyledAdministrationStaff>
     <ButtonContainer>
@@ -104,31 +105,32 @@ const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
       </Button>
     </ButtonContainer>
     <StaffContainer>
-      {staffMembersToRender.map((member: Employee) => (
-        <StaffItemContainer key={member._id}>
-          <StaffItem item={member} />
-          <StaffItemFooter>
-            <Button
-              buttonType="delete"
-              clickFunction={() => handleOpenModal("delete", member._id)}
-            >
-              <FontAwesomeIcon
-                icon={faCircleMinus}
-                style={{ fontSize: 20, color: "white" }}
-              />
-            </Button>
-            <Button
-              buttonType="edit"
-              clickFunction={() => handleOpenModal("edit", member._id)}
-            >
-              <FontAwesomeIcon
-                icon={faPen}
-                style={{ fontSize: 20, color: "white" }}
-              />
-            </Button>
-          </StaffItemFooter>
-        </StaffItemContainer>
-      ))}
+      {employees &&
+        employees.map((member: Employee) => (
+          <StaffItemContainer key={member._id}>
+            <StaffItem item={member} />
+            <StaffItemFooter>
+              <Button
+                buttonType="delete"
+                clickFunction={() => handleOpenModal("delete", member._id)}
+              >
+                <FontAwesomeIcon
+                  icon={faCircleMinus}
+                  style={{ fontSize: 20, color: "white" }}
+                />
+              </Button>
+              <Button
+                buttonType="edit"
+                clickFunction={() => handleOpenModal("edit", member._id)}
+              >
+                <FontAwesomeIcon
+                  icon={faPen}
+                  style={{ fontSize: 20, color: "white" }}
+                />
+              </Button>
+            </StaffItemFooter>
+          </StaffItemContainer>
+        ))}
     </StaffContainer>
     <Modal
       open={openModal}
@@ -169,10 +171,10 @@ const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
             </Button>
           </>
         )}
-
-        {isLoading && <Loading />}
       </FormContainer>
     </Modal>
+
+    {status === "loading" && <Loading />}
   </StyledAdministrationStaff>
 );
 

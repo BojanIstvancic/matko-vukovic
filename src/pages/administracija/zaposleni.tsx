@@ -10,35 +10,37 @@ import {
   editEmployee,
   getEmployees,
 } from "@/api/employees";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import {
+  getEmployeesAsync,
+  selectEmployees,
+} from "@/features/employees/employeesSlice";
 
 const AdministrationStaffContainer: React.FC = ({}) => {
-  // move all these crapy actions to the redux
-  const [staffMembers, setStaffMembers] = useState<Employee[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getEmployees();
-
-      setStaffMembers(response.data.employees);
-    };
-
-    fetchData();
-  }, []);
-
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const employees = useAppSelector(selectEmployees);
   const [search, setSearch] = useState("");
-
   const [openModal, setOpenModal] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState<undefined | Employee>(
     undefined
   );
   const [currentAction, setCurrentAction] = useState("");
 
+  useEffect(() => {
+    if (!employees.employees) {
+      dispatch(getEmployeesAsync());
+    }
+  }, [employees.employees, dispatch]);
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // add debounce here
     setSearch(event.target.value);
   };
 
   const handleOpenModal = (action: string, id: string | null = null) => {
-    const filterCurrentEmployee = staffMembers.find((item) => item._id === id);
+    const filterCurrentEmployee = employees.employees?.find(
+      (item) => item._id === id
+    );
     setCurrentEmployee(filterCurrentEmployee);
 
     setCurrentAction(action);
@@ -119,7 +121,7 @@ const AdministrationStaffContainer: React.FC = ({}) => {
     setIsLoading(false);
   };
 
-  const staffMembersToRender = staffMembers.filter(
+  const staffMembersToRender = employees.employees?.filter(
     (member: Employee) =>
       member.firstName.toLowerCase().includes(search.toLowerCase()) ||
       member.lastName.toLowerCase().includes(search.toLowerCase())
@@ -136,9 +138,9 @@ const AdministrationStaffContainer: React.FC = ({}) => {
         openModal={openModal}
         currentAction={currentAction}
         currentEmployee={currentEmployee}
-        isLoading={isLoading}
-        staffMembersToRender={staffMembersToRender}
+        employees={staffMembersToRender}
         handleSearch={handleSearch}
+        status={employees.status}
       />
     </Layout>
   );
