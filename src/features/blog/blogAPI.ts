@@ -70,25 +70,25 @@ const getBlogPostItems = async () => {
 //   return response;
 // };
 
-// const deleteBlogPostItem = async (id: string) => {
-//   const token = getCookie("token");
-//   const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.POSTS}/${id}`;
+const deleteBlogPostItem = async (id: string) => {
+  const token = getCookie("token");
+  const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.POSTS}/${id}`;
 
-//   const response = await axios({
-//     method: API_Method.DELETE,
-//     url,
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
+  const response = await axios({
+    method: API_Method.DELETE,
+    url,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-//   return response;
-// };
+  return response;
+};
 
 export {
   getBlogPostItems,
   // getBlogPostItem,
   // createBlogPostItem,
   // editBlogPostItem,
-  // deleteBlogPostItem,
+  deleteBlogPostItem,
 };

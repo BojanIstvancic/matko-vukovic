@@ -2,41 +2,39 @@ import { useState, useEffect } from "react";
 
 import Layout from "@/components/AdministrationLayout";
 import AdministrationBlog from "@/components/presentation/AdministrationBlog";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import {
+  deleteBlogPostItemAsync,
+  getBlogPostItemsAsync,
+  selectBlog,
+} from "@/features/blog/blogSlice";
+import { createBlogPostItem, editBlogPostItem } from "@/api/blog";
 
 import { Post } from "../../constants/types";
 
-import styled from "styled-components";
-import {
-  createBlogPostItem,
-  deleteBlogPostItem,
-  editBlogPostItem,
-  getBlogPostItems,
-} from "@/api/blog";
-
 const AdnministrationBlogContainer: React.FC = ({}) => {
-  const [blogPosts, setBlogPosts] = useState<Post[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const blog = useAppSelector(selectBlog);
+
+  useEffect(() => {
+    if (!blog.posts) {
+      dispatch(getBlogPostItemsAsync());
+    }
+
+    setOpenModal(false);
+  }, [blog.posts, dispatch]);
+
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [currentPost, setCurrentPost] = useState<undefined | Post>(undefined);
   const [currentAction, setCurrentAction] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getBlogPostItems();
-
-      setBlogPosts(response.data.posts);
-    };
-
-    fetchData();
-  }, []);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
 
   const handleOpenModal = (action: string, id: string | null = null) => {
-    const filterCurrentPost = blogPosts.find((item) => item._id === id);
+    const filterCurrentPost = blog.posts?.find((item) => item._id === id);
     setCurrentPost(filterCurrentPost);
 
     setCurrentAction(action);
@@ -53,8 +51,6 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
     };
 
     try {
-      setIsLoading(true);
-
       const response = await createBlogPostItem(data);
 
       const post = response.data.post;
@@ -65,8 +61,6 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
     } catch (error) {
       console.log(error);
     }
-
-    setIsLoading(false);
   };
 
   const handleEditPost = async (values: Post) => {
@@ -79,8 +73,6 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
     const id = values._id;
 
     try {
-      setIsLoading(true);
-
       const response = await editBlogPostItem(data, id);
       const post = response.data.post;
       const blogPostsWithEditeddItem = blogPosts.map((item) =>
@@ -93,30 +85,13 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
     } catch (error) {
       console.log(error);
     }
-
-    setIsLoading(false);
   };
 
-  const handleDeletePost = async () => {
-    try {
-      setIsLoading(true);
-
-      const response = await deleteBlogPostItem(currentPost?._id);
-      const post = response?.data.post;
-      const blogPostsWithoutDeletedItem = blogPosts.filter(
-        (item) => item._id !== post._id
-      );
-      setBlogPosts(blogPostsWithoutDeletedItem);
-
-      setOpenModal(false);
-    } catch (error) {
-      console.log(error);
-    }
-
-    setIsLoading(false);
+  const handleDeletePost = () => {
+    dispatch(deleteBlogPostItemAsync(currentPost?._id as string));
   };
 
-  const blogPostsToRender = blogPosts.filter(
+  const blogPostsToRender = blog.posts?.filter(
     (post: Post) =>
       post.content.toLowerCase().includes(search.toLowerCase()) ||
       post.title.toLowerCase().includes(search.toLowerCase())
@@ -133,9 +108,9 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
         openModal={openModal}
         currentAction={currentAction}
         currentPost={currentPost}
-        isLoading={isLoading}
-        blogPostsToRender={blogPostsToRender}
+        posts={blogPostsToRender}
         handleSearch={handleSearch}
+        status={blog.status}
       />
     </Layout>
   );

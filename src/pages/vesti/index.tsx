@@ -8,8 +8,6 @@ import { getBlogPostItemsAsync, selectBlog } from "@/features/blog/blogSlice";
 
 import Blog from "@/components/presentation/Blog";
 
-import { Post } from "../../constants/types";
-
 const BlogContainer: React.FC<{}> = ({}) => {
   const dispatch = useAppDispatch();
   const blog = useAppSelector(selectBlog);

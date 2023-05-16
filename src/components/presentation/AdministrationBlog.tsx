@@ -12,6 +12,7 @@ import {
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { Post } from "@/constants/types";
+import { API_LOADING_STATUS } from "@/constants/api";
 
 const StyledBlog = styled.div``;
 const ButtonContainer = styled.div`
@@ -68,15 +69,15 @@ const FormContainer = styled.div`
 export interface AdministrationBlogProps {
   handleCreatePost: (values: Post) => Promise<void>;
   handleEditPost: (values: Post) => Promise<void>;
-  handleDeletePost: () => Promise<void>;
+  handleDeletePost: () => void;
   handleOpenModal: (action: string, id?: string | null) => void;
   handleCloseModal: () => void;
   openModal: boolean;
   currentAction: string;
   currentPost: Post | undefined;
-  isLoading: boolean;
-  blogPostsToRender: Post[];
+  posts: Post[] | undefined;
   handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  status: API_LOADING_STATUS;
 }
 
 const AdministrationBlog: React.FC<AdministrationBlogProps> = ({
@@ -88,9 +89,9 @@ const AdministrationBlog: React.FC<AdministrationBlogProps> = ({
   openModal,
   currentAction,
   currentPost,
-  isLoading,
-  blogPostsToRender,
+  posts,
   handleSearch,
+  status,
 }) => (
   <StyledBlog>
     <ButtonContainer>
@@ -103,31 +104,32 @@ const AdministrationBlog: React.FC<AdministrationBlogProps> = ({
       </Button>
     </ButtonContainer>
     <BlogPostContainer>
-      {blogPostsToRender.map((post: Post) => (
-        <BlogPostInnerWrapper key={post._id}>
-          <BlogPostButtonContainer>
-            <Button
-              buttonType="delete"
-              clickFunction={() => handleOpenModal("delete", post._id)}
-            >
-              <FontAwesomeIcon
-                icon={faCircleMinus}
-                style={{ fontSize: 20, color: "white" }}
-              />
-            </Button>
-            <Button
-              buttonType="edit"
-              clickFunction={() => handleOpenModal("edit", post._id)}
-            >
-              <FontAwesomeIcon
-                icon={faPen}
-                style={{ fontSize: 20, color: "white" }}
-              />
-            </Button>
-          </BlogPostButtonContainer>
-          <BlogPost post={post} />
-        </BlogPostInnerWrapper>
-      ))}
+      {posts &&
+        posts.map((post: Post) => (
+          <BlogPostInnerWrapper key={post._id}>
+            <BlogPostButtonContainer>
+              <Button
+                buttonType="delete"
+                clickFunction={() => handleOpenModal("delete", post._id)}
+              >
+                <FontAwesomeIcon
+                  icon={faCircleMinus}
+                  style={{ fontSize: 20, color: "white" }}
+                />
+              </Button>
+              <Button
+                buttonType="edit"
+                clickFunction={() => handleOpenModal("edit", post._id)}
+              >
+                <FontAwesomeIcon
+                  icon={faPen}
+                  style={{ fontSize: 20, color: "white" }}
+                />
+              </Button>
+            </BlogPostButtonContainer>
+            <BlogPost post={post} />
+          </BlogPostInnerWrapper>
+        ))}
     </BlogPostContainer>
 
     <Modal
@@ -166,10 +168,9 @@ const AdministrationBlog: React.FC<AdministrationBlogProps> = ({
             </Button>
           </>
         )}
-
-        {isLoading && <Loading />}
       </FormContainer>
     </Modal>
+    {status === "loading" && <Loading />}
   </StyledBlog>
 );
 
