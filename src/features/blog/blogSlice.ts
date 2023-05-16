@@ -3,10 +3,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { AppState } from "../../store";
 import { getBlogPostItems, deleteBlogPostItem, createBlogPostItem, editBlogPostItem } from "./blogAPI";
 import { BlogPostData, BlogPostDataWithId, Post } from "@/constants/types";
+import { API_LOADING_STATUS } from "@/constants/api";
 
 export interface BlogSlice {
   posts: Post[] | null;
-  status: "idle" | "loading" | "failed";
+  status: API_LOADING_STATUS;
 }
 
 const initialState: BlogSlice = {

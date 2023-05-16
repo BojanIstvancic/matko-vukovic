@@ -1,8 +1,10 @@
 import StaffItem from "@/components/StaffItem";
+import { API_LOADING_STATUS } from "@/constants/api";
 
 import { Employee } from "@/constants/types";
 
 import styled from "styled-components";
+import Loading from "../Loading";
 
 const StyledStaff = styled.section``;
 const StaffBlock = styled.div`
@@ -24,23 +26,26 @@ const StaffItemContainer = styled.div`
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 40px;
   }
+  // I DON'T like css here adjust this
 `;
 
 export interface StaffProps {
-  administration: Employee[];
-  professionalService: Employee[];
-  professors: Employee[];
+  administration: Employee[] | undefined;
+  professionalService: Employee[] | undefined;
+  professors: Employee[] | undefined;
+  status: API_LOADING_STATUS;
 }
 
 const Staff: React.FC<StaffProps> = ({
   administration,
   professionalService,
   professors,
+  status,
 }) => {
   return (
     <StyledStaff>
       <h1>Zaposleni</h1>
-      {!!administration.length && (
+      {administration && (
         <StaffBlock>
           <StaffHeading>Uprava škole</StaffHeading>
           <StaffItemContainer>
@@ -50,7 +55,7 @@ const Staff: React.FC<StaffProps> = ({
           </StaffItemContainer>
         </StaffBlock>
       )}
-      {!!professionalService.length && (
+      {professionalService && (
         <StaffBlock>
           <StaffHeading>Stručna služba</StaffHeading>
           <StaffItemContainer>
@@ -60,7 +65,7 @@ const Staff: React.FC<StaffProps> = ({
           </StaffItemContainer>
         </StaffBlock>
       )}
-      {!!professors.length && (
+      {professors && (
         <StaffBlock>
           <StaffHeading>Profesori</StaffHeading>
           <StaffItemContainer>
@@ -69,6 +74,12 @@ const Staff: React.FC<StaffProps> = ({
             ))}
           </StaffItemContainer>
         </StaffBlock>
+      )}
+
+      {status === "loading" && <Loading />}
+
+      {status === "failed" && (
+        <h1>Doslo je do greske prilikom konekcije na bazu podataka.</h1>
       )}
     </StyledStaff>
   );

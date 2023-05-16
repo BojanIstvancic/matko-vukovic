@@ -1,32 +1,34 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import Layout from "@/components/Layout";
 import Container from "@/components/Container";
-import Staff from "../components/presentation/Staff";
+import Staff from "@/components/presentation/Staff";
+
+import {
+  getEmployeesAsync,
+  selectEmployees,
+} from "@/features/employees/employeesSlice";
+
+import { useAppDispatch, useAppSelector } from "@/hooks";
 
 import {
   Administration,
-  Employee,
   EmployeeRoles,
   ProfessionalService,
 } from "@/constants/types";
 
-import { getEmployees } from "@/api/employees";
-
 const StaffContainer: React.FC = () => {
-  const [staffMembers, setStaffMembers] = useState<Employee[]>([]);
-  // move all this code to reducer
+  const dispatch = useAppDispatch();
+  const employees = useAppSelector(selectEmployees);
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getEmployees();
+    if (!employees.employees) {
+      dispatch(getEmployeesAsync());
+    }
+  }, [employees.employees, dispatch]);
 
-      setStaffMembers(response.data.employees);
-    };
-
-    fetchData();
-  }, []);
-
-  const administration = staffMembers.filter(
+  // PUT ALL THESE THINGS IN SELECTOR
+  const administration = employees.employees?.filter(
     (member) =>
       member.role.includes(Administration.DIRECTOR) ||
       member.role.includes(Administration.SECRETARY) ||
@@ -34,13 +36,13 @@ const StaffContainer: React.FC = () => {
       member.role.includes(Administration.LAWYER)
   );
 
-  const professionalService = staffMembers.filter(
+  const professionalService = employees.employees?.filter(
     (member) =>
       member.role.includes(ProfessionalService.PEDAGOGUE) ||
       member.role.includes(ProfessionalService.PSYCHOLOGIST)
   );
 
-  const professors = staffMembers.filter((member) =>
+  const professors = employees.employees?.filter((member) =>
     member.role.includes(EmployeeRoles.PROFESSOR)
   );
 
@@ -51,6 +53,7 @@ const StaffContainer: React.FC = () => {
           administration={administration}
           professionalService={professionalService}
           professors={professors}
+          status={employees.status}
         />
       </Container>
     </Layout>

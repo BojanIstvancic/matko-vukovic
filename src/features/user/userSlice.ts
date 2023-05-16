@@ -4,10 +4,12 @@ import type { AppState } from "../../store";
 import { loginUser } from "./userAPI";
 import { setCookie } from "@/helpers/cookieStorage";
 
+import { API_LOADING_STATUS } from "@/constants/api";
+
 export interface UserSlice {
   isLogedIn: boolean;
   token: string | null; // change this to user info
-  status: "idle" | "loading" | "failed";
+  status: API_LOADING_STATUS
 }
 
 const initialState: UserSlice = {

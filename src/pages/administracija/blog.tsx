@@ -31,6 +31,7 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
   }, [blog.posts, dispatch]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // add debounce to this search function
     setSearch(event.target.value);
   };
 
