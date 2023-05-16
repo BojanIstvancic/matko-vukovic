@@ -17,6 +17,11 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
   const blog = useAppSelector(selectBlog);
 
+  const [search, setSearch] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [currentPost, setCurrentPost] = useState<undefined | Post>(undefined);
+  const [currentAction, setCurrentAction] = useState("");
+
   useEffect(() => {
     if (!blog.posts) {
       dispatch(getBlogPostItemsAsync());
@@ -24,11 +29,6 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
 
     setOpenModal(false);
   }, [blog.posts, dispatch]);
-
-  const [search, setSearch] = useState("");
-  const [openModal, setOpenModal] = useState(false);
-  const [currentPost, setCurrentPost] = useState<undefined | Post>(undefined);
-  const [currentAction, setCurrentAction] = useState("");
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
