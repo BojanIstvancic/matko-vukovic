@@ -11,6 +11,8 @@ export function makeStore() {
   })
 }
 
+// ADD REDUX PERSIST 
+
 const store = makeStore()
 
 export type AppState = ReturnType<typeof store.getState>

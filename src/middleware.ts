@@ -12,5 +12,5 @@ const token = request.cookies.get('token');
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/administracija/blog', '/administracija/zaposleni'],
+  matcher: ['/administracija/blog', '/administracija/zaposleni', '/administracija/korisnik'],
 }
