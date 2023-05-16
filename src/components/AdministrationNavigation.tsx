@@ -8,6 +8,9 @@ import styled from "styled-components";
 
 import Employees from "/public/images/pages/administration/employees.png";
 import Blog from "/public/images/pages/administration/blog.png";
+import User from "/public/images/pages/administration/user.png";
+// OPTIMIZE THESE IMAGES
+
 import { links } from "../constants/links";
 
 const StyledNavigation = styled.div`
@@ -34,7 +37,7 @@ const StyledNavigation = styled.div`
 `;
 const NavigationItem = styled.div`
   display: flex;
-  width: 200px;
+  width: 100px;
 
   flex-direction: column;
   align-items: center;
@@ -47,7 +50,7 @@ const NavigationItem = styled.div`
   cursor: pointer;
 
   &:not(:last-child) {
-    margin-right: 30px;
+    margin-right: 10px;
   }
 
   &:hover,
@@ -79,7 +82,7 @@ const Navigation: React.FC<{}> = () => {
             asPath === links.administrationEmployees.url ? "active" : ""
           }
         >
-          <Image src={Employees} alt="employees" width={100} height={85} />
+          <Image src={Employees} alt="employees" width={50} height={42} />
           <NavigationText>Zaposleni</NavigationText>
         </NavigationItem>
       </Link>
@@ -87,8 +90,16 @@ const Navigation: React.FC<{}> = () => {
         <NavigationItem
           className={asPath === links.administrationBlog.url ? "active" : ""}
         >
-          <Image src={Blog} alt="blog" width={100} height={85} />
+          <Image src={Blog} alt="blog" width={50} height={42} />
           <NavigationText>Blog</NavigationText>
+        </NavigationItem>
+      </Link>
+      <Link href={links.administrationUser.url}>
+        <NavigationItem
+          className={asPath === links.administrationUser.url ? "active" : ""}
+        >
+          <Image src={User} alt="user" width={50} height={42} />
+          <NavigationText>Korisnik</NavigationText>
         </NavigationItem>
       </Link>
     </StyledNavigation>

@@ -18,12 +18,13 @@ export const links = {
   administrationIndex: {
     url: `/administracija`,
   },
-
   administrationBlog: {
     url: `/administracija/blog`,
   },
-
   administrationEmployees: {
     url: `/administracija/zaposleni`,
+  },
+  administrationUser: {
+    url: `/administracija/korisnik`,
   },
 };
