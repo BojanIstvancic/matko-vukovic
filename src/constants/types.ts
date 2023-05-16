@@ -72,7 +72,6 @@ export enum AdministrationLevel {
   ADMIN = 'admin',
   SUPER = 'super',
 }
-
 export interface User {
   _id: string;
   name: string;

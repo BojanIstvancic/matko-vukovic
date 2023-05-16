@@ -9,7 +9,7 @@ import { User } from "@/constants/types";
 
 export interface UserSlice {
   user: User | null;
-  token: string | null; // change this to user info
+  token: string | null; 
   status: API_LOADING_STATUS
 }
 
