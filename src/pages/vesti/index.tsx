@@ -3,27 +3,26 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import Container from "@/components/Container";
 
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { getBlogPostItemsAsync, selectBlog } from "@/features/blog/blogSlice";
+
 import Blog from "@/components/presentation/Blog";
+
 import { Post } from "../../constants/types";
-import { getBlogPostItems } from "@/api/blog";
 
 const BlogContainer: React.FC<{}> = ({}) => {
-  const [blogPosts, setBlogPosts] = useState<Post[]>([]);
+  const dispatch = useAppDispatch();
+  const blog = useAppSelector(selectBlog);
 
   useEffect(() => {
-    // put this in redux later
-    const fetchData = async () => {
-      const response = await getBlogPostItems();
-
-      setBlogPosts(response.data.posts);
-    };
-
-    fetchData();
-  }, []);
+    if (!blog.posts) {
+      dispatch(getBlogPostItemsAsync());
+    }
+  }, [blog.posts, dispatch]);
 
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 6;
-  const itemsLength = blogPosts.length;
+  const itemsLength = blog.posts?.length || 1;
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const BlogContainer: React.FC<{}> = ({}) => {
     setItemOffset(newOffset);
   };
 
-  const blogPostsToRender = blogPosts.slice(
+  const blogPostsToRender = blog.posts?.slice(
     itemOffset,
     itemOffset + itemsPerPage
   );
@@ -44,9 +43,10 @@ const BlogContainer: React.FC<{}> = ({}) => {
     <Layout title={"Matko Vuković | Vesti"} content={"description"}>
       <Container>
         <Blog
-          blogPostsToRender={blogPostsToRender}
+          posts={blogPostsToRender}
           handlePageClick={handlePageClick}
           pageCount={pageCount}
+          status={blog.status}
         />
       </Container>
     </Layout>

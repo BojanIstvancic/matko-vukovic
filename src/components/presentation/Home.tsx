@@ -11,7 +11,7 @@ import SwiperImage1 from "/public/images/pages/index/swiper-1.jpg";
 import SwiperImage2 from "/public/images/pages/index/swiper-2.jpg";
 import SwiperImage3 from "/public/images/pages/index/swiper-3.jpg";
 import Loading from "../Loading";
-import { API_LOADING_STATE } from "@/constants/api";
+import { API_LOADING_STATUS } from "@/constants/api";
 
 const StyledHome = styled.div``;
 
@@ -154,7 +154,7 @@ const BlogPostContent = styled.div``;
 
 export interface HomeProps {
   posts: Post[] | undefined;
-  status: API_LOADING_STATE;
+  status: API_LOADING_STATUS;
 }
 
 const Home: React.FC<HomeProps> = ({ posts, status }) => {
@@ -221,7 +221,7 @@ const Home: React.FC<HomeProps> = ({ posts, status }) => {
               </BlogPost>
             ))}
           {status === "loading" && <Loading />}
-          {!posts && (
+          {!posts && status === "failed" && (
             <h1>Doslo je do greske prilikom konekcije na bazu podataka.</h1>
           )}
         </BlogPostContainer>

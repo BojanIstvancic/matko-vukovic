@@ -12,4 +12,4 @@ export enum API_URL {
   EMPLOYEES = "employees",
 }
 
-export type API_LOADING_STATE = "loading" | "idle" | "failed";
+export type API_LOADING_STATUS = "loading" | "idle" | "failed";

@@ -3,6 +3,8 @@ import BlogPost from "@/components/BlogPost";
 
 import styled from "styled-components";
 import { Post } from "../../constants/types";
+import { API_LOADING_STATUS } from "@/constants/api";
+import Loading from "../Loading";
 
 const StyledBlog = styled.div`
   margin-bottom: 25px;
@@ -66,46 +68,56 @@ const PaginationContainer = styled.div`
 `;
 
 export interface BlogProps {
-  blogPostsToRender: Post[] | null;
+  posts: Post[] | undefined;
   handlePageClick: (event: any) => void;
   pageCount: number;
+  status: API_LOADING_STATUS;
 }
 
 const Blog: React.FC<BlogProps> = ({
-  blogPostsToRender,
+  posts,
   handlePageClick,
   pageCount,
+  status,
 }) => (
   <StyledBlog>
     <h1>Vesti</h1>
-    <BlogPostContainer>
-      {blogPostsToRender &&
-        !!blogPostsToRender.length &&
-        blogPostsToRender.map((post) => (
-          <BlogPost key={post._id} post={post} />
-        ))}
-    </BlogPostContainer>
-    <PaginationContainer>
-      <ReactPaginate
-        nextLabel="Sledeća >"
-        previousLabel="< Prethodna"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={1}
-        pageCount={pageCount}
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
-      />
-    </PaginationContainer>
+
+    {posts && (
+      <>
+        <BlogPostContainer>
+          {posts.map((post) => (
+            <BlogPost key={post._id} post={post} />
+          ))}
+        </BlogPostContainer>
+        <PaginationContainer>
+          <ReactPaginate
+            nextLabel="Sledeća >"
+            previousLabel="< Prethodna"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={1}
+            pageCount={pageCount}
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+          />
+        </PaginationContainer>
+      </>
+    )}
+    {status === "loading" && <Loading />}
+
+    {!posts && status === "failed" && (
+      <h1>Doslo je do greske prilikom konekcije na bazu podataka.</h1>
+    )}
   </StyledBlog>
 );
 

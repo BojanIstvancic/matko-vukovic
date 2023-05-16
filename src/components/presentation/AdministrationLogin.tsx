@@ -3,7 +3,7 @@ import Loading from "@/components/Loading";
 
 import styled from "styled-components";
 import { loginFormValues } from "@/utils/forms";
-import { API_LOADING_STATE } from "@/constants/api";
+import { API_LOADING_STATUS } from "@/constants/api";
 
 const StyledAdministrationLogin = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const ErrorMessage = styled.p`
 
 export interface AdministrationLoginProps {
   handleSubmit: ({ name, password }: loginFormValues) => Promise<void>;
-  status: API_LOADING_STATE;
+  status: API_LOADING_STATUS;
 }
 
 const AdministrationLogin: React.FC<AdministrationLoginProps> = ({
