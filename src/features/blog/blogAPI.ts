@@ -42,7 +42,7 @@ const createBlogPostItem = async (formData: BlogPostData) => {
   return response;
 };
 
-const editBlogPostItem = async (formData:BlogPostData, id:any) => {
+const editBlogPostItem = async (formData: BlogPostData, id:any) => {
   const token = getCookie("token");
   const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.POSTS}/${id}`;
 

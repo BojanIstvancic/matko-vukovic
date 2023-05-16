@@ -11,7 +11,7 @@ import {
   selectBlog,
 } from "@/features/blog/blogSlice";
 
-import { BlogPostData, BlogPostDataWithId, Post } from "../../constants/types";
+import { BlogPostData, Post } from "../../constants/types";
 
 const AdnministrationBlogContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
@@ -55,7 +55,7 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
     dispatch(createBlogPostItemAsync(data));
   };
 
-  const handleEditPost = async (values: BlogPostDataWithId) => {
+  const handleEditPost = async (values: BlogPostData) => {
     const data = {
       id: currentPost?._id as string,
       content: values.content,

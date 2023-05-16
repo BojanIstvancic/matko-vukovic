@@ -51,6 +51,10 @@ export interface EmployeeData {
   image: string;
 }
 
+export interface EmployeeDataWithId extends EmployeeData {
+  id: string;
+}
+
 export enum Administration {
   DIRECTOR = EmployeeRoles.DIRECTOR,
   SECRETARY = EmployeeRoles.SECRETARY,

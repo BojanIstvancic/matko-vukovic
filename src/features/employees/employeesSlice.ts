@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../store";
-import { createEmployee, getEmployees } from "./employeesAPI";
-import { Employee, EmployeeData, } from "@/constants/types";
+import { createEmployee, editEmployee, getEmployees } from "./employeesAPI";
+import { Employee, EmployeeData, EmployeeDataWithId, } from "@/constants/types";
 import { API_LOADING_STATUS } from "@/constants/api";
+import { editBlogPostItem } from "../blog/blogAPI";
 
 export interface EmployeesSlice {
   employees: Employee[] | null;
@@ -29,6 +30,16 @@ export const createEmployeeAsync = createAsyncThunk(
   async (data: EmployeeData) => {
     const response = await createEmployee(data);
     
+    return response.data.employee;
+  }
+);
+
+
+export const editEmployeeAsync = createAsyncThunk(
+  "employees/editEmployee",
+  async (data: EmployeeDataWithId) => {  
+    const response = await editEmployee(data, data.id);
+
     return response.data.employee;
   }
 );
@@ -61,6 +72,21 @@ export const employeesSlice = createSlice({
         state.employees = [ action.payload, ...employees];
       })
       .addCase(createEmployeeAsync.rejected, (state) => {
+        state.status = "failed";
+      })
+
+      .addCase(editEmployeeAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(editEmployeeAsync.fulfilled, (state, action) => {    
+        const employees = state.employees as Employee[];
+
+        state.status = "idle";    
+        state.employees = employees.map((employee) =>
+        employee._id === action.payload._id ? action.payload : employee
+        );
+      })
+      .addCase(editEmployeeAsync.rejected, (state) => {
         state.status = "failed";
       })
   },
