@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../store";
-import { createEmployee, editEmployee, getEmployees } from "./employeesAPI";
+import { createEmployee, deleteEmployee, editEmployee, getEmployees } from "./employeesAPI";
 import { Employee, EmployeeData, EmployeeDataWithId, } from "@/constants/types";
 import { API_LOADING_STATUS } from "@/constants/api";
-import { editBlogPostItem } from "../blog/blogAPI";
 
 export interface EmployeesSlice {
   employees: Employee[] | null;
@@ -41,6 +40,15 @@ export const editEmployeeAsync = createAsyncThunk(
     const response = await editEmployee(data, data.id);
 
     return response.data.employee;
+  }
+);
+
+export const deleteEmployeeAsync = createAsyncThunk(
+  "employee/deleteEmployee",
+  async (id: string) => {
+    const response = await deleteEmployee(id);
+
+    return response.data.employee._id;
   }
 );
 
@@ -89,6 +97,19 @@ export const employeesSlice = createSlice({
       .addCase(editEmployeeAsync.rejected, (state) => {
         state.status = "failed";
       })
+
+      .addCase(deleteEmployeeAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteEmployeeAsync.fulfilled, (state, action) => {
+        const employees = state.employees as Employee[];
+
+        state.status = "idle";
+        state.employees = employees.filter(employee => employee._id !== action.payload)
+      })
+      .addCase(deleteEmployeeAsync.rejected, (state) => {
+        state.status = "failed";
+      });
   },
 });
 

@@ -9,6 +9,7 @@ import { deleteEmployee, editEmployee } from "@/api/employees";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   createEmployeeAsync,
+  deleteEmployeeAsync,
   editEmployeeAsync,
   getEmployeesAsync,
   selectEmployees,
@@ -73,21 +74,7 @@ const AdministrationStaffContainer: React.FC = ({}) => {
   };
 
   const handleDeleteEmployee = async () => {
-    try {
-      setIsLoading(true);
-
-      const response = await deleteEmployee(currentEmployee?._id);
-      const employee = response?.data.employee;
-      const blogPostsWithoutDeletedItem = staffMembers.filter(
-        (item) => item._id !== employee._id
-      );
-      setStaffMembers(blogPostsWithoutDeletedItem);
-
-      setOpenModal(false);
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
+    dispatch(deleteEmployeeAsync(currentEmployee?._id as string));
   };
 
   const staffMembersToRender = employees.employees?.filter(

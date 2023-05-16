@@ -68,7 +68,7 @@ const editEmployee = async (formData: EmployeeDataWithId, id: string) => {
   return response;
 };
 
-const deleteEmployee = async (id) => {
+const deleteEmployee = async (id: string) => {
   const token = getCookie("token");
   const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.EMPLOYEES}/${id}`;
 

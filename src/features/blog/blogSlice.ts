@@ -104,7 +104,7 @@ export const blogSlice = createSlice({
 
         state.status = "idle";
         state.posts = posts.filter(post => post._id !== action.payload)
-    })
+      })
       .addCase(deleteBlogPostItemAsync.rejected, (state) => {
         state.status = "failed";
       });
