@@ -37,10 +37,7 @@ export const createBlogPostItemAsync = createAsyncThunk(
   async (data: BlogPostData) => {
     const response = await createBlogPostItem(data);
 
-    console.log(response, 'test response');
-
-
-    // return response.data.post._id;
+    return response.data.post;
   }
 );
 
@@ -66,11 +63,11 @@ export const blogSlice = createSlice({
       .addCase(createBlogPostItemAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(createBlogPostItemAsync.fulfilled, (state, action) => {
-       
-       
-        // state.status = "idle";
-        // state.posts = posts.filter(post => post._id !== action.payload)
+      .addCase(createBlogPostItemAsync.fulfilled, (state, action) => {    
+        const posts = state.posts as Post[];
+
+        state.status = "idle";    
+        state.posts = [ action.payload, ...posts];
     })
       .addCase(createBlogPostItemAsync.rejected, (state) => {
         state.status = "failed";

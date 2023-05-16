@@ -22,7 +22,11 @@ const createBlogPostItem = async (formData: BlogPostData) => {
   const data = new FormData();
 
   for (const [key, value] of Object.entries(formData)) {
-    data.append(key, value);
+    if(key === 'image') {
+      data.append('post_image', value)
+    } else {
+      data.append(key, value);
+    }
   }
 
   const response = await axios({
@@ -78,7 +82,6 @@ const deleteBlogPostItem = async (id: string) => {
 
 export {
   getBlogPostItems,
-  // getBlogPostItem,
   createBlogPostItem,
   // editBlogPostItem,
   deleteBlogPostItem,
