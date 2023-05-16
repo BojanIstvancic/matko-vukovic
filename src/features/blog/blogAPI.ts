@@ -42,28 +42,32 @@ const createBlogPostItem = async (formData: BlogPostData) => {
   return response;
 };
 
-// const editBlogPostItem = async (formData:any, id:any) => {
-//   const token = getCookie("token");
-//   const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.POSTS}/${id}`;
+const editBlogPostItem = async (formData:BlogPostData, id:any) => {
+  const token = getCookie("token");
+  const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.POSTS}/${id}`;
 
-//   const data = new FormData();
+  const data = new FormData();
 
-//   for (const [key, value] of Object.entries(formData)) {
-//     data.append(key, value);
-//   }
+  for (const [key, value] of Object.entries(formData)) {
+    if(key === 'image') {
+      data.append('post_image', value)
+    } else {
+      data.append(key, value);
+    }
+  }
 
-//   const response = await axios({
-//     method: API_Method.PATCH,
-//     url,
-//     data,
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//       contentType: "multipart/form-data",
-//     },
-//   });
+  const response = await axios({
+    method: API_Method.PATCH,
+    url,
+    data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      contentType: "multipart/form-data",
+    },
+  });
 
-//   return response;
-// };
+  return response;
+};
 
 const deleteBlogPostItem = async (id: string) => {
   const token = getCookie("token");
@@ -83,6 +87,6 @@ const deleteBlogPostItem = async (id: string) => {
 export {
   getBlogPostItems,
   createBlogPostItem,
-  // editBlogPostItem,
+  editBlogPostItem,
   deleteBlogPostItem,
 };

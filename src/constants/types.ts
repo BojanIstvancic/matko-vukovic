@@ -15,6 +15,10 @@ export interface BlogPostData {
   image: string,
 }
 
+export interface BlogPostDataWithId extends BlogPostData{
+  id: string;
+}
+
 
 export enum EmployeeRoles {
   DIRECTOR = "director",

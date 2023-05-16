@@ -11,7 +11,7 @@ import {
   faPen,
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { Post } from "@/constants/types";
+import { BlogPostData, BlogPostDataWithId, Post } from "@/constants/types";
 import { API_LOADING_STATUS } from "@/constants/api";
 
 const StyledBlog = styled.div``;
@@ -67,8 +67,8 @@ const FormContainer = styled.div`
 `;
 
 export interface AdministrationBlogProps {
-  handleCreatePost: (values: Post) => Promise<void>;
-  handleEditPost: (values: Post) => Promise<void>;
+  handleCreatePost: (values: BlogPostData) => Promise<void>;
+  handleEditPost: (values: BlogPostDataWithId) => Promise<void>;
   handleDeletePost: () => void;
   handleOpenModal: (action: string, id?: string | null) => void;
   handleCloseModal: () => void;

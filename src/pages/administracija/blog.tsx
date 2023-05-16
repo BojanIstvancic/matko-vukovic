@@ -6,12 +6,12 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   createBlogPostItemAsync,
   deleteBlogPostItemAsync,
+  editBlogPostitemAsync,
   getBlogPostItemsAsync,
   selectBlog,
 } from "@/features/blog/blogSlice";
-import { editBlogPostItem } from "@/api/blog";
 
-import { BlogPostData, Post } from "../../constants/types";
+import { BlogPostData, BlogPostDataWithId, Post } from "../../constants/types";
 
 const AdnministrationBlogContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
@@ -54,28 +54,15 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
     dispatch(createBlogPostItemAsync(data));
   };
 
-  const handleEditPost = async (values: Post) => {
+  const handleEditPost = async (values: BlogPostDataWithId) => {
     const data = {
+      id: currentPost?._id as string,
       content: values.content,
       title: values.title,
-      post_image: values.image,
+      image: values.image,
     };
 
-    const id = values._id;
-
-    try {
-      const response = await editBlogPostItem(data, id);
-      const post = response.data.post;
-      const blogPostsWithEditeddItem = blogPosts.map((item) =>
-        item._id === post._id ? post : item
-      );
-
-      setBlogPosts(blogPostsWithEditeddItem);
-
-      setOpenModal(false);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(editBlogPostitemAsync(data));
   };
 
   const handleDeletePost = () => {
