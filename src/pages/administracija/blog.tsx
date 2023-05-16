@@ -4,13 +4,14 @@ import Layout from "@/components/AdministrationLayout";
 import AdministrationBlog from "@/components/presentation/AdministrationBlog";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
+  createBlogPostItemAsync,
   deleteBlogPostItemAsync,
   getBlogPostItemsAsync,
   selectBlog,
 } from "@/features/blog/blogSlice";
-import { createBlogPostItem, editBlogPostItem } from "@/api/blog";
+import { editBlogPostItem } from "@/api/blog";
 
-import { Post } from "../../constants/types";
+import { BlogPostData, Post } from "../../constants/types";
 
 const AdnministrationBlogContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
@@ -43,24 +44,14 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
 
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleCreatePost = async (values: Post) => {
+  const handleCreatePost = async (values: BlogPostData) => {
     const data = {
       content: values.content,
       title: values.title,
-      post_image: values.image,
+      image: values.image,
     };
 
-    try {
-      const response = await createBlogPostItem(data);
-
-      const post = response.data.post;
-      const blogPostsWithCreatedItem = [post, ...blogPosts];
-      setBlogPosts(blogPostsWithCreatedItem);
-
-      setOpenModal(false);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(createBlogPostItemAsync(data));
   };
 
   const handleEditPost = async (values: Post) => {

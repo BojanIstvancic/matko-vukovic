@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../store";
-import { getBlogPostItems, deleteBlogPostItem } from "./blogAPI";
-import { Post } from "@/constants/types";
+import { getBlogPostItems, deleteBlogPostItem, createBlogPostItem } from "./blogAPI";
+import { BlogPostData, Post } from "@/constants/types";
 
 export interface BlogSlice {
   posts: Post[] | null;
@@ -32,6 +32,18 @@ export const deleteBlogPostItemAsync = createAsyncThunk(
   }
 );
 
+export const createBlogPostItemAsync = createAsyncThunk(
+  "blog/createBlogPostItem",
+  async (data: BlogPostData) => {
+    const response = await createBlogPostItem(data);
+
+    console.log(response, 'test response');
+
+
+    // return response.data.post._id;
+  }
+);
+
 
 export const blogSlice = createSlice({
   name: "blog",
@@ -48,6 +60,19 @@ export const blogSlice = createSlice({
         state.posts = action.payload;
       })
       .addCase(getBlogPostItemsAsync.rejected, (state) => {
+        state.status = "failed";
+      })
+
+      .addCase(createBlogPostItemAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(createBlogPostItemAsync.fulfilled, (state, action) => {
+       
+       
+        // state.status = "idle";
+        // state.posts = posts.filter(post => post._id !== action.payload)
+    })
+      .addCase(createBlogPostItemAsync.rejected, (state) => {
         state.status = "failed";
       })
 

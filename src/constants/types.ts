@@ -9,6 +9,12 @@ export interface Post {
   __v: string;
 }
 
+export interface BlogPostData {
+  content: string,
+  title: string,
+  image: string,
+}
+
 
 export enum EmployeeRoles {
   DIRECTOR = "director",

@@ -13,3 +13,4 @@ export enum API_URL {
 }
 
 export type API_LOADING_STATUS = "loading" | "idle" | "failed";
+

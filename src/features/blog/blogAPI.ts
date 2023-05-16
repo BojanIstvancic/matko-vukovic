@@ -1,4 +1,5 @@
 import { API_Method, API_URL } from "@/constants/api";
+import { BlogPostData } from "@/constants/types";
 import { getCookie } from "@/helpers/cookieStorage";
 import axios from "axios";
 
@@ -13,39 +14,29 @@ const getBlogPostItems = async () => {
   return response;
 };
 
-// const getBlogPostItem = async (param:any) => {
-//   const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.POSTS}/${param}`;
 
-//   const response = await axios({
-//     method: API_Method.GET,
-//     url,
-//   });
+const createBlogPostItem = async (formData: BlogPostData) => {
+  const token = getCookie("token");
+  const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.POSTS}`;
 
-//   return response;
-// };
+  const data = new FormData();
 
-// const createBlogPostItem = async (formData:any) => {
-//   const token = getCookie("token");
-//   const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.POSTS}`;
+  for (const [key, value] of Object.entries(formData)) {
+    data.append(key, value);
+  }
 
-//   const data = new FormData();
+  const response = await axios({
+    method: API_Method.POST,
+    url,
+    data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      contentType: "multipart/form-data",
+    },
+  });
 
-//   for (const [key, value] of Object.entries(formData)) {
-//     data.append(key, value);
-//   }
-
-//   const response = await axios({
-//     method: API_Method.POST,
-//     url,
-//     data,
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//       contentType: "multipart/form-data",
-//     },
-//   });
-
-//   return response;
-// };
+  return response;
+};
 
 // const editBlogPostItem = async (formData:any, id:any) => {
 //   const token = getCookie("token");
@@ -88,7 +79,7 @@ const deleteBlogPostItem = async (id: string) => {
 export {
   getBlogPostItems,
   // getBlogPostItem,
-  // createBlogPostItem,
+  createBlogPostItem,
   // editBlogPostItem,
   deleteBlogPostItem,
 };
