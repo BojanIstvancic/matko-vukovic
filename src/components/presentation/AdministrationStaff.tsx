@@ -16,7 +16,9 @@ import { Employee } from "@/constants/types";
 import { API_LOADING_STATUS } from "@/constants/api";
 
 const StyledAdministrationStaff = styled.div``;
-const StaffItemContainer = styled.div``;
+const StaffItemContainer = styled.div`
+  position: relative;
+`;
 const ButtonContainer = styled.div`
   display: flex;
 
@@ -29,7 +31,7 @@ const StaffTextInput = styled.input`
 const StaffContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 30px;
+  grid-gap: 10px;
 
   @media (min-width: 600px) {
     grid-template-columns: repeat(4, 1fr);
@@ -37,10 +39,13 @@ const StaffContainer = styled.div`
 
   @media (min-width: 900px) {
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 40px;
+    grid-gap: 10px 20px;
   }
 `;
-const StaffItemFooter = styled.div`
+const StaffItemButtonContainer = styled.div`
+  position: absolute;
+  top: 0;
+
   display: flex;
   justify-content: center;
 `;
@@ -109,7 +114,7 @@ const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
         employees.map((member: Employee) => (
           <StaffItemContainer key={member._id}>
             <StaffItem item={member} />
-            <StaffItemFooter>
+            <StaffItemButtonContainer>
               <Button
                 buttonType="delete"
                 clickFunction={() => handleOpenModal("delete", member._id)}
@@ -128,7 +133,7 @@ const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
                   style={{ fontSize: 20, color: "white" }}
                 />
               </Button>
-            </StaffItemFooter>
+            </StaffItemButtonContainer>
           </StaffItemContainer>
         ))}
     </StaffContainer>
