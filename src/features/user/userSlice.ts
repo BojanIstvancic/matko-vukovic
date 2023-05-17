@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../store";
-import { loginUser } from "./userAPI";
+import { getUser, loginUser } from "./userAPI";
 import { setCookie } from "@/helpers/cookieStorage";
 
 import { API_LOADING_STATUS } from "@/constants/api";
@@ -25,13 +25,27 @@ export const loginUserAsync = createAsyncThunk(
     name: string,
     password: string,
   }) => {
+
     const response = await loginUser(data);
 
     setCookie("token", response.data.token, 7);  
-  
+
+    localStorage.setItem("user", response.data.user._id); 
+    localStorage.setItem("administrationLevel", response.data.user.administrationLevel);
+    // PUT THIS IN JWT PAYLOAD
+
     return response.data;
   }
 );
+
+export const getUserAsync = createAsyncThunk(
+  "user/getUser",
+  async() => {
+    const response = await getUser();
+
+    return response.data.user;
+  }
+)
 
 export const userSlice = createSlice({
   name: "user",
@@ -49,6 +63,17 @@ export const userSlice = createSlice({
         state.user = action.payload.user;
       })
       .addCase(loginUserAsync.rejected, (state) => {
+        state.status = "failed";
+      })
+
+      .addCase(getUserAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getUserAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.user = action.payload;
+      })
+      .addCase(getUserAsync.rejected, (state) => {
         state.status = "failed";
       });
   },

@@ -20,4 +20,20 @@ const loginUser = async (data: {
   return response;
 };
 
-export { loginUser };
+const getUser = async () => {
+  const id = localStorage.getItem("user");
+
+  const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.USERS}/${id}`;
+
+  const response = await axios({
+    method: API_Method.GET,
+    url,
+    headers: {
+      contentType: "application/json",
+    },
+  });
+
+  return response;
+};
+
+export { loginUser, getUser };

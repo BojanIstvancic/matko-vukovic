@@ -74,7 +74,6 @@ export enum AdministrationLevel {
 }
 export interface User {
   _id: string;
-  name: string;
   firstName: string;
   lastName: string;
   administrationLevel: AdministrationLevel.BASIC | AdministrationLevel.ADMIN | AdministrationLevel.SUPER;

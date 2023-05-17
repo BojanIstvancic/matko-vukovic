@@ -10,6 +10,7 @@ export enum API_URL {
   LOGIN = "auth/login",
   POSTS = "posts",
   EMPLOYEES = "employees",
+  USERS = "users"
 }
 
 export type API_LOADING_STATUS = "loading" | "idle" | "failed";

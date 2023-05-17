@@ -1,15 +1,22 @@
-import Layout from "@/components/AdministrationLayout";
-import { selectUser } from "@/features/user/userSlice";
-import { useAppSelector } from "@/hooks";
+import { useEffect } from "react";
+import { getUserAsync, selectUser } from "@/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 
+import Layout from "@/components/AdministrationLayout";
+import AdministrationUser from "@/components/presentation/AdministrationUser";
 const AdministrationUserContainer: React.FC = ({}) => {
-  const { user } = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+  const { user, status } = useAppSelector(selectUser);
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(getUserAsync());
+    }
+  }, [user, dispatch]);
 
   return (
     <Layout title={"Matko Vuković | Korisnik"}>
-      <p>{user?.firstName} </p>
-      <p>{user?.lastName} </p>
-      <p>{user?.administrationLevel} </p>
+      <AdministrationUser user={user} status={status} />
     </Layout>
   );
 };

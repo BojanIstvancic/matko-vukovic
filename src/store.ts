@@ -7,11 +7,15 @@ import employeesReducer from './features/employees/employeesSlice';
 
 export function makeStore() {
   return configureStore({
-    reducer: { user: userReducer, blog: blogReducer, blogItem: blogItemReducer, employees: employeesReducer },
+    reducer: {
+       user: userReducer, 
+       blog: blogReducer, 
+       blogItem: blogItemReducer, 
+       employees: employeesReducer 
+    },
   })
 }
 
-// ADD REDUX PERSIST 
 
 const store = makeStore()
 
