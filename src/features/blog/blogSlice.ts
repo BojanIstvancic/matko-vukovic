@@ -4,14 +4,21 @@ import type { AppState } from "../../store";
 import { getBlogPostItems, deleteBlogPostItem, createBlogPostItem, editBlogPostItem } from "./blogAPI";
 import { BlogPostData, BlogPostDataWithId, Post } from "@/constants/types";
 import { API_LOADING_STATUS } from "@/constants/api";
+import { LargeNumberLike } from "crypto";
 
 export interface BlogSlice {
   posts: Post[] | null;
+  pageCount: number;
+  itemsPerPage: number;
+  itemOffset: number;
   status: API_LOADING_STATUS;
 }
 
 const initialState: BlogSlice = {
   posts: null,
+  pageCount: 0,
+  itemsPerPage: 6,
+  itemOffset: 0,
   status: "idle",
 };
 
@@ -53,7 +60,12 @@ export const deleteBlogPostItemAsync = createAsyncThunk(
 export const blogSlice = createSlice({
   name: "blog",
   initialState,
-  reducers: {},
+  reducers: {
+    updateBlogItemsPerPage: (state, action) => {
+      const posts = state.posts as Post[];
+      state.itemOffset = (action.payload * state.itemsPerPage) % posts.length;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getBlogPostItemsAsync.pending, (state) => {
@@ -62,6 +74,7 @@ export const blogSlice = createSlice({
       .addCase(getBlogPostItemsAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.posts = action.payload;
+        state.pageCount = Math.ceil(action.payload.length / state.itemsPerPage)
       })
       .addCase(getBlogPostItemsAsync.rejected, (state) => {
         state.status = "failed";
@@ -110,13 +123,22 @@ export const blogSlice = createSlice({
   },
 });
 
-export const { } = blogSlice.actions;
+export const { updateBlogItemsPerPage } = blogSlice.actions;
 
 export const selectBlog = (state: AppState) => state.blog;
 export const selectBlogThreeItems = (state: AppState) => {
   return {
     posts: state.blog.posts?.slice(0,3),
     status: state.blog.status
-  }}
+}}
+
+export const selectBlogForPagination = (state: AppState) => {
+return {
+  posts: state.blog.posts?.slice(state.blog.itemOffset, state.blog.itemOffset + state.blog.itemsPerPage),
+  status: state.blog.status,
+  pageCount: state.blog.pageCount
+}}
+
+
 
 export default blogSlice.reducer;
