@@ -43,7 +43,6 @@ export const blogItemSlice = createSlice({
   },
 });
 
-export const { } = blogItemSlice.actions;
 
 export const selectBlogItem = (state: AppState) => state.blogItem;
 

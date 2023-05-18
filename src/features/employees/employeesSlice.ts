@@ -112,7 +112,6 @@ export const employeesSlice = createSlice({
   },
 });
 
-export const { } = employeesSlice.actions;
 
 export const selectEmployees = (state: AppState) => state.employees;
 
