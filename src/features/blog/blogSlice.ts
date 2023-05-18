@@ -1,10 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createDraftSafeSelector, createSlice } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../store";
 import { getBlogPostItems, deleteBlogPostItem, createBlogPostItem, editBlogPostItem } from "./blogAPI";
 import { BlogPostData, BlogPostDataWithId, Post } from "@/constants/types";
 import { API_LOADING_STATUS } from "@/constants/api";
-import { LargeNumberLike } from "crypto";
 
 export interface BlogSlice {
   posts: Post[] | null;
@@ -126,19 +125,26 @@ export const blogSlice = createSlice({
 export const { updateBlogItemsPerPage } = blogSlice.actions;
 
 export const selectBlog = (state: AppState) => state.blog;
-export const selectBlogThreeItems = (state: AppState) => {
-  return {
-    posts: state.blog.posts?.slice(0,3),
-    status: state.blog.status
-}}
 
-export const selectBlogForPagination = (state: AppState) => {
-return {
-  posts: state.blog.posts?.slice(state.blog.itemOffset, state.blog.itemOffset + state.blog.itemsPerPage),
-  status: state.blog.status,
-  pageCount: state.blog.pageCount
-}}
+export const selectBlogThreeItems = createDraftSafeSelector(
+  selectBlog,
+  (state) => {
+    return {
+      posts: state.posts?.slice(0,3),
+      status: state.status
+    } 
+  }
+)
 
-
+export const selectBlogForPagination = createDraftSafeSelector(
+  selectBlog,
+  (state) => {
+    return {
+      posts: state.posts?.slice(state.itemOffset, state.itemOffset + state.itemsPerPage),
+      status: state.status,
+      pageCount: state.pageCount
+    } 
+  }
+)
 
 export default blogSlice.reducer;
