@@ -1,4 +1,4 @@
-import { createAsyncThunk, createDraftSafeSelector, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createDraftSafeSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../store";
 import { getBlogPostItems, deleteBlogPostItem, createBlogPostItem, editBlogPostItem } from "./blogAPI";
@@ -67,33 +67,16 @@ export const blogSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getBlogPostItemsAsync.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(getBlogPostItemsAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.posts = action.payload;
         state.pageCount = Math.ceil(action.payload.length / state.itemsPerPage)
-      })
-      .addCase(getBlogPostItemsAsync.rejected, (state) => {
-        state.status = "failed";
-      })
-
-      .addCase(createBlogPostItemAsync.pending, (state) => {
-        state.status = "loading";
       })
       .addCase(createBlogPostItemAsync.fulfilled, (state, action) => {    
         const posts = state.posts as Post[];
 
         state.status = "idle";    
         state.posts = [ action.payload, ...posts];
-      })
-      .addCase(createBlogPostItemAsync.rejected, (state) => {
-        state.status = "failed";
-      })
-
-      .addCase(editBlogPostitemAsync.pending, (state) => {
-        state.status = "loading";
       })
       .addCase(editBlogPostitemAsync.fulfilled, (state, action) => {    
         const posts = state.posts as Post[];
@@ -103,22 +86,23 @@ export const blogSlice = createSlice({
           post._id === action.payload._id ? action.payload : post
         );
       })
-      .addCase(editBlogPostitemAsync.rejected, (state) => {
-        state.status = "failed";
-      })
-
-      .addCase(deleteBlogPostItemAsync.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(deleteBlogPostItemAsync.fulfilled, (state, action) => {
         const posts = state.posts as Post[];
 
         state.status = "idle";
         state.posts = posts.filter(post => post._id !== action.payload)
       })
-      .addCase(deleteBlogPostItemAsync.rejected, (state) => {
-        state.status = "failed";
-      });
+
+      .addMatcher(
+        isAnyOf(getBlogPostItemsAsync.pending, createBlogPostItemAsync.pending, editBlogPostitemAsync.pending, deleteBlogPostItemAsync.pending),
+        (state) => {
+          state.status = "loading"
+      })
+      .addMatcher(
+        isAnyOf(getBlogPostItemsAsync.rejected, createBlogPostItemAsync.rejected, editBlogPostitemAsync.rejected, deleteBlogPostItemAsync.rejected),
+        (state) => {
+          state.status = "failed"
+      })
   },
 });
 

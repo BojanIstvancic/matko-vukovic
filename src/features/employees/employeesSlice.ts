@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../store";
 import { createEmployee, deleteEmployee, editEmployee, getEmployees } from "./employeesAPI";
@@ -58,32 +58,15 @@ export const employeesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getEmployeesAsync.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(getEmployeesAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.employees = action.payload;
-      })
-      .addCase(getEmployeesAsync.rejected, (state) => {
-        state.status = "failed";
-      })
-
-      .addCase(createEmployeeAsync.pending, (state) => {
-        state.status = "loading";
       })
       .addCase(createEmployeeAsync.fulfilled, (state, action) => {    
         const employees = state.employees as Employee[];
 
         state.status = "idle";    
         state.employees = [ action.payload, ...employees];
-      })
-      .addCase(createEmployeeAsync.rejected, (state) => {
-        state.status = "failed";
-      })
-
-      .addCase(editEmployeeAsync.pending, (state) => {
-        state.status = "loading";
       })
       .addCase(editEmployeeAsync.fulfilled, (state, action) => {    
         const employees = state.employees as Employee[];
@@ -93,22 +76,24 @@ export const employeesSlice = createSlice({
         employee._id === action.payload._id ? action.payload : employee
         );
       })
-      .addCase(editEmployeeAsync.rejected, (state) => {
-        state.status = "failed";
-      })
-
-      .addCase(deleteEmployeeAsync.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(deleteEmployeeAsync.fulfilled, (state, action) => {
         const employees = state.employees as Employee[];
 
         state.status = "idle";
         state.employees = employees.filter(employee => employee._id !== action.payload)
       })
-      .addCase(deleteEmployeeAsync.rejected, (state) => {
-        state.status = "failed";
-      });
+
+      .addMatcher(
+        isAnyOf(getEmployeesAsync.pending, createEmployeeAsync.pending, editEmployeeAsync.pending, deleteEmployeeAsync.pending),
+        (state) => {
+          state.status = "loading"
+        })
+
+      .addMatcher(
+        isAnyOf(getEmployeesAsync.rejected, createEmployeeAsync.rejected, editEmployeeAsync.rejected, deleteEmployeeAsync.rejected),
+        (state) => {
+          state.status = "failed"
+      })
   },
 });
 

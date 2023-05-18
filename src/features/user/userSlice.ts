@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../store";
 import { getUser, loginUser } from "./userAPI";
@@ -53,28 +53,26 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loginUserAsync.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.token = action.payload.token;
         state.user = action.payload.user;
       })
-      .addCase(loginUserAsync.rejected, (state) => {
-        state.status = "failed";
-      })
-
-      .addCase(getUserAsync.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(getUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.user = action.payload;
       })
-      .addCase(getUserAsync.rejected, (state) => {
-        state.status = "failed";
-      });
+
+      .addMatcher(
+        isAnyOf(loginUserAsync.pending, getUserAsync.pending),
+        (state) => {
+          state.status = "loading"
+        })
+      .addMatcher(
+        isAnyOf(loginUserAsync.pending, getUserAsync.pending),
+        (state) => {
+          state.status = "failed"
+      })
   },
 });
 

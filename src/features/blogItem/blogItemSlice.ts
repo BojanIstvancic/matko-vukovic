@@ -37,6 +37,7 @@ export const blogItemSlice = createSlice({
         state.status = "idle";
         state.post = action.payload;
       })
+      
       .addCase(getBlogPostItemAsync.rejected, (state) => {
         state.status = "failed";
       });
