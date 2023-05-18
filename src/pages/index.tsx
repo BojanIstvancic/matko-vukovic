@@ -12,18 +12,18 @@ import {
 
 const HomeContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
-  const blog = useAppSelector(selectBlogThreeItems);
+  const { posts, status } = useAppSelector(selectBlogThreeItems);
 
   useEffect(() => {
-    if (!blog.posts) {
+    if (!posts) {
       dispatch(getBlogPostItemsAsync());
     }
-  }, [blog.posts, dispatch]);
+  }, [posts, dispatch]);
 
   return (
     <Layout title={"Matko Vuković | Naslovna"} content={"description"}>
       <Container>
-        <Home posts={blog.posts} status={blog.status} />
+        <Home posts={posts} status={status} />
       </Container>
     </Layout>
   );

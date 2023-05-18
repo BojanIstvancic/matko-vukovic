@@ -16,7 +16,7 @@ import {
 
 const AdministrationStaffContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
-  const employees = useAppSelector(selectEmployees);
+  const { employees, status } = useAppSelector(selectEmployees);
 
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -26,12 +26,12 @@ const AdministrationStaffContainer: React.FC = ({}) => {
   const [currentAction, setCurrentAction] = useState("");
 
   useEffect(() => {
-    if (!employees.employees) {
+    if (!employees) {
       dispatch(getEmployeesAsync());
     }
 
     setOpenModal(false);
-  }, [employees.employees, dispatch]);
+  }, [employees, dispatch]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     // add debounce here
@@ -39,9 +39,7 @@ const AdministrationStaffContainer: React.FC = ({}) => {
   };
 
   const handleOpenModal = (action: string, id: string | null = null) => {
-    const filterCurrentEmployee = employees.employees?.find(
-      (item) => item._id === id
-    );
+    const filterCurrentEmployee = employees?.find((item) => item._id === id);
     setCurrentEmployee(filterCurrentEmployee);
 
     setCurrentAction(action);
@@ -77,7 +75,7 @@ const AdministrationStaffContainer: React.FC = ({}) => {
     dispatch(deleteEmployeeAsync(currentEmployee?._id as string));
   };
 
-  const employeesToRender = employees.employees?.filter(
+  const employeesToRender = employees?.filter(
     (employee: Employee) =>
       employee.firstName.toLowerCase().includes(search.toLowerCase()) ||
       employee.lastName.toLowerCase().includes(search.toLowerCase())
@@ -96,7 +94,7 @@ const AdministrationStaffContainer: React.FC = ({}) => {
         currentEmployee={currentEmployee}
         employees={employeesToRender}
         handleSearch={handleSearch}
-        status={employees.status}
+        status={status}
       />
     </Layout>
   );

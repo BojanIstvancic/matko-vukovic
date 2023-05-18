@@ -15,7 +15,7 @@ import { BlogPostData, Post } from "../../constants/types";
 
 const AdnministrationBlogContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
-  const blog = useAppSelector(selectBlog);
+  const { posts, status } = useAppSelector(selectBlog);
 
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -23,12 +23,12 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
   const [currentAction, setCurrentAction] = useState("");
 
   useEffect(() => {
-    if (!blog.posts) {
+    if (!posts) {
       dispatch(getBlogPostItemsAsync());
     }
 
     setOpenModal(false);
-  }, [blog.posts, dispatch]);
+  }, [posts, dispatch]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     // add debounce to this search function
@@ -36,7 +36,7 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
   };
 
   const handleOpenModal = (action: string, id: string | null = null) => {
-    const filterCurrentPost = blog.posts?.find((item) => item._id === id);
+    const filterCurrentPost = posts?.find((item) => item._id === id);
     setCurrentPost(filterCurrentPost);
 
     setCurrentAction(action);
@@ -70,7 +70,7 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
     dispatch(deleteBlogPostItemAsync(currentPost?._id as string));
   };
 
-  const blogPostsToRender = blog.posts?.filter(
+  const blogPostsToRender = posts?.filter(
     (post: Post) =>
       post.content.toLowerCase().includes(search.toLowerCase()) ||
       post.title.toLowerCase().includes(search.toLowerCase())
@@ -89,7 +89,7 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
         currentPost={currentPost}
         posts={blogPostsToRender}
         handleSearch={handleSearch}
-        status={blog.status}
+        status={status}
       />
     </Layout>
   );

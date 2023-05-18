@@ -13,21 +13,21 @@ import BlogPostItem from "@/components/presentation/BlogItem";
 
 const BlogPostItemContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
-  const blogItem = useAppSelector(selectBlogItem);
+  const { post, status } = useAppSelector(selectBlogItem);
 
   const router = useRouter();
   const id = router.query.id as string;
 
   useEffect(() => {
-    if (id !== undefined && blogItem.post?._id !== id) {
+    if (id !== undefined && post?._id !== id) {
       dispatch(getBlogPostItemAsync(id));
     }
-  }, [blogItem.post, dispatch, id]);
+  }, [post, dispatch, id]);
 
   return (
     <Layout title={"Matko Vuković | Blog"} content={"description"}>
       <Container>
-        <BlogPostItem post={blogItem.post} status={blogItem.status} />
+        <BlogPostItem post={post} status={status} />
       </Container>
     </Layout>
   );

@@ -19,16 +19,16 @@ import {
 
 const StaffContainer: React.FC = () => {
   const dispatch = useAppDispatch();
-  const employees = useAppSelector(selectEmployees);
+  const { employees, status } = useAppSelector(selectEmployees);
 
   useEffect(() => {
-    if (!employees.employees) {
+    if (!employees) {
       dispatch(getEmployeesAsync());
     }
-  }, [employees.employees, dispatch]);
+  }, [employees, dispatch]);
 
   // PUT ALL THESE THINGS IN SELECTOR
-  const administration = employees.employees?.filter(
+  const administration = employees?.filter(
     (member) =>
       member.role.includes(Administration.DIRECTOR) ||
       member.role.includes(Administration.SECRETARY) ||
@@ -36,13 +36,13 @@ const StaffContainer: React.FC = () => {
       member.role.includes(Administration.LAWYER)
   );
 
-  const professionalService = employees.employees?.filter(
+  const professionalService = employees?.filter(
     (member) =>
       member.role.includes(ProfessionalService.PEDAGOGUE) ||
       member.role.includes(ProfessionalService.PSYCHOLOGIST)
   );
 
-  const professors = employees.employees?.filter((member) =>
+  const professors = employees?.filter((member) =>
     member.role.includes(EmployeeRoles.PROFESSOR)
   );
 
@@ -53,7 +53,7 @@ const StaffContainer: React.FC = () => {
           administration={administration}
           professionalService={professionalService}
           professors={professors}
-          status={employees.status}
+          status={status}
         />
       </Container>
     </Layout>

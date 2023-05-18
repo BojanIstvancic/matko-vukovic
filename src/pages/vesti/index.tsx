@@ -10,17 +10,17 @@ import Blog from "@/components/presentation/Blog";
 
 const BlogContainer: React.FC<{}> = ({}) => {
   const dispatch = useAppDispatch();
-  const blog = useAppSelector(selectBlog);
+  const { posts, status } = useAppSelector(selectBlog);
 
   useEffect(() => {
-    if (!blog.posts) {
+    if (!posts) {
       dispatch(getBlogPostItemsAsync());
     }
-  }, [blog.posts, dispatch]);
+  }, [posts, dispatch]);
 
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 6;
-  const itemsLength = blog.posts?.length || 1;
+  const itemsLength = posts?.length || 1;
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
@@ -32,10 +32,7 @@ const BlogContainer: React.FC<{}> = ({}) => {
     setItemOffset(newOffset);
   };
 
-  const blogPostsToRender = blog.posts?.slice(
-    itemOffset,
-    itemOffset + itemsPerPage
-  );
+  const blogPostsToRender = posts?.slice(itemOffset, itemOffset + itemsPerPage);
 
   // REFACTOR THIS AND EXTRACT THIS LOGIC IN SELECTOR
   return (
@@ -45,7 +42,7 @@ const BlogContainer: React.FC<{}> = ({}) => {
           posts={blogPostsToRender}
           handlePageClick={handlePageClick}
           pageCount={pageCount}
-          status={blog.status}
+          status={status}
         />
       </Container>
     </Layout>

@@ -12,7 +12,7 @@ import { getCookie } from "@/helpers/cookieStorage";
 
 const AdministrationLoginContainer: React.FC<{}> = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
+  const { status } = useAppSelector(selectUser);
   const router = useRouter();
 
   const token = getCookie("token");
@@ -33,7 +33,7 @@ const AdministrationLoginContainer: React.FC<{}> = () => {
   return (
     <Layout title={"Matko Vuković | Uloguj se"} content="uloguj se">
       <Container>
-        <AdministrationLogin handleSubmit={handleSubmit} status={user.status} />
+        <AdministrationLogin handleSubmit={handleSubmit} status={status} />
       </Container>
     </Layout>
   );
