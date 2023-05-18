@@ -53,8 +53,7 @@ export const deleteBlogPostItemAsync = createAsyncThunk(
 export const blogSlice = createSlice({
   name: "blog",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getBlogPostItemsAsync.pending, (state) => {
