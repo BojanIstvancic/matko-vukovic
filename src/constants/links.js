@@ -14,6 +14,9 @@ export const links = {
   contact: {
     url: `/kontakt`,
   },
+  fun: {
+    url: `/zabava`,
+  },
 
   administrationIndex: {
     url: `/administracija`,

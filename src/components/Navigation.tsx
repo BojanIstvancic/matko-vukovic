@@ -90,6 +90,9 @@ const Navigation: React.FC<NavigationProps> = ({ setDisplayMobileNav }) => {
                 O školi
               </a>
             </Link>
+            <Link href={links.fun.url} passHref>
+              <a className={asPath === links.fun.url ? "active" : ""}>Zabava</a>
+            </Link>
             <Link href={links.contact.url} passHref>
               <a className={asPath === links.contact.url ? "active" : ""}>
                 Kontakt

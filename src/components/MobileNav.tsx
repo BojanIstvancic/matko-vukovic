@@ -115,6 +115,14 @@ const MobileNav: React.FC<MobileNavProps> = ({
             O školi
           </NavLink>
         </Link>
+        <Link href={links.fun.url} passHref>
+          <NavLink
+            className={asPath === links.fun.url ? "active" : ""}
+            onClick={() => setDisplayMobileNav(false)}
+          >
+            Zabava
+          </NavLink>
+        </Link>
         <Link href={links.contact.url} passHref>
           <NavLink
             className={asPath === links.contact.url ? "active" : ""}
