@@ -1,7 +1,7 @@
 import { Modal } from "@mui/material";
 import styled from "styled-components";
 
-const ModalWrapper = styled.div`
+const ModalContent = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -35,7 +35,7 @@ const StyledModal: React.FC<ModalProps> = ({
     aria-labelledby="parent-modal-title"
     aria-describedby="parent-modal-description"
   >
-    <ModalWrapper>{children}</ModalWrapper>
+    <ModalContent>{children}</ModalContent>
   </Modal>
 );
 
