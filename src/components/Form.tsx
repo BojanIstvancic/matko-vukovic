@@ -26,9 +26,6 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
 }) => {
   const { inputs, validationSchema } = getInputs(formType);
   let { initialValues } = getInputs(formType);
-  // create getInputs function
-  // create handle Submit o
-  // add create dynamic add Image input
 
   if (customInitialValues) {
     initialValues = customInitialValues;
