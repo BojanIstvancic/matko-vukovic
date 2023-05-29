@@ -2,7 +2,7 @@ import Button from "../../components/Button";
 import Loading from "@/components/Loading";
 import Form from "../../components/Form";
 import StaffItem from "@/components/StaffItem";
-import { Modal } from "@mui/material";
+import Modal from "@/components/Modal";
 
 import styled from "styled-components";
 
@@ -48,25 +48,6 @@ const StaffItemButtonContainer = styled.div`
 
   display: flex;
   justify-content: center;
-`;
-const FormContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: var(--white);
-
-  &:not(.delete) {
-    width: 50%;
-    min-width: 300px;
-    max-width: 500px;
-  }
-
-  h3 span {
-    color: var(--primary);
-    font-weight: bold;
-  }
 `;
 
 export interface AdministrationStaffProps {
@@ -138,12 +119,12 @@ const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
         ))}
     </StaffContainer>
     <Modal
-      open={openModal}
-      onClose={handleCloseModal}
+      openModal={openModal}
+      closeModal={handleCloseModal}
       aria-labelledby="parent-modal-title"
       aria-describedby="parent-modal-description"
     >
-      <FormContainer className={currentAction}>
+      <>
         {currentAction === "add" && (
           <Form
             formName="Napravi novog zaposlenog"
@@ -176,7 +157,7 @@ const AdministrationStaff: React.FC<AdministrationStaffProps> = ({
             </Button>
           </>
         )}
-      </FormContainer>
+      </>
     </Modal>
 
     {status === "loading" && <Loading />}
