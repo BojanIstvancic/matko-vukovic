@@ -19,19 +19,19 @@ const ModalContent = styled.div`
 `;
 
 export interface ModalProps {
-  closeModal: () => void;
+  handleCloseModal: () => void;
   openModal: boolean;
   children: JSX.Element;
 }
 
 const StyledModal: React.FC<ModalProps> = ({
-  closeModal,
+  handleCloseModal,
   openModal,
   children,
 }) => (
   <Modal
     open={openModal}
-    onClose={closeModal}
+    onClose={handleCloseModal}
     aria-labelledby="parent-modal-title"
     aria-describedby="parent-modal-description"
   >

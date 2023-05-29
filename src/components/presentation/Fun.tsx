@@ -39,7 +39,7 @@ const Fun: React.FC<FunProps> = ({
       </HowToPlay>
       <Modal
         openModal={openModal}
-        closeModal={handleCloseModal}
+        handleCloseModal={handleCloseModal}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
