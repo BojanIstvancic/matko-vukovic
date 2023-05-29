@@ -41,7 +41,7 @@ const Letter = styled.div`
 `;
 
 export interface RowProps {
-  guess?: string;
+  guess?: string[];
   currentWord?: string;
 }
 
@@ -62,13 +62,17 @@ const Row: React.FC<RowProps> = ({ guess, currentWord }) => {
   }
 
   if (guess) {
-    const guessLetters = guess.split("");
-
     return (
       <StyledRow>
-        {guessLetters.map((guess, index) => (
-          <Letter key={index}>{guess}</Letter>
-        ))}
+        {guess.map((guesAttempt, index) => {
+          const guesAttempPair = guesAttempt.split("-");
+
+          return (
+            <Letter key={index} className={guesAttempPair[1]}>
+              {guesAttempPair[0]}
+            </Letter>
+          );
+        })}
       </StyledRow>
     );
   }
