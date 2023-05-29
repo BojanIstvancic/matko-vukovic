@@ -47,8 +47,32 @@ export interface RowProps {
 
 const Row: React.FC<RowProps> = ({ guess, currentWord }) => {
   if (currentWord) {
-    console.log(currentWord, "da");
+    const letters = currentWord.split("");
+    const emptyBoxes = [...Array(5 - letters.length)];
+
+    return (
+      <StyledRow>
+        {letters.map((letter, index) => (
+          <Letter key={index}>{letter}</Letter>
+        ))}
+        {!!emptyBoxes.length &&
+          emptyBoxes.map((_, index) => <Letter key={index} />)}
+      </StyledRow>
+    );
   }
+
+  if (guess) {
+    const guessLetters = guess.split("");
+
+    return (
+      <StyledRow>
+        {guessLetters.map((guess, index) => (
+          <Letter key={index}>{guess}</Letter>
+        ))}
+      </StyledRow>
+    );
+  }
+
   return (
     <StyledRow>
       <Letter></Letter>
