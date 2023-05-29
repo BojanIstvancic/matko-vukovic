@@ -3,8 +3,9 @@ import { useState } from 'react'
 const useWordle = (solution: string) => {
   const [currentWord, setCurrentWord] = useState(""); 
   const [guesses, setGuesses] = useState([...Array(6)]);
-  const availableLetters = "abcčćdđefghijklmnoprsštuvzž".split("");
   const [turn, setTurn] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false)
+  const availableLetters = "abcčćdđefghijklmnoprsštuvzž".split("");
 
   const formatGuesses = () => {
     const guessAttempt = [...Array(5)].map((_, index) => {
@@ -22,9 +23,17 @@ const useWordle = (solution: string) => {
     const newGuesses = [...guesses];
     newGuesses.splice(turn, 1,  guessAttempt);
 
-    setGuesses(newGuesses)
+    return newGuesses;
+  }
+
+  const checkIfGameIsOver = () => {
+    setGuesses(formatGuesses())
     setCurrentWord("");
     setTurn((previous) =>  previous + 1)
+
+    if(currentWord === solution) {
+      setIsCorrect(true)
+    }
   }
 
   const handleKeyUp = (event: any) => {
@@ -36,7 +45,7 @@ const useWordle = (solution: string) => {
 
     
     if(enteredValue === "Enter" && currentWord.length === 5 ) {
-      formatGuesses()
+      checkIfGameIsOver()
     }
 
     if(enteredValue === "Backspace") {
@@ -50,7 +59,7 @@ const useWordle = (solution: string) => {
     }
   }
 
-  return { handleKeyUp, guesses, currentWord, turn }
+  return { handleKeyUp, guesses, currentWord, turn, isCorrect }
 }
 
 export default useWordle;
