@@ -1,8 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import Wordle from "../wordle/Wordle";
+import Modal from "../Modal";
+import WordleInstructions from "../wordle/WordleInstructions";
 
 import styled from "styled-components";
-import Modal from "../Modal";
 
 const StyledFun = styled.div``;
 
@@ -37,13 +39,14 @@ const Fun: React.FC<FunProps> = ({
           style={{ fontSize: 20, color: "var(--primary)" }}
         />
       </HowToPlay>
+      <Wordle />
       <Modal
         openModal={openModal}
         handleCloseModal={handleCloseModal}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <p>lalal</p>
+        <WordleInstructions />
       </Modal>
     </StyledFun>
   );
