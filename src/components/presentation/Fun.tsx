@@ -5,6 +5,7 @@ import Modal from "../Modal";
 import WordleInstructions from "../wordle/WordleInstructions";
 
 import styled from "styled-components";
+import { useState } from "react";
 
 const StyledFun = styled.div``;
 
@@ -18,17 +19,11 @@ const HowToPlayLabel = styled.span`
   font-weight: 700;
 `;
 
-export interface FunProps {
-  openModal: boolean;
-  handleOpenModal: () => void;
-  handleCloseModal: () => void;
-}
+const Fun: React.FC<{ solution: string }> = ({ solution }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const handleCloseModal = () => setOpenModal(false);
+  const handleOpenModal = () => setOpenModal(true);
 
-const Fun: React.FC<FunProps> = ({
-  openModal,
-  handleOpenModal,
-  handleCloseModal,
-}) => {
   return (
     <StyledFun>
       <h1>Wordle</h1>
@@ -39,7 +34,7 @@ const Fun: React.FC<FunProps> = ({
           style={{ fontSize: 20, color: "var(--primary)" }}
         />
       </HowToPlay>
-      <Wordle />
+      <Wordle solution={solution} />
       <Modal
         openModal={openModal}
         handleCloseModal={handleCloseModal}

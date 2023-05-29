@@ -8,8 +8,7 @@ const ModalContent = styled.div`
   transform: translate(-50%, -50%);
   padding: 20px;
   background-color: var(--white);
-  width: 50%;
-  min-width: 300px;
+  min-width: 350px;
   max-width: 700px;
 
   h3 span {

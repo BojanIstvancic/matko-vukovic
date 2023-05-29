@@ -1,6 +1,8 @@
+import { memo, useEffect } from "react";
+import useWordle from "./useWordle";
+
+import Grid from "./Grid";
 import styled from "@emotion/styled";
-import { generateGoalWord } from "./helpers";
-import { useEffect, useState } from "react";
 
 const StyledWordle = styled.div`
   margin: 0 auto;
@@ -8,72 +10,24 @@ const StyledWordle = styled.div`
   padding: 40px;
 `;
 
-const Letter = styled.span`
-  width: 60px;
-  height: 60px;
+export interface WordleProps {
+  solution: string;
+}
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 30px;
-  font-weight: 700;
-  border: 1px solid var(--black);
-
-  &:not(:last-child) {
-    margin-right: 5px;
-  }
-
-  &.correct,
-  &.semicorrect,
-  &.incorrect {
-    color: var(--white);
-    border: none;
-  }
-
-  &.correct {
-    background-color: var(--primary);
-  }
-
-  &.semicorrect {
-    background-color: var(--yellow-400);
-  }
-
-  &.incorrect {
-    background-color: var(--gray-300);
-  }
-`;
-
-const Wordle: React.FC<{}> = () => {
-  const goalWord = generateGoalWord();
-  const letters = "abcčćdđefghijklmnoprsštuvzž";
-
-  const [currentWord, setCurrentWord] = useState("");
-
-  const renderResults = () => {
-    let results = [];
-
-    for (let i = 1; i <= 30; i++) {
-      results.push(<Letter key={i} />);
-    }
-
-    return results;
-  };
-
-  const gameStart = (event: any) => {
-    const enteredValue = event.key;
-    console.log(enteredValue);
-  };
+const Wordle: React.FC<WordleProps> = ({ solution }) => {
+  const { handleKeyUp, guesses, currentWord, turn } = useWordle(solution);
 
   useEffect(() => {
-    window.addEventListener("keyup", gameStart);
+    window.addEventListener("keyup", handleKeyUp);
 
-    return () => {
-      window.removeEventListener("keydown", gameStart);
-    };
-  }, []);
+    return () => window.removeEventListener("keyup", handleKeyUp);
+  }, [handleKeyUp]);
 
-  return <StyledWordle>{renderResults()}</StyledWordle>;
+  return (
+    <StyledWordle>
+      <Grid guesses={guesses} currentWord={currentWord} turn={turn} />
+    </StyledWordle>
+  );
 };
 
-export default Wordle;
+export default memo(Wordle);
