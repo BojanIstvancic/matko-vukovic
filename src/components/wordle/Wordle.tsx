@@ -1,8 +1,8 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
 import useWordle from "./useWordle";
 
 import Grid from "./Grid";
-import Modal from "../Modal";
+import GameOverModal from "./GameOverModal";
 
 import styled from "@emotion/styled";
 
@@ -20,17 +20,23 @@ export interface WordleProps {
 }
 
 const Wordle: React.FC<WordleProps> = ({ solution }) => {
-  const { handleKeyUp, guesses, currentWord, turn } = useWordle(solution);
+  const { handleKeyUp, guesses, currentWord, turn, isCorrect } =
+    useWordle(solution);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyUp);
 
+    if (isCorrect || turn > 5) {
+      window.removeEventListener("keyup", handleKeyUp);
+    }
+
     return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [handleKeyUp]);
+  }, [handleKeyUp, isCorrect, turn]);
 
   return (
     <StyledWordle>
       <Grid guesses={guesses} currentWord={currentWord} turn={turn} />
+      <GameOverModal isCorrect={isCorrect} turn={turn} solution={solution} />
     </StyledWordle>
   );
 };
