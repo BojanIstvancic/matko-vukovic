@@ -5,8 +5,8 @@ const StyledRow = styled.div`
   margin: 10px 0;
 `;
 const Letter = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 
   display: flex;
   align-items: center;
@@ -38,6 +38,11 @@ const Letter = styled.div`
 
   &.incorrect {
     background-color: var(--gray-300);
+  }
+
+  @media (min-width: 600px) {
+    width: 60px;
+    height: 60px;
   }
 `;
 

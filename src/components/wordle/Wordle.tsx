@@ -1,12 +1,17 @@
-import { memo, useEffect } from "react";
+import { memo, useEffect, useState } from "react";
 import useWordle from "./useWordle";
 
 import Grid from "./Grid";
+import Modal from "../Modal";
+
 import styled from "@emotion/styled";
 
 const StyledWordle = styled.div`
   margin: 0 auto;
-  width: 450px;
+
+  display: flex;
+  justify-content: center;
+
   padding: 40px;
 `;
 
