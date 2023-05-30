@@ -15,6 +15,7 @@ const Letter = styled.div`
   font-size: 30px;
   font-weight: 700;
   border: 1px solid var(--gray-300);
+  text-transform: uppercase;
 
   &:not(:last-child) {
     margin-right: 5px;

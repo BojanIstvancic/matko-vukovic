@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Row from "./Row";
 
 const StyledWordleInstructions = styled.div``;
 
@@ -11,47 +12,7 @@ const Instructions = styled.div`
 
   padding: 20px;
   padding-bottom: 0;
-  border-top: 1px solid var(--incorrect-200);
-`;
-
-const LetterContainer = styled.div`
-  display: flex;
-  margin: 10px 0;
-`;
-const Letter = styled.div`
-  width: 60px;
-  height: 60px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 30px;
-  font-weight: 700;
-  border: 1px solid var(--gray-300);
-
-  &:not(:last-child) {
-    margin-right: 5px;
-  }
-
-  &.correct,
-  &.semicorrect,
-  &.incorrect {
-    color: var(--white);
-    border: none;
-  }
-
-  &.correct {
-    background-color: var(--primary);
-  }
-
-  &.semicorrect {
-    background-color: var(--yellow-400);
-  }
-
-  &.incorrect {
-    background-color: var(--gray-300);
-  }
+  border-top: 1px solid var(--gray-200);
 `;
 
 const WordleInstructions: React.FC<{}> = () => (
@@ -70,33 +31,15 @@ const WordleInstructions: React.FC<{}> = () => (
     </p>
     <Instructions>
       <h2>Primeri</h2>
-      <LetterContainer>
-        <Letter className="correct">D</Letter>
-        <Letter>O</Letter>
-        <Letter>M</Letter>
-        <Letter>A</Letter>
-        <Letter>R</Letter>
-      </LetterContainer>
+      <Row guess={["d-correct", "o", "m", "a", "r"]} />
       <p>
         <b>D</b> je u reči na tačnoj lokaciji!
       </p>
-      <LetterContainer>
-        <Letter>G</Letter>
-        <Letter>O</Letter>
-        <Letter className="semicorrect">S</Letter>
-        <Letter>P</Letter>
-        <Letter>A</Letter>
-      </LetterContainer>
+      <Row guess={["g", "o", "s-semicorrect", "p", "a"]} />
       <p>
         <b>S</b> je u reči, ali ne na tačnoj lokaciji.
       </p>
-      <LetterContainer>
-        <Letter>B</Letter>
-        <Letter>A</Letter>
-        <Letter>S</Letter>
-        <Letter>A</Letter>
-        <Letter className="incorrect">M</Letter>
-      </LetterContainer>
+      <Row guess={["b", "a", "s", "a", "n-incorrect"]} />
       <p>
         <b>M</b> nije prisutan u reči koju pokušavate pogoditi.
       </p>
