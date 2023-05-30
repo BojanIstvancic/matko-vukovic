@@ -6,6 +6,7 @@ const useWordle = (solution: string) => {
   const [turn, setTurn] = useState(0);
   const [isCorrect, setIsCorrect] = useState(false)
   const availableLetters = "abcčćdđefghijklmnoprsštuvzž".split("");
+  const [usedLetters, setUsedLetters] = useState<string[]>([]);
 
   const formatGuesses = () => {
     const guessAttempt = [...Array(5)].map((_, index) => {
@@ -27,6 +28,7 @@ const useWordle = (solution: string) => {
   }
 
   const checkIfGameIsOver = () => {
+    setUsedLetters((previous) => [...previous,...currentWord.split("")])
     setGuesses(formatGuesses())
     setCurrentWord("");
     setTurn((previous) =>  previous + 1)
@@ -59,7 +61,7 @@ const useWordle = (solution: string) => {
     }
   }
 
-  return { handleKeyUp, guesses, currentWord, turn, isCorrect }
+  return { handleKeyUp, guesses, currentWord, turn, isCorrect, usedLetters }
 }
 
 export default useWordle;

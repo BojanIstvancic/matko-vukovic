@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Row from "./Row";
 
-const StyledGrid = styled.div``;
+const StyledGrid = styled.div`
+  margin-bottom: 20px;
+`;
 
 export interface GridProps {
   guesses: any[];
