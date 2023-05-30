@@ -23,7 +23,6 @@ const Fun: React.FC<{ solution: string }> = ({ solution }) => {
   const [openModal, setOpenModal] = useState(false);
   const handleCloseModal = () => setOpenModal(false);
   const handleOpenModal = () => setOpenModal(true);
-
   return (
     <StyledFun>
       <h1>Wordle</h1>

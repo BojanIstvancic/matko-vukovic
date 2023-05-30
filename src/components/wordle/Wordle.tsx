@@ -32,7 +32,7 @@ const Wordle: React.FC<WordleProps> = ({ solution }) => {
 
     return () => window.removeEventListener("keyup", handleKeyUp);
   }, [handleKeyUp, isCorrect, turn]);
-
+  console.log(solution);
   return (
     <StyledWordle>
       <Grid guesses={guesses} currentWord={currentWord} turn={turn} />

@@ -4,6 +4,10 @@ import Modal from "../Modal";
 
 import styled from "@emotion/styled";
 
+import Congratulations from "/public/images/pages/zabava/congratulations.png";
+import Luck from "/public/images/pages/zabava/luck.png";
+import Image from "next/image";
+
 export interface GameOverModal {
   isCorrect: boolean;
   turn: number;
@@ -16,6 +20,10 @@ const GameOverText = styled.p`
     color: var(--primary);
   }
 `;
+const GameOverImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 const GameOverModal: React.FC<GameOverModal> = ({
   isCorrect,
@@ -26,9 +34,18 @@ const GameOverModal: React.FC<GameOverModal> = ({
   const handleCloseModal = () => setOpenModal(false);
   const handleOpenModal = () => setOpenModal(true);
 
+  const numberText = [
+    "prvog",
+    "drugog",
+    "trećeg",
+    "četvrtog",
+    "petog",
+    "šestog",
+  ];
+
   useEffect(() => {
     if (isCorrect || turn > 5) {
-      handleOpenModal();
+      setTimeout(() => handleOpenModal(), 1000);
     }
   }, [isCorrect, turn]);
 
@@ -43,7 +60,8 @@ const GameOverModal: React.FC<GameOverModal> = ({
         <h1>Rezultat</h1>
         {isCorrect && (
           <GameOverText>
-            Čestitamo! Uspešno ste pogodili traženu reč iz <b>{turn}.</b>{" "}
+            Čestitamo! Uspešno ste pogodili traženu reč iz{" "}
+            <b>{numberText[turn]} </b>
             pokušaja.
           </GameOverText>
         )}
@@ -52,9 +70,18 @@ const GameOverModal: React.FC<GameOverModal> = ({
             Tražena reč je bila <b>{solution}</b>. Više sreće drugi put!
           </GameOverText>
         )}
-        <GameOverText>
+        <GameOverText style={{ marginBottom: "20px" }}>
           Ako želite da ponovite igru, osvežite stranicu.
         </GameOverText>
+
+        <GameOverImageContainer>
+          <Image
+            src={isCorrect ? Congratulations : Luck}
+            alt={isCorrect ? "srecno" : "cestitamo"}
+            width={250}
+            height={250}
+          />
+        </GameOverImageContainer>
       </GameOverContent>
     </Modal>
   );

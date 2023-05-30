@@ -16,6 +16,16 @@ const Letter = styled.div`
   font-weight: 700;
   border: 1px solid var(--gray-300);
   text-transform: uppercase;
+  background-color: var(--white);
+
+  animation-name: animate;
+  animation-duration: 500ms;
+
+  @keyframes animate {
+    from {
+      background-color: var(--white);
+    }
+  }
 
   &:not(:last-child) {
     margin-right: 5px;

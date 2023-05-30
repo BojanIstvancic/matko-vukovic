@@ -92,7 +92,6 @@ const FunContainer: React.FC<{}> = () => {
     "nalog",
 
     "osmeh",
-    "obim",
     "oblak",
     "obruč",
 
