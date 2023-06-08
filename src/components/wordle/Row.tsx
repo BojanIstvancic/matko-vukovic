@@ -43,7 +43,7 @@ const Letter = styled.div`
   }
 
   &.semicorrect {
-    background-color: var(--yellow-400);
+    background-color: var(--yellow-600);
   }
 
   &.incorrect {
