@@ -91,6 +91,14 @@ const MobileNav: React.FC<MobileNavProps> = ({
             Naslovna
           </NavLink>
         </Link>
+        <Link href={links.events.url} passHref>
+          <NavLink
+            className={asPath === links.events.url ? "active" : ""}
+            onClick={() => setDisplayMobileNav(false)}
+          >
+            Dešavanja
+          </NavLink>
+        </Link>
         <Link href={links.news.url} passHref>
           <NavLink
             className={asPath === links.news.url ? "active" : ""}

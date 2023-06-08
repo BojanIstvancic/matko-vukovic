@@ -17,6 +17,9 @@ export const links = {
   fun: {
     url: `/zabava`,
   },
+  events: {
+    url: `/desavanja`,
+  },
 
   administrationIndex: {
     url: `/administracija`,

@@ -47,6 +47,10 @@ const SwiperTitle = styled.h1`
 
 const EventsSection = styled.div`
   margin-bottom: 20px;
+
+  h2 {
+    cursor: pointer;
+  }
 `;
 
 const BlogPostSection = styled.section`
@@ -173,7 +177,9 @@ const Home: React.FC<HomeProps> = ({ posts, status, eventsData }) => {
         <SwiperTitle>Matko Vuković</SwiperTitle>
       </SwiperSection>
       <EventsSection>
-        <h2>Dešavanja</h2>
+        <Link href={links.events.url}>
+          <h2>Dešavanja</h2>
+        </Link>
         <EventList eventsData={eventsData} />
       </EventsSection>
       <BlogPostSection>

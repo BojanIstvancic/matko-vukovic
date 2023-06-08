@@ -1,25 +1,8 @@
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-
-import Layout from "../components/Layout";
+import Layout from "@/components/Layout";
 import Container from "@/components/Container";
-import Home from "@/components/presentation/Home";
+import Events from "@/components/presentation/Events";
 
-import {
-  getBlogPostItemsAsync,
-  selectBlogThreeItems,
-} from "@/features/blog/blogSlice";
-
-const HomeContainer: React.FC = ({}) => {
-  const dispatch = useAppDispatch();
-  const { posts, status } = useAppSelector(selectBlogThreeItems);
-
-  useEffect(() => {
-    if (!posts) {
-      dispatch(getBlogPostItemsAsync());
-    }
-  }, [posts, dispatch]);
-
+const EventsContainer: React.FC<{}> = () => {
   const eventsData = [
     {
       date: "sreda, 07.jun 2023",
@@ -68,16 +51,15 @@ const HomeContainer: React.FC = ({}) => {
       ],
     },
   ];
-
-  // DELETE THIS WHEN REDUX ADDED, keep all events FOR THAT DAY
+  // DELETE THIS WHEN REDUX ADDED, keep all events
 
   return (
-    <Layout title={"Matko Vuković | Naslovna"} content={"description"}>
+    <Layout title={"Matko Vuković | Dešavanja"} content={"description"}>
       <Container>
-        <Home posts={posts} status={status} eventsData={eventsData} />
+        <Events eventsData={eventsData} />
       </Container>
     </Layout>
   );
 };
 
-export default HomeContainer;
+export default EventsContainer;
