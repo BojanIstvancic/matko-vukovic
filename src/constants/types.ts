@@ -78,3 +78,15 @@ export interface User {
   lastName: string;
   administrationLevel: AdministrationLevel.BASIC | AdministrationLevel.ADMIN | AdministrationLevel.SUPER;
 }
+
+export interface Event {
+  id: number;
+  type: string;
+  group: string;
+  text: string;
+}
+
+export interface EventsData {
+  date: string;
+  events: Event[];
+}

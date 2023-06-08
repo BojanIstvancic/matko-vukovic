@@ -2,9 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Swiper from "../Swiper";
+import EventList from "../EventList";
 
 import styled from "styled-components";
-import { Post } from "../../constants/types";
+import { EventsData, Post } from "../../constants/types";
 import { links } from "@/constants/links";
 
 import SwiperImage1 from "/public/images/pages/index/swiper-1.jpg";
@@ -42,6 +43,10 @@ const SwiperTitle = styled.h1`
     font-size: 20px;
     padding: 5px 10px;
   }
+`;
+
+const EventsSection = styled.div`
+  margin-bottom: 20px;
 `;
 
 const BlogPostSection = styled.section`
@@ -154,10 +159,11 @@ const BlogPostContent = styled.div``;
 
 export interface HomeProps {
   posts: Post[] | undefined;
+  eventsData: EventsData[];
   status: API_LOADING_STATUS;
 }
 
-const Home: React.FC<HomeProps> = ({ posts, status }) => {
+const Home: React.FC<HomeProps> = ({ posts, status, eventsData }) => {
   const swiperImages = [SwiperImage1, SwiperImage2, SwiperImage3];
 
   return (
@@ -166,6 +172,10 @@ const Home: React.FC<HomeProps> = ({ posts, status }) => {
         <Swiper images={swiperImages} />
         <SwiperTitle>Matko Vuković</SwiperTitle>
       </SwiperSection>
+      <EventsSection>
+        <h2>Dešavanja</h2>
+        <EventList eventsData={eventsData} />
+      </EventsSection>
       <BlogPostSection>
         <Link href={links.news.url}>
           <h2>Vesti</h2>
