@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 
 import Layout from "../components/Layout";
@@ -9,72 +9,38 @@ import {
   getBlogPostItemsAsync,
   selectBlogThreeItems,
 } from "@/features/blog/blogSlice";
+import {
+  getEventsAsync,
+  selectEvents,
+  selectEventsToday,
+} from "@/features/events/eventsSlice";
 
 const HomeContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
   const { posts, status } = useAppSelector(selectBlogThreeItems);
+  const { eventsData, status: eventsStatus } =
+    useAppSelector(selectEventsToday);
+  const { events } = useAppSelector(selectEvents);
 
   useEffect(() => {
     if (!posts) {
       dispatch(getBlogPostItemsAsync());
     }
-  }, [posts, dispatch]);
 
-  const eventsData = [
-    {
-      date: "sreda, 07.jun 2023",
-      events: [
-        {
-          id: 1,
-          type: "exam",
-          group: "8c",
-          text: "Test iz matematika koji obuhvata tri poglavlja: sabiranje, oduzimanje, množenje.",
-        },
-        {
-          id: 2,
-          type: "info",
-          group: "all",
-          text: "Danas ce biti organizovana priredba za prijem prvaka u školi u Malom Bajmoku.",
-        },
-        {
-          id: 3,
-          type: "dayOff",
-          group: "all",
-          text: "Zbog standardnih praznika za odmor, dani 01. - 04. Maj će biti neradni. Sa nastavom se redovno nastavlja 05. Maja u ponedeljak.",
-        },
-      ],
-    },
-    {
-      date: "četvrtak, 08.jun 2023",
-      events: [
-        {
-          id: 4,
-          type: "exam",
-          group: "1c",
-          text: "Test na temu lektira - Mali Princ.",
-        },
-        {
-          id: 5,
-          type: "info",
-          group: "all",
-          text: "Danas ce 1. razredi škole u Malom Bajmoku ići u ZOO VRT.",
-        },
-        {
-          id: 6,
-          type: "dayOff",
-          group: "all",
-          text: "Zbog standardnih praznika za odmor, dani 01. - 04. Maj će biti neradni. Sa nastavom se redovno nastavlja 05. Maja u ponedeljak.",
-        },
-      ],
-    },
-  ];
-
-  // DELETE THIS WHEN REDUX ADDED, keep all events FOR THAT DAY
+    if (!events) {
+      dispatch(getEventsAsync());
+    }
+  }, [posts, events, dispatch]);
 
   return (
     <Layout title={"Matko Vuković | Naslovna"} content={"description"}>
       <Container>
-        <Home posts={posts} status={status} eventsData={eventsData} />
+        <Home
+          posts={posts}
+          status={status}
+          eventsData={eventsData}
+          eventsStatus={eventsStatus}
+        />
       </Container>
     </Layout>
   );

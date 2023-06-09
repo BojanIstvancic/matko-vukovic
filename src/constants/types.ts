@@ -79,14 +79,28 @@ export interface User {
   administrationLevel: AdministrationLevel.BASIC | AdministrationLevel.ADMIN | AdministrationLevel.SUPER;
 }
 
+
+
 export interface Event {
-  id: number;
+  _id: string;
+  type: string;
+  date: string;
+  info: string;
+  group: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: string;
+}
+
+export interface EventData {
+  _id: string;
   type: string;
   group: string;
-  text: string;
+  info: string;
 }
 
 export interface EventsData {
   date: string;
-  events: Event[];
+  events: EventData[] | undefined;
 }

@@ -165,23 +165,29 @@ export interface HomeProps {
   posts: Post[] | undefined;
   eventsData: EventsData[];
   status: API_LOADING_STATUS;
+  eventStatus: API_LOADING_STATUS;
 }
 
-const Home: React.FC<HomeProps> = ({ posts, status, eventsData }) => {
+const Home: React.FC<HomeProps> = ({
+  posts,
+  status,
+  eventsData,
+  eventStatus,
+}) => {
   const swiperImages = [SwiperImage1, SwiperImage2, SwiperImage3];
-
+  const eventsToday = eventsData[0].events?.length;
   return (
     <StyledHome>
       <SwiperSection>
         <Swiper images={swiperImages} />
         <SwiperTitle>Matko Vuković</SwiperTitle>
       </SwiperSection>
-      <EventsSection>
-        <Link href={links.events.url}>
-          <h2>Dešavanja</h2>
-        </Link>
-        <EventList eventsData={eventsData} />
-      </EventsSection>
+      {eventsToday && (
+        <EventsSection>
+          <h2>Dešavanja danas</h2>
+          <EventList eventsData={eventsData} />
+        </EventsSection>
+      )}
       <BlogPostSection>
         <Link href={links.news.url}>
           <h2>Vesti</h2>
@@ -236,8 +242,9 @@ const Home: React.FC<HomeProps> = ({ posts, status, eventsData }) => {
                 </BlogPostContent>
               </BlogPost>
             ))}
-          {status === "loading" && <Loading />}
-          {!posts && status === "failed" && (
+          {(status === "loading" || eventStatus === "loading") && <Loading />}
+          {((!posts && status === "failed") ||
+            (!eventsData[0].events && eventStatus === "failed")) && (
             <h1>Doslo je do greske prilikom konekcije na bazu podataka.</h1>
           )}
         </BlogPostContainer>

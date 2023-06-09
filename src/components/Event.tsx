@@ -1,4 +1,4 @@
-import { Event } from "@/constants/types";
+import { EventData } from "@/constants/types";
 import styled from "styled-components";
 
 const EventInfo = styled.div`
@@ -60,7 +60,7 @@ const StyledEvent = styled.div`
   }
 `;
 
-const EventRow: React.FC<Event> = ({ id, type, group, text }) => {
+const EventRow: React.FC<EventData> = ({ type, group, info }) => {
   const eventTypeLabels = {
     info: "Informacija",
     dayOff: "Neradni dan",
@@ -68,11 +68,11 @@ const EventRow: React.FC<Event> = ({ id, type, group, text }) => {
   };
 
   return (
-    <StyledEvent key={id} className={type}>
+    <StyledEvent className={type}>
       <EventInfo>{group === "all" ? "svi" : group}</EventInfo>
       <EventBody>
         <EventTitle>{eventTypeLabels[type]}</EventTitle>
-        <EvenText>{text}</EvenText>
+        <EvenText>{info}</EvenText>
       </EventBody>
     </StyledEvent>
   );

@@ -4,6 +4,7 @@ import userReducer from './features/user/userSlice';
 import blogReducer from './features/blog/blogSlice';
 import blogItemReducer from './features/blogItem/blogItemSlice';
 import employeesReducer from './features/employees/employeesSlice';
+import eventsReducer from './features/events/eventsSlice';
 
 export function makeStore() {
   return configureStore({
@@ -11,7 +12,8 @@ export function makeStore() {
        user: userReducer, 
        blog: blogReducer, 
        blogItem: blogItemReducer, 
-       employees: employeesReducer 
+       employees: employeesReducer,
+       events: eventsReducer 
     },
   })
 }

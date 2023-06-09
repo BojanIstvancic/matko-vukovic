@@ -40,15 +40,16 @@ const EventList: React.FC<EventListProps> = ({ eventsData }) => (
             <ListHeaderText>{event.date}</ListHeaderText>
           </ListHeaderContent>
         </ListHeader>
-        {event.events.map((singleEvent) => (
-          <Event
-            key={singleEvent.id}
-            id={singleEvent.id}
-            type={singleEvent.type}
-            group={singleEvent.group}
-            text={singleEvent.text}
-          />
-        ))}
+        {event.events &&
+          event.events.map((singleEvent, index) => (
+            <Event
+              key={singleEvent._id}
+              _id={singleEvent._id}
+              type={singleEvent.type}
+              group={singleEvent.group}
+              info={singleEvent.info}
+            />
+          ))}
       </List>
     ))}
   </StyledEventList>
