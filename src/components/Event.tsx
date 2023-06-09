@@ -12,12 +12,15 @@ const EventInfo = styled.div`
 
   font-size: 22px;
   text-transform: uppercase;
+
+  border-radius: 10px;
 `;
 const EventBody = styled.div`
   padding: 10px 0;
 `;
-const EventTitle = styled.h3`
+const EventTitle = styled.p`
   margin-bottom: 10px;
+  font-weight bold;
 `;
 const EvenText = styled.p`
   margin-bottom: 0;

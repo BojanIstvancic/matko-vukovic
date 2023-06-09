@@ -7,7 +7,8 @@ import { EventsData } from "@/constants/types";
 
 const StyledEventList = styled.div``;
 const List = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--gray-250);
 `;
 
 const ListHeader = styled.div`
