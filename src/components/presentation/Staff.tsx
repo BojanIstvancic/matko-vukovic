@@ -79,7 +79,7 @@ const Staff: React.FC<StaffProps> = ({
       {status === "loading" && <Loading />}
 
       {status === "failed" && (
-        <h1>Doslo je do greske prilikom konekcije na bazu podataka.</h1>
+        <h3>Doslo je do greske prilikom konekcije na bazu podataka.</h3>
       )}
     </StyledStaff>
   );

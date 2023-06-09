@@ -8,12 +8,14 @@ import { AppState } from "@/store";
 export interface EventSlice {
   events: Event[] | null;
   eventsData: EventsData[] | null;
+  eventsAllData: EventsData[] | null;
   status: API_LOADING_STATUS
 }
 
 const initialState: EventSlice = {
   events: null,
   eventsData: null,
+  eventsAllData: null,
   status: "idle",
 };
 
@@ -62,6 +64,32 @@ export const selectEventsToday = createDraftSafeSelector(
         date: currentDate.slice(5),
         events: todaysEvents,
     }],
+      status: state.status
+    }
+  }
+)
+
+export const selectAllEvents = createDraftSafeSelector(
+  selectEvents,
+  (state) => {
+    const arrayOfDates = state.events?.map((event) => event.date.slice(0, 10))
+    const arrayOfUniqueDates = Array.from(new Set(arrayOfDates));
+
+    let allEvents:EventsData[] = [];
+
+    arrayOfUniqueDates.forEach(uniqueDate => {
+      const getAllEventsWithThisDate = state.events?.filter(event => event.date.startsWith(uniqueDate))
+
+      const events = {
+        date: uniqueDate.slice(5),
+        events: getAllEventsWithThisDate,
+      }
+
+      allEvents.push(events)
+    })
+
+    return { 
+      eventsAllData: allEvents,
       status: state.status
     }
   }

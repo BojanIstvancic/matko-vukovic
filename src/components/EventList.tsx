@@ -6,7 +6,9 @@ import styled from "styled-components";
 import { EventsData } from "@/constants/types";
 
 const StyledEventList = styled.div``;
-const List = styled.div``;
+const List = styled.div`
+  margin-bottom: 30px;
+`;
 
 const ListHeader = styled.div`
   margin-bottom: 10px;

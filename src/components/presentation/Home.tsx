@@ -165,14 +165,14 @@ export interface HomeProps {
   posts: Post[] | undefined;
   eventsData: EventsData[];
   status: API_LOADING_STATUS;
-  eventStatus: API_LOADING_STATUS;
+  eventsStatus: API_LOADING_STATUS;
 }
 
 const Home: React.FC<HomeProps> = ({
   posts,
   status,
   eventsData,
-  eventStatus,
+  eventsStatus,
 }) => {
   const swiperImages = [SwiperImage1, SwiperImage2, SwiperImage3];
   const eventsToday = eventsData[0].events?.length;
@@ -242,10 +242,9 @@ const Home: React.FC<HomeProps> = ({
                 </BlogPostContent>
               </BlogPost>
             ))}
-          {(status === "loading" || eventStatus === "loading") && <Loading />}
-          {((!posts && status === "failed") ||
-            (!eventsData[0].events && eventStatus === "failed")) && (
-            <h1>Doslo je do greske prilikom konekcije na bazu podataka.</h1>
+          {(status === "loading" || eventsStatus === "loading") && <Loading />}
+          {((!posts && status === "failed") || eventsStatus === "failed") && (
+            <h3>Doslo je do greske prilikom konekcije na bazu podataka.</h3>
           )}
         </BlogPostContainer>
       </BlogPostSection>
