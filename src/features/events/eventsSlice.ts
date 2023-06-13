@@ -61,7 +61,7 @@ export const selectEventsToday = createDraftSafeSelector(
 
     return { 
       eventsData: [{
-        date: currentDate.slice(5),
+        date: new Date(currentDate).toLocaleDateString("nl"),
         events: todaysEvents,
     }],
       status: state.status

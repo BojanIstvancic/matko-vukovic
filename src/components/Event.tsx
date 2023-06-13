@@ -64,18 +64,12 @@ const StyledEvent = styled.div`
   }
 `;
 
-const EventRow: React.FC<EventData> = ({ type, group, info, date }) => {
+const EventRow: React.FC<EventData> = ({ type, group, info }) => {
   const eventTypeLabels = {
     info: "Informacija",
     dayOff: "Neradni dan",
     exam: "Provera znanja",
   };
-
-  const myDate = new Date(date);
-  console.log(myDate, "date");
-
-  const { asPath } = useRouter();
-  const isAdministration = asPath.includes("/administracija");
 
   return (
     <StyledEvent className={type}>

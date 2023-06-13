@@ -102,7 +102,6 @@ export interface EventData {
   type: EventType.INFO | EventType.DAYOFF | EventType.EXAM
   group: string;
   info: string;
-  date: string;
 }
 
 export interface EventsData {
