@@ -33,4 +33,7 @@ export const links = {
   administrationUser: {
     url: `/administracija/korisnik`,
   },
+  administrationEvents: {
+    url: `/administracija/desavanja`,
+  },
 };

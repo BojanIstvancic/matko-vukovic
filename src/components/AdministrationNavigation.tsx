@@ -9,7 +9,7 @@ import styled from "styled-components";
 import Employees from "/public/images/pages/administration/employees.png";
 import Blog from "/public/images/pages/administration/blog.png";
 import User from "/public/images/pages/administration/user.png";
-// OPTIMIZE THESE IMAGES
+import Events from "/public/images/pages/administration/events.png";
 
 import { links } from "../constants/links";
 
@@ -76,14 +76,12 @@ const Navigation: React.FC<{}> = () => {
 
   return (
     <StyledNavigation>
-      <Link href={links.administrationEmployees.url}>
+      <Link href={links.administrationEvents.url}>
         <NavigationItem
-          className={
-            asPath === links.administrationEmployees.url ? "active" : ""
-          }
+          className={asPath === links.administrationEvents.url ? "active" : ""}
         >
-          <Image src={Employees} alt="employees" width={50} height={42} />
-          <NavigationText>Zaposleni</NavigationText>
+          <Image src={Events} alt="events" width={50} height={42} />
+          <NavigationText>Dešavanja</NavigationText>
         </NavigationItem>
       </Link>
       <Link href={links.administrationBlog.url}>
@@ -92,6 +90,16 @@ const Navigation: React.FC<{}> = () => {
         >
           <Image src={Blog} alt="blog" width={50} height={42} />
           <NavigationText>Blog</NavigationText>
+        </NavigationItem>
+      </Link>
+      <Link href={links.administrationEmployees.url}>
+        <NavigationItem
+          className={
+            asPath === links.administrationEmployees.url ? "active" : ""
+          }
+        >
+          <Image src={Employees} alt="employees" width={50} height={42} />
+          <NavigationText>Zaposleni</NavigationText>
         </NavigationItem>
       </Link>
       <Link href={links.administrationUser.url}>
