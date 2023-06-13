@@ -47,10 +47,6 @@ const SwiperTitle = styled.h1`
 
 const EventsSection = styled.div`
   margin-bottom: 20px;
-
-  h2 {
-    cursor: pointer;
-  }
 `;
 
 const BlogPostSection = styled.section`
@@ -175,7 +171,7 @@ const Home: React.FC<HomeProps> = ({
   eventsStatus,
 }) => {
   const swiperImages = [SwiperImage1, SwiperImage2, SwiperImage3];
-  const eventsToday = eventsData[0].events?.length;
+  const eventsToday = !!eventsData[0].events?.length;
   return (
     <StyledHome>
       <SwiperSection>

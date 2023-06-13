@@ -21,6 +21,8 @@ const Events: React.FC<EventsProps> = ({ eventsData, status }) => (
     <h1>Događaji</h1>
     <EventList eventsData={eventsData} />
 
+    {!eventsData.length && <h3>Nema unešenih dešavanja.</h3>}
+
     {status === "loading" && <Loading />}
     {status === "failed" && (
       <h3>Doslo je do greske prilikom konekcije na bazu podataka.</h3>
