@@ -1,19 +1,21 @@
+import { API_LOADING_STATUS } from "@/constants/api";
+
 import styled from "styled-components";
 import { EventsData } from "@/constants/types";
 import EventList from "../EventList";
-import { API_LOADING_STATUS } from "@/constants/api";
 import Loading from "../Loading";
 
-const StyledEvents = styled.div`
-  padding-bottom: 20px;
-`;
+const StyledEvents = styled.div``;
 
-export interface EventsProps {
+export interface AdministrationEventsProps {
   eventsData: EventsData[];
   status: API_LOADING_STATUS;
 }
 
-const Events: React.FC<EventsProps> = ({ eventsData, status }) => (
+const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
+  eventsData,
+  status,
+}) => (
   <StyledEvents>
     <h1>Događaji</h1>
     <EventList eventsData={eventsData} />
@@ -27,4 +29,4 @@ const Events: React.FC<EventsProps> = ({ eventsData, status }) => (
   </StyledEvents>
 );
 
-export default Events;
+export default AdministrationEvents;

@@ -79,8 +79,6 @@ export interface User {
   administrationLevel: AdministrationLevel.BASIC | AdministrationLevel.ADMIN | AdministrationLevel.SUPER;
 }
 
-
-
 export interface Event {
   _id: string;
   type: string;
