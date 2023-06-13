@@ -88,8 +88,6 @@ export const selectAllEvents = createDraftSafeSelector(
       allEvents.push(events)
     })
 
-    console.log(allEvents,'test')
-
     return { 
       eventsAllData: allEvents,
       status: state.status
