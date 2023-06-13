@@ -2,18 +2,12 @@ import { useEffect } from "react";
 
 import Layout from "@/components/AdministrationLayout";
 import AdministrationEvents from "@/components/presentation/AdministrationEvents";
-import {
-  getEventsAsync,
-  selectEvents,
-  selectEventsToday,
-} from "@/features/events/eventsSlice";
+import { getEventsAsync, selectEvents } from "@/features/events/eventsSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 
 const AdministrationEventsContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
-  const { eventsData, status: eventsStatus } =
-    useAppSelector(selectEventsToday);
-  const { events } = useAppSelector(selectEvents);
+  const { events, status } = useAppSelector(selectEvents);
 
   useEffect(() => {
     if (!events) {
@@ -23,7 +17,7 @@ const AdministrationEventsContainer: React.FC = ({}) => {
 
   return (
     <Layout title={"Matko Vuković | Dešavanja"}>
-      <AdministrationEvents eventsData={eventsData} status={eventsStatus} />
+      <AdministrationEvents events={events} status={status} />
     </Layout>
   );
 };

@@ -1,26 +1,36 @@
 import { API_LOADING_STATUS } from "@/constants/api";
 
 import styled from "styled-components";
-import { EventsData } from "@/constants/types";
-import EventList from "../EventList";
+import { Event as EventData } from "@/constants/types";
+import Event from "../Event";
 import Loading from "../Loading";
 
 const StyledEvents = styled.div``;
 
 export interface AdministrationEventsProps {
-  eventsData: EventsData[];
+  events: EventData[] | null;
   status: API_LOADING_STATUS;
 }
 
 const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
-  eventsData,
+  events,
   status,
 }) => (
   <StyledEvents>
     <h1>Događaji</h1>
-    <EventList eventsData={eventsData} />
+    {events &&
+      events.map((singleEvent) => (
+        <Event
+          key={singleEvent._id}
+          _id={singleEvent._id}
+          type={singleEvent.type}
+          group={singleEvent.group}
+          info={singleEvent.info}
+          date={singleEvent.date}
+        />
+      ))}
 
-    {!eventsData.length && <h3>Nema unešenih dešavanja.</h3>}
+    {!events && <h3>Nema unešenih dešavanja.</h3>}
 
     {status === "loading" && <Loading />}
     {status === "failed" && (

@@ -51,6 +51,7 @@ const EventList: React.FC<EventListProps> = ({ eventsData }) => (
               type={singleEvent.type}
               group={singleEvent.group}
               info={singleEvent.info}
+              date={singleEvent.date}
             />
           ))}
       </List>
