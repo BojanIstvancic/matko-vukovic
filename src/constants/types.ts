@@ -79,9 +79,15 @@ export interface User {
   administrationLevel: AdministrationLevel.BASIC | AdministrationLevel.ADMIN | AdministrationLevel.SUPER;
 }
 
+export enum EventType {
+  INFO = "info",
+  DAYOFF = "dayOff",
+  EXAM = "exam",
+}
+
 export interface Event {
   _id: string;
-  type: string;
+  type: EventType.INFO | EventType.DAYOFF | EventType.EXAM
   date: string;
   info: string;
   group: string;
@@ -93,7 +99,7 @@ export interface Event {
 
 export interface EventData {
   _id: string;
-  type: string;
+  type: EventType.INFO | EventType.DAYOFF | EventType.EXAM
   group: string;
   info: string;
 }

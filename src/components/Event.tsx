@@ -1,4 +1,4 @@
-import { Event as EventData } from "@/constants/types";
+import { EventData } from "@/constants/types";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -64,7 +64,7 @@ const StyledEvent = styled.div`
   }
 `;
 
-const EventRow: React.FC<EventData> = ({ type, group, info, _id }) => {
+const EventRow: React.FC<EventData> = ({ type, group, info }) => {
   const eventTypeLabels = {
     info: "Informacija",
     dayOff: "Neradni dan",
