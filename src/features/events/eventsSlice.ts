@@ -81,12 +81,14 @@ export const selectAllEvents = createDraftSafeSelector(
       const getAllEventsWithThisDate = state.events?.filter(event => event.date.startsWith(uniqueDate))
 
       const events = {
-        date: uniqueDate.slice(5),
+        date: new Date(uniqueDate).toLocaleDateString("nl"),
         events: getAllEventsWithThisDate,
       }
 
       allEvents.push(events)
     })
+
+    console.log(allEvents,'test')
 
     return { 
       eventsAllData: allEvents,
