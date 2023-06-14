@@ -1,7 +1,7 @@
 import {  createAsyncThunk, createDraftSafeSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
 
-import { createEvent, deleteEvent, getEvents } from "./eventsAPI";
-import { Event, EventData, EventsData } from "@/constants/types";
+import { createEvent, deleteEvent, editEvent, getEvents } from "./eventsAPI";
+import { Event, EventData, EventDataWithId, EventsData } from "@/constants/types";
 import { API_LOADING_STATUS } from "@/constants/api";
 import { AppState } from "@/store";
 
@@ -32,6 +32,15 @@ export const createEventAsync = createAsyncThunk(
   "blog/createEvent",
   async (data: EventData) => {
     const response = await createEvent(data);
+
+    return response.data.event;
+  }
+);
+
+export const editEventAsync = createAsyncThunk(
+  "blog/editEvent",
+  async (data: EventDataWithId) => {  
+    const response = await editEvent(data);
 
     return response.data.event;
   }
@@ -68,13 +77,21 @@ export const eventSlice = createSlice({
       state.status = "idle";
       state.events = events.filter(event => event._id !== action.payload)
     })
+    .addCase(editEventAsync.fulfilled, (state, action) => {    
+      const events = state.events as Event[];
+
+      state.status = "idle";    
+      state.events = events.map((event) =>
+        event._id === action.payload._id ? action.payload : event
+      );
+    })
     .addMatcher(
-      isAnyOf(getEventsAsync.pending, createEventAsync.pending, deleteEventAsync.pending),
+      isAnyOf(getEventsAsync.pending, createEventAsync.pending, editEventAsync.pending, deleteEventAsync.pending),
       (state) => {
         state.status = "loading"
     })
     .addMatcher(
-      isAnyOf(getEventsAsync.rejected, createEventAsync.rejected, deleteEventAsync.rejected),
+      isAnyOf(getEventsAsync.rejected, createEventAsync.rejected, editEventAsync.rejected, deleteEventAsync.rejected),
       (state) => {
         state.status = "failed"
     })

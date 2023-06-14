@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   createBlogPostItemAsync,
   deleteBlogPostItemAsync,
-  editBlogPostitemAsync,
+  editBlogPostItemAsync,
   getBlogPostItemsAsync,
   selectBlog,
 } from "@/features/blog/blogSlice";
@@ -63,7 +63,7 @@ const AdnministrationBlogContainer: React.FC = ({}) => {
       image: values.image,
     };
 
-    dispatch(editBlogPostitemAsync(data));
+    dispatch(editBlogPostItemAsync(data));
   };
 
   const handleDeletePost = () => {

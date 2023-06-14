@@ -1,5 +1,5 @@
 import { API_Method, API_URL } from "@/constants/api";
-import { EventData } from "@/constants/types";
+import { EventData, EventDataWithId } from "@/constants/types";
 import { getCookie } from "@/helpers/cookieStorage";
 import axios from "axios";
 
@@ -32,6 +32,25 @@ const createEvent = async (data: EventData) => {
   return response;
 };
 
+
+const editEvent = async (data: EventDataWithId) => {
+  const token = getCookie("token");
+  const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.EVENTS}/${data.id}`;
+
+  const response = await axios({
+    method: API_Method.PATCH,
+    url,
+    data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      contentType: "application/json",
+    },
+  });
+
+  return response;
+};
+
+
 const deleteEvent = async (id: string) => {
   const token = getCookie("token");
   const url = `${process.env.NEXT_PUBLIC_API_URL}${API_URL.EVENTS}/${id}`;
@@ -50,5 +69,6 @@ const deleteEvent = async (id: string) => {
 export {
   getEvents,
   createEvent,
+  editEvent,
   deleteEvent
 };

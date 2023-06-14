@@ -39,9 +39,10 @@ const EventDate = styled.p`
 
 export interface AdministrationEventsProps {
   handleCreateEvent: (values: any) => Promise<void>;
+  handleEditEvent: (values: EventData) => Promise<void>;
+  handleDeleteEvent: () => void;
   handleOpenModal: (action: string, id?: string | null) => void;
   handleCloseModal: () => void;
-  handleDeleteEvent: () => void;
   openModal: boolean;
   currentEvent: EventData | undefined;
   currentAction: string;
@@ -51,9 +52,10 @@ export interface AdministrationEventsProps {
 
 const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
   handleCreateEvent,
+  handleEditEvent,
+  handleDeleteEvent,
   handleOpenModal,
   handleCloseModal,
-  handleDeleteEvent,
   openModal,
   currentEvent,
   currentAction,
@@ -123,16 +125,16 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
             handleSubmit={handleCreateEvent}
           />
         )}
-        {/* {currentAction === "edit" && (
+        {currentAction === "edit" && (
           <Form
-            formName="Doradi post"
-            formType="post"
+            formName="Doradi događaj"
+            formType="event"
             buttonName="Sačuvaj izmene"
             buttonType="edit"
-            customInitialValues={currentPost}
-            handleSubmit={handleEditPost}
+            customInitialValues={currentEvent}
+            handleSubmit={handleEditEvent}
           />
-        )} */}
+        )}
 
         {currentAction === "delete" && (
           <>

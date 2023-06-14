@@ -39,7 +39,7 @@ export const createBlogPostItemAsync = createAsyncThunk(
   }
 );
 
-export const editBlogPostitemAsync = createAsyncThunk(
+export const editBlogPostItemAsync = createAsyncThunk(
   "blog/editBlogPostItem",
   async (data: BlogPostDataWithId) => {  
     const response = await editBlogPostItem(data, data.id);
@@ -78,7 +78,7 @@ export const blogSlice = createSlice({
         state.status = "idle";    
         state.posts = [ action.payload, ...posts];
       })
-      .addCase(editBlogPostitemAsync.fulfilled, (state, action) => {    
+      .addCase(editBlogPostItemAsync.fulfilled, (state, action) => {    
         const posts = state.posts as Post[];
 
         state.status = "idle";    
@@ -94,12 +94,12 @@ export const blogSlice = createSlice({
       })
 
       .addMatcher(
-        isAnyOf(getBlogPostItemsAsync.pending, createBlogPostItemAsync.pending, editBlogPostitemAsync.pending, deleteBlogPostItemAsync.pending),
+        isAnyOf(getBlogPostItemsAsync.pending, createBlogPostItemAsync.pending, editBlogPostItemAsync.pending, deleteBlogPostItemAsync.pending),
         (state) => {
           state.status = "loading"
       })
       .addMatcher(
-        isAnyOf(getBlogPostItemsAsync.rejected, createBlogPostItemAsync.rejected, editBlogPostitemAsync.rejected, deleteBlogPostItemAsync.rejected),
+        isAnyOf(getBlogPostItemsAsync.rejected, createBlogPostItemAsync.rejected, editBlogPostItemAsync.rejected, deleteBlogPostItemAsync.rejected),
         (state) => {
           state.status = "failed"
       })

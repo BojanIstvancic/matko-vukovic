@@ -104,6 +104,11 @@ export interface EventData {
   date: string;
 }
 
+
+export interface EventDataWithId extends EventData {
+  id: string;
+}
+
 export interface EventsData {
   date: string;
   events: EventData[] | undefined;
