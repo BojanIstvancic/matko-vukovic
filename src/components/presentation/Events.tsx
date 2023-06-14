@@ -15,7 +15,7 @@ export interface EventsProps {
 
 const Events: React.FC<EventsProps> = ({ eventsData, status }) => (
   <StyledEvents>
-    <h1>Događaji</h1>
+    <h1>Sva dešavanja</h1>
     <EventList eventsData={eventsData} />
 
     {!eventsData.length && <h3>Nema unešenih dešavanja.</h3>}

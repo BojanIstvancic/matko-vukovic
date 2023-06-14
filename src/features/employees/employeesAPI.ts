@@ -21,8 +21,8 @@ const createEmployee = async (formData: EmployeeData) => {
   const data = new FormData();
 
   for (const [key, value] of Object.entries(formData)) {
-    if(key === 'image') {
-      data.append('staff_image', value)
+    if(key === "image") {
+      data.append("staff_image", value)
     } else {
       data.append(key, value);
     }
@@ -48,8 +48,8 @@ const editEmployee = async (formData: EmployeeDataWithId, id: string) => {
   const data = new FormData();
 
   for (const [key, value] of Object.entries(formData)) {
-    if(key === 'image') {
-      data.append('staff_image', value)
+    if(key === "image") {
+      data.append("staff_image", value)
     } else {
       data.append(key, value);
     }

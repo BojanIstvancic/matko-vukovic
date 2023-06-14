@@ -63,7 +63,7 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
   status,
 }) => (
   <StyledEvents>
-    <h1>Događaji</h1>
+    <h1>Sva dešavanja</h1>
     <ButtonContainer>
       <ButtonLabel>Dodaj novi događaj: </ButtonLabel>
       <Button clickFunction={() => handleOpenModal("add")}>

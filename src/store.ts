@@ -1,10 +1,10 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
 
-import userReducer from './features/user/userSlice';
-import blogReducer from './features/blog/blogSlice';
-import blogItemReducer from './features/blogItem/blogItemSlice';
-import employeesReducer from './features/employees/employeesSlice';
-import eventsReducer from './features/events/eventsSlice';
+import userReducer from "./features/user/userSlice";
+import blogReducer from "./features/blog/blogSlice";
+import blogItemReducer from "./features/blogItem/blogItemSlice";
+import employeesReducer from "./features/employees/employeesSlice";
+import eventsReducer from "./features/events/eventsSlice";
 
 export function makeStore() {
   return configureStore({

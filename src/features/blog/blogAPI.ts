@@ -22,8 +22,8 @@ const createBlogPostItem = async (formData: BlogPostData) => {
   const data = new FormData();
 
   for (const [key, value] of Object.entries(formData)) {
-    if(key === 'image') {
-      data.append('post_image', value)
+    if(key === "image") {
+      data.append("post_image", value)
     } else {
       data.append(key, value);
     }
@@ -49,8 +49,8 @@ const editBlogPostItem = async (formData: BlogPostData, id:any) => {
   const data = new FormData();
 
   for (const [key, value] of Object.entries(formData)) {
-    if(key === 'image') {
-      data.append('post_image', value)
+    if(key === "image") {
+      data.append("post_image", value)
     } else {
       data.append(key, value);
     }

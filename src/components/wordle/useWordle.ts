@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 const useWordle = (solution: string) => {
   const [currentWord, setCurrentWord] = useState(""); 

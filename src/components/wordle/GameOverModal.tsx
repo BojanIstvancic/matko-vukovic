@@ -61,7 +61,7 @@ const GameOverModal: React.FC<GameOverModal> = ({
         {isCorrect && (
           <GameOverText>
             Čestitamo! Uspešno ste pogodili traženu reč iz{" "}
-            <b>{numberText[turn]} </b>
+            <b>{numberText[turn - 1]} </b>
             pokušaja.
           </GameOverText>
         )}

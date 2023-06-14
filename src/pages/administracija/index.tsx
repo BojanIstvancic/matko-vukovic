@@ -18,7 +18,7 @@ const AdministrationLoginContainer: React.FC<{}> = () => {
   const token = getCookie("token");
 
   if (token) {
-    router.push(links.administrationBlog.url);
+    router.push(links.administrationEvents.url);
   }
 
   const handleSubmit = async ({ name, password }: loginFormValues) => {
