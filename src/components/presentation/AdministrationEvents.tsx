@@ -2,25 +2,28 @@ import Event from "../Event";
 import Loading from "../Loading";
 import Button from "../Button";
 import Modal from "../../components/Modal";
+import Form from "../../components/Form";
 
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleMinus, faPen } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleMinus,
+  faCirclePlus,
+  faPen,
+} from "@fortawesome/free-solid-svg-icons";
 import { Event as EventData } from "@/constants/types";
 import { API_LOADING_STATUS } from "@/constants/api";
 
 const StyledEvents = styled.div``;
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
 
-export interface AdministrationEventsProps {
-  handleOpenModal: (action: string, id?: string | null) => void;
-  handleCloseModal: () => void;
-  handleDeleteEvent: () => void;
-  openModal: boolean;
-  currentEvent: EventData | undefined;
-  currentAction: string;
-  events: EventData[] | null;
-  status: API_LOADING_STATUS;
-}
+  margin-bottom: 30px;
+`;
+const ButtonLabel = styled.p`
+  margin-right: 25px;
+`;
 
 const EventWrapper = styled.div``;
 const EventHeader = styled.div`
@@ -34,7 +37,20 @@ const EventDate = styled.p`
   margin-left: 10px;
 `;
 
+export interface AdministrationEventsProps {
+  handleCreateEvent: (values: any) => Promise<void>;
+  handleOpenModal: (action: string, id?: string | null) => void;
+  handleCloseModal: () => void;
+  handleDeleteEvent: () => void;
+  openModal: boolean;
+  currentEvent: EventData | undefined;
+  currentAction: string;
+  events: EventData[] | null;
+  status: API_LOADING_STATUS;
+}
+
 const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
+  handleCreateEvent,
   handleOpenModal,
   handleCloseModal,
   handleDeleteEvent,
@@ -46,6 +62,15 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
 }) => (
   <StyledEvents>
     <h1>Događaji</h1>
+    <ButtonContainer>
+      <ButtonLabel>Dodaj novi događaj: </ButtonLabel>
+      <Button clickFunction={() => handleOpenModal("add")}>
+        <FontAwesomeIcon
+          icon={faCirclePlus}
+          style={{ fontSize: 20, color: "white" }}
+        />
+      </Button>
+    </ButtonContainer>
     {events &&
       events.map((singleEvent) => {
         const currentDate = new Date(singleEvent.date).toLocaleDateString("nl");
@@ -90,15 +115,15 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
       aria-describedby="parent-modal-description"
     >
       <>
-        {/* {currentAction === "add" && (
+        {currentAction === "add" && (
           <Form
-            formName="Napravi nov post"
-            formType="post"
-            buttonName="Napravi post"
-            handleSubmit={handleCreatePost}
+            formName="Napravi novi događaj"
+            formType="event"
+            buttonName="Napravi događaj"
+            handleSubmit={handleCreateEvent}
           />
         )}
-        {currentAction === "edit" && (
+        {/* {currentAction === "edit" && (
           <Form
             formName="Doradi post"
             formType="post"

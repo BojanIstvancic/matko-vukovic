@@ -37,6 +37,10 @@ const AdministrationEventsContainer: React.FC = ({}) => {
 
   const handleCloseModal = () => setOpenModal(false);
 
+  const handleCreateEvent = async (values: any) => {
+    console.log("create Event");
+  };
+
   const handleDeleteEvent = () => {
     dispatch(deleteEventAsync(currentEvent?._id as string));
   };
@@ -44,6 +48,7 @@ const AdministrationEventsContainer: React.FC = ({}) => {
   return (
     <Layout title={"Matko Vuković | Dešavanja"}>
       <AdministrationEvents
+        handleCreateEvent={handleCreateEvent}
         handleDeleteEvent={handleDeleteEvent}
         handleOpenModal={handleOpenModal}
         handleCloseModal={handleCloseModal}
