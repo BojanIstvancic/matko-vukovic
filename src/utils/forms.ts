@@ -216,7 +216,7 @@ export const forms: { [x: string]: InputProps[] } =
         {
             type: "select",
             name: "type",
-            label: "Tip događaja: ",
+            label: "Tip dešavanja: ",
             value: "",
             options: [
                 {
@@ -235,7 +235,7 @@ export const forms: { [x: string]: InputProps[] } =
             validations: [
                 {
                     type: "required",
-                    message: "Tip događaja je obavezan"
+                    message: "Tip dešavanja je obavezan"
                 }
             ]
         },
@@ -395,7 +395,7 @@ export const forms: { [x: string]: InputProps[] } =
             validations: [
                 {
                     type: "required",
-                    message: "Tip događaja je obavezan"
+                    message: "Tip dešavanja je obavezan"
                 }
             ]
         },

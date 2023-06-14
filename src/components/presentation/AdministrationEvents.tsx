@@ -65,7 +65,7 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
   <StyledEvents>
     <h1>Sva dešavanja</h1>
     <ButtonContainer>
-      <ButtonLabel>Dodaj novi događaj: </ButtonLabel>
+      <ButtonLabel>Dodaj novo dešavanje: </ButtonLabel>
       <Button clickFunction={() => handleOpenModal("add")}>
         <FontAwesomeIcon
           icon={faCirclePlus}
@@ -119,15 +119,15 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
       <>
         {currentAction === "add" && (
           <Form
-            formName="Napravi novi događaj"
+            formName="Napravi novo dešavanje"
             formType="event"
-            buttonName="Napravi događaj"
+            buttonName="Napravi dešavanje"
             handleSubmit={handleCreateEvent}
           />
         )}
         {currentAction === "edit" && (
           <Form
-            formName="Doradi događaj"
+            formName="Doradi dešavanje"
             formType="event"
             buttonName="Sačuvaj izmene"
             buttonType="edit"
@@ -139,7 +139,7 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
         {currentAction === "delete" && (
           <>
             <h3>
-              Potvrdite brisanje događaja <span>{currentEvent?.info}</span>
+              Potvrdite brisanje dešavanja <span>{currentEvent?.info}</span>
             </h3>
             <Button buttonType="delete" clickFunction={handleDeleteEvent}>
               Potvrdi
