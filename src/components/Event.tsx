@@ -1,5 +1,4 @@
 import { EventData } from "@/constants/types";
-import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const EventInfo = styled.div`

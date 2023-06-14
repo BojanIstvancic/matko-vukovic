@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/AdministrationLayout";
 import AdministrationEvents from "@/components/presentation/AdministrationEvents";
 import {
+  createEventAsync,
   deleteEventAsync,
   getEventsAsync,
   selectEvents,
 } from "@/features/events/eventsSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { Event } from "@/constants/types";
+import { Event, EventData } from "@/constants/types";
 
 const AdministrationEventsContainer: React.FC = ({}) => {
   const dispatch = useAppDispatch();
@@ -37,8 +38,15 @@ const AdministrationEventsContainer: React.FC = ({}) => {
 
   const handleCloseModal = () => setOpenModal(false);
 
-  const handleCreateEvent = async (values: any) => {
-    console.log("create Event");
+  const handleCreateEvent = async (values: EventData) => {
+    const data = {
+      type: values.type,
+      date: values.date,
+      info: values.info,
+      group: values.group,
+    };
+
+    dispatch(createEventAsync(data));
   };
 
   const handleDeleteEvent = () => {

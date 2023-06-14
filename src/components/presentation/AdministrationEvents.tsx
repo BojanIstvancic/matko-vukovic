@@ -99,10 +99,10 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
               <EventDate>{`Datum: ${currentDate}`}</EventDate>
             </EventHeader>
             <Event
-              _id={singleEvent._id}
               type={singleEvent.type}
               group={singleEvent.group}
               info={singleEvent.info}
+              date={singleEvent.date}
             />
           </EventWrapper>
         );

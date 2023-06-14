@@ -31,6 +31,7 @@ const HomeContainer: React.FC = ({}) => {
       dispatch(getEventsAsync());
     }
   }, [posts, events, dispatch]);
+
   return (
     <Layout title={"Matko Vuković | Naslovna"} content={"description"}>
       <Container>

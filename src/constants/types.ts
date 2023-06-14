@@ -68,9 +68,9 @@ export enum ProfessionalService {
 }
 
 export enum AdministrationLevel {
-  BASIC = 'basic',
-  ADMIN = 'admin',
-  SUPER = 'super',
+  BASIC = "basic",
+  ADMIN = "admin",
+  SUPER = "super",
 }
 export interface User {
   _id: string;
@@ -98,10 +98,10 @@ export interface Event {
 }
 
 export interface EventData {
-  _id: string;
   type: EventType.INFO | EventType.DAYOFF | EventType.EXAM
   group: string;
   info: string;
+  date: string;
 }
 
 export interface EventsData {

@@ -4,7 +4,7 @@ export interface InputProps {
   placeholder?: string;
   label?: string;
 
-  type: "text" | "password" | "select" | "textarea"| "file"; // which compoonent to render
+  type: "text" | "password" | "select" | "textarea" | "file" | "date"; // which compoonent to render
   typeValue?: "string" ; // what type of data to assign to instance of Yup
   options?: Opt[]; // select options
   validations: Validation[]; // validation rules
@@ -236,6 +236,19 @@ export const forms: { [x: string]: InputProps[] } =
                 {
                     type: "required",
                     message: "Tip događaja je obavezan"
+                }
+            ]
+        },
+        {
+            type: "date",
+            name: "date",
+            label: "Datum ",
+            placeholder: "MM/DD/YYYY",
+            value: "",
+            validations: [
+                {
+                    type: "required",
+                    message: "Datum je obavezan"
                 }
             ]
         },

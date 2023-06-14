@@ -6,6 +6,7 @@ import TextInput from "./TextInput";
 import TextArea from "./TextArea";
 import UploadInput from "./UploadInput";
 import Button from "./Button";
+import DateInput from "./DateInput";
 
 export interface FormikDynamicProps {
   formName: string;
@@ -64,6 +65,15 @@ const FormikDynamic: React.FC<FormikDynamicProps> = ({
                   );
                 case "file":
                   return <UploadInput key={name} name={name} type={type} />;
+                case "date":
+                  return (
+                    <DateInput
+                      key={name}
+                      name={name}
+                      placeholder={props.placeholder}
+                      type={type}
+                    />
+                  );
                 default:
                   return (
                     <TextInput
