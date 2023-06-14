@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { createAsyncThunk, createDraftSafeSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
 
 import type { AppState } from "../../store";
 import { createEmployee, deleteEmployee, editEmployee, getEmployees } from "./employeesAPI";
-import { Employee, EmployeeData, EmployeeDataWithId, } from "@/constants/types";
+import { Administration, Employee, EmployeeData, EmployeeDataWithId, EmployeeRoles, Library, ProfessionalService, Support, } from "@/constants/types";
 import { API_LOADING_STATUS } from "@/constants/api";
 
 export interface EmployeesSlice {
@@ -99,5 +99,47 @@ export const employeesSlice = createSlice({
 
 
 export const selectEmployees = (state: AppState) => state.employees;
+
+
+export const selectEmployesSortedByRoles = createDraftSafeSelector(
+  selectEmployees,
+  (state) => {
+    const administration = state.employees?.filter(
+      (member) =>
+        member.role.includes(Administration.DIRECTOR) ||
+        member.role.includes(Administration.SECRETARY) ||
+        member.role.includes(Administration.DEPUTY) ||
+        member.role.includes(Administration.LAWYER)
+    );
+  
+    const professionalService = state.employees?.filter(
+      (member) =>
+        member.role.includes(ProfessionalService.PEDAGOGUE) ||
+        member.role.includes(ProfessionalService.PSYCHOLOGIST)
+    );
+  
+    const professors = state.employees?.filter((member) =>
+      member.role.includes(EmployeeRoles.PROFESSOR)
+    );
+  
+    const support = state.employees?.filter(
+      (member) =>
+        member.role.includes(Support.CLEANER) ||
+        member.role.includes(Support.JANITOR)
+    );
+  
+    const library = state.employees?.filter((member) =>
+      member.role.includes(Library.LIBRARIAN)
+    );
+
+    return { 
+      administration,
+      professionalService,
+      professors,
+      support,
+      library,
+    }
+  }
+)
 
 export default employeesSlice.reducer;
