@@ -14,7 +14,9 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   Administration,
   EmployeeRoles,
+  Library,
   ProfessionalService,
+  Support,
 } from "@/constants/types";
 
 const StaffContainer: React.FC = () => {
@@ -46,6 +48,16 @@ const StaffContainer: React.FC = () => {
     member.role.includes(EmployeeRoles.PROFESSOR)
   );
 
+  const support = employees?.filter(
+    (member) =>
+      member.role.includes(Support.CLEANER) ||
+      member.role.includes(Support.JANITOR)
+  );
+
+  const library = employees?.filter((member) =>
+    member.role.includes(Library.LIBRARIAN)
+  );
+
   return (
     <Layout title={"Matko Vuković | Zaposleni"} content={"description"}>
       <Container>
@@ -53,6 +65,8 @@ const StaffContainer: React.FC = () => {
           administration={administration}
           professionalService={professionalService}
           professors={professors}
+          support={support}
+          library={library}
           status={status}
         />
       </Container>

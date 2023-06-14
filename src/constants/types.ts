@@ -67,6 +67,15 @@ export enum ProfessionalService {
   PSYCHOLOGIST = EmployeeRoles.PSYCHOLOGIST,
 }
 
+export enum Support {
+  JANITOR = EmployeeRoles.JANITOR,
+  CLEANER = EmployeeRoles.CLEANER,
+}
+
+export enum Library {
+  LIBRARIAN = EmployeeRoles.LIBRARIAN
+}
+
 export enum AdministrationLevel {
   BASIC = "basic",
   ADMIN = "admin",

@@ -33,6 +33,8 @@ export interface StaffProps {
   administration: Employee[] | undefined;
   professionalService: Employee[] | undefined;
   professors: Employee[] | undefined;
+  support: Employee[] | undefined;
+  library: Employee[] | undefined;
   status: API_LOADING_STATUS;
 }
 
@@ -40,12 +42,14 @@ const Staff: React.FC<StaffProps> = ({
   administration,
   professionalService,
   professors,
+  support,
+  library,
   status,
 }) => {
   return (
     <StyledStaff>
       <h1>Zaposleni</h1>
-      {administration && (
+      {!!administration?.length && (
         <StaffBlock>
           <StaffHeading>Uprava škole</StaffHeading>
           <StaffItemContainer>
@@ -55,7 +59,7 @@ const Staff: React.FC<StaffProps> = ({
           </StaffItemContainer>
         </StaffBlock>
       )}
-      {professionalService && (
+      {!!professionalService?.length && (
         <StaffBlock>
           <StaffHeading>Stručna služba</StaffHeading>
           <StaffItemContainer>
@@ -65,11 +69,31 @@ const Staff: React.FC<StaffProps> = ({
           </StaffItemContainer>
         </StaffBlock>
       )}
-      {professors && (
+      {!!professors?.length && (
         <StaffBlock>
           <StaffHeading>Profesori</StaffHeading>
           <StaffItemContainer>
             {professors.map((member: Employee) => (
+              <StaffItem item={member} key={member._id} />
+            ))}
+          </StaffItemContainer>
+        </StaffBlock>
+      )}
+      {!!support?.length && (
+        <StaffBlock>
+          <StaffHeading>Pomoćno osoblje</StaffHeading>
+          <StaffItemContainer>
+            {support.map((member: Employee) => (
+              <StaffItem item={member} key={member._id} />
+            ))}
+          </StaffItemContainer>
+        </StaffBlock>
+      )}
+      {!!library?.length && (
+        <StaffBlock>
+          <StaffHeading>Biblioteka</StaffHeading>
+          <StaffItemContainer>
+            {library.map((member: Employee) => (
               <StaffItem item={member} key={member._id} />
             ))}
           </StaffItemContainer>
