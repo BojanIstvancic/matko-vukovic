@@ -1,16 +1,23 @@
-import { API_LOADING_STATUS } from "@/constants/api";
-
-import styled from "styled-components";
-import { Event as EventData } from "@/constants/types";
 import Event from "../Event";
 import Loading from "../Loading";
 import Button from "../Button";
+import Modal from "../../components/Modal";
+
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleMinus, faPen } from "@fortawesome/free-solid-svg-icons";
+import { Event as EventData } from "@/constants/types";
+import { API_LOADING_STATUS } from "@/constants/api";
 
 const StyledEvents = styled.div``;
 
 export interface AdministrationEventsProps {
+  handleOpenModal: (action: string, id?: string | null) => void;
+  handleCloseModal: () => void;
+  handleDeleteEvent: () => void;
+  openModal: boolean;
+  currentEvent: EventData | undefined;
+  currentAction: string;
   events: EventData[] | null;
   status: API_LOADING_STATUS;
 }
@@ -28,6 +35,12 @@ const EventDate = styled.p`
 `;
 
 const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
+  handleOpenModal,
+  handleCloseModal,
+  handleDeleteEvent,
+  openModal,
+  currentEvent,
+  currentAction,
   events,
   status,
 }) => (
@@ -42,7 +55,7 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
             <EventHeader>
               <Button
                 buttonType="delete"
-                // clickFunction={() => handleOpenModal("delete", post._id)}
+                clickFunction={() => handleOpenModal("delete", singleEvent._id)}
               >
                 <FontAwesomeIcon
                   icon={faCircleMinus}
@@ -51,7 +64,7 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
               </Button>
               <Button
                 buttonType="edit"
-                // clickFunction={() => handleOpenModal("edit", post._id)}
+                clickFunction={() => handleOpenModal("edit", singleEvent._id)}
               >
                 <FontAwesomeIcon
                   icon={faPen}
@@ -69,6 +82,45 @@ const AdministrationEvents: React.FC<AdministrationEventsProps> = ({
           </EventWrapper>
         );
       })}
+
+    <Modal
+      openModal={openModal}
+      handleCloseModal={handleCloseModal}
+      aria-labelledby="parent-modal-title"
+      aria-describedby="parent-modal-description"
+    >
+      <>
+        {/* {currentAction === "add" && (
+          <Form
+            formName="Napravi nov post"
+            formType="post"
+            buttonName="Napravi post"
+            handleSubmit={handleCreatePost}
+          />
+        )}
+        {currentAction === "edit" && (
+          <Form
+            formName="Doradi post"
+            formType="post"
+            buttonName="Sačuvaj izmene"
+            buttonType="edit"
+            customInitialValues={currentPost}
+            handleSubmit={handleEditPost}
+          />
+        )} */}
+
+        {currentAction === "delete" && (
+          <>
+            <h3>
+              Potvrdite brisanje događaja <span>{currentEvent?.info}</span>
+            </h3>
+            <Button buttonType="delete" clickFunction={handleDeleteEvent}>
+              Potvrdi
+            </Button>
+          </>
+        )}
+      </>
+    </Modal>
 
     {!events && <h3>Nema unešenih dešavanja.</h3>}
 
