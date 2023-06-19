@@ -72,36 +72,47 @@ const Navigation: React.FC<NavigationProps> = ({ setDisplayMobileNav }) => {
       <Container>
         <StyledNavigationInner>
           <NavigationDesktop>
-            <Link href={links.index.url} passHref>
-              <a className={asPath === links.index.url ? "active" : ""}>
-                Naslovna
-              </a>
+            <Link
+              href={links.index.url}
+              className={asPath === links.index.url ? "active" : ""}
+            >
+              Naslovna
             </Link>
-            <Link href={links.events.url} passHref>
-              <a className={asPath === links.events.url ? "active" : ""}>
-                Dešavanja
-              </a>
+            <Link
+              href={links.events.url}
+              className={asPath === links.events.url ? "active" : ""}
+            >
+              Dešavanja
             </Link>
-            <Link href={links.news.url} passHref>
-              <a className={asPath === links.news.url ? "active" : ""}>Vesti</a>
+            <Link
+              href={links.news.url}
+              className={asPath === links.news.url ? "active" : ""}
+            >
+              Vesti
             </Link>
-            <Link href={links.staff.url} passHref>
-              <a className={asPath === links.staff.url ? "active" : ""}>
-                Zaposleni
-              </a>
+            <Link
+              href={links.staff.url}
+              className={asPath === links.staff.url ? "active" : ""}
+            >
+              Zaposleni
             </Link>
-            <Link href={links.about.url} passHref>
-              <a className={asPath === links.about.url ? "active" : ""}>
-                O školi
-              </a>
+            <Link
+              href={links.about.url}
+              className={asPath === links.about.url ? "active" : ""}
+            >
+              O školi
             </Link>
-            <Link href={links.fun.url} passHref>
-              <a className={asPath === links.fun.url ? "active" : ""}>Zabava</a>
+            <Link
+              href={links.fun.url}
+              className={asPath === links.fun.url ? "active" : ""}
+            >
+              Zabava
             </Link>
-            <Link href={links.contact.url} passHref>
-              <a className={asPath === links.contact.url ? "active" : ""}>
-                Kontakt
-              </a>
+            <Link
+              href={links.contact.url}
+              className={asPath === links.contact.url ? "active" : ""}
+            >
+              Kontakt
             </Link>
           </NavigationDesktop>
           <NavigationHamburger onClick={() => setDisplayMobileNav(true)}>

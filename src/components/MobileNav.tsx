@@ -32,7 +32,7 @@ const NavContent = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   position: relative;
   width: 100%;
   padding: 20px 0;
@@ -83,62 +83,55 @@ const MobileNav: React.FC<MobileNavProps> = ({
         <NavCloseButton onClick={() => setDisplayMobileNav(false)}>
           <i className="fa fa-times" aria-hidden="true"></i>
         </NavCloseButton>
-        <Link href={links.index.url} passHref>
-          <NavLink
-            className={asPath === links.index.url ? "active" : ""}
-            onClick={() => setDisplayMobileNav(false)}
-          >
-            Naslovna
-          </NavLink>
-        </Link>
-        <Link href={links.events.url} passHref>
-          <NavLink
-            className={asPath === links.events.url ? "active" : ""}
-            onClick={() => setDisplayMobileNav(false)}
-          >
-            Dešavanja
-          </NavLink>
-        </Link>
-        <Link href={links.news.url} passHref>
-          <NavLink
-            className={asPath === links.news.url ? "active" : ""}
-            onClick={() => setDisplayMobileNav(false)}
-          >
-            Vesti
-          </NavLink>
-        </Link>
-        <Link href={links.staff.url} passHref>
-          <NavLink
-            className={asPath === links.staff.url ? "active" : ""}
-            onClick={() => setDisplayMobileNav(false)}
-          >
-            Zaposleni
-          </NavLink>
-        </Link>
-        <Link href={links.about.url} passHref>
-          <NavLink
-            className={asPath === links.about.url ? "active" : ""}
-            onClick={() => setDisplayMobileNav(false)}
-          >
-            O školi
-          </NavLink>
-        </Link>
-        <Link href={links.fun.url} passHref>
-          <NavLink
-            className={asPath === links.fun.url ? "active" : ""}
-            onClick={() => setDisplayMobileNav(false)}
-          >
-            Zabava
-          </NavLink>
-        </Link>
-        <Link href={links.contact.url} passHref>
-          <NavLink
-            className={asPath === links.contact.url ? "active" : ""}
-            onClick={() => setDisplayMobileNav(false)}
-          >
-            Kontakt
-          </NavLink>
-        </Link>
+        <NavLink
+          href={links.index.url}
+          className={asPath === links.index.url ? "active" : ""}
+          onClick={() => setDisplayMobileNav(false)}
+        >
+          Naslovna
+        </NavLink>
+        <NavLink
+          href={links.events.url}
+          className={asPath === links.events.url ? "active" : ""}
+          onClick={() => setDisplayMobileNav(false)}
+        >
+          Dešavanja
+        </NavLink>
+        <NavLink
+          href={links.news.url}
+          className={asPath === links.news.url ? "active" : ""}
+          onClick={() => setDisplayMobileNav(false)}
+        >
+          Vesti
+        </NavLink>
+        <NavLink
+          href={links.staff.url}
+          className={asPath === links.staff.url ? "active" : ""}
+          onClick={() => setDisplayMobileNav(false)}
+        >
+          Zaposleni
+        </NavLink>
+        <NavLink
+          href={links.about.url}
+          className={asPath === links.about.url ? "active" : ""}
+          onClick={() => setDisplayMobileNav(false)}
+        >
+          O školi
+        </NavLink>
+        <NavLink
+          href={links.fun.url}
+          className={asPath === links.fun.url ? "active" : ""}
+          onClick={() => setDisplayMobileNav(false)}
+        >
+          Zabava
+        </NavLink>
+        <NavLink
+          href={links.contact.url}
+          className={asPath === links.contact.url ? "active" : ""}
+          onClick={() => setDisplayMobileNav(false)}
+        >
+          Kontakt
+        </NavLink>
       </NavContent>
     </StyledNav>
   );

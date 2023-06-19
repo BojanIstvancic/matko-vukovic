@@ -81,7 +81,7 @@ const BlogPost: React.FC<BlogPostprops> = ({ post }) => (
         layout="fill"
         alt={`blog-post-image-${post._id}`}
       />
-      <a href={`${links.news.url}/${post._id}`} />
+      <Link href={`${links.news.url}/${post._id}`} />
     </BlogPostImageContainer>
     <BlogPostContent>
       <Link href={`${links.news.url}/${post._id}`}>

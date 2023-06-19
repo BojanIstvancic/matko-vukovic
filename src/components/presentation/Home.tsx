@@ -225,9 +225,7 @@ const Home: React.FC<HomeProps> = ({
                       </linearGradient>
                     </defs>
                   </svg>
-                  <Link href={`${links.news.url}/${item._id}`}>
-                    <a></a>
-                  </Link>
+                  <Link href={`${links.news.url}/${item._id}`} />
                   <span>Pročitaj</span>
                 </BlogPostImageContainer>
                 <BlogPostContent>
