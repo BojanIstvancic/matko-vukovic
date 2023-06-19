@@ -65,7 +65,7 @@ const HeaderMain: React.FC<{}> = () => {
         <HeaderMainInner>
           <InfoContainer>
             <Link href={links.index.url} passHref>
-              <Image src={Logo} alt="logo" width={150} height={90} />
+              <Image src={Logo} alt="logo" width={150} height={90} priority />
             </Link>
             <Info>
               <InfoItem>

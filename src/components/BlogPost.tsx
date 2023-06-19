@@ -78,7 +78,10 @@ const BlogPost: React.FC<BlogPostprops> = ({ post }) => (
     <BlogPostImageContainer>
       <Image
         src={post.image}
-        layout="fill"
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: "100%", height: "100%" }}
         alt={`blog-post-image-${post._id}`}
       />
       <Link href={`${links.news.url}/${post._id}`} />
