@@ -9,14 +9,14 @@ import { API_LOADING_STATUS } from "@/constants/api";
 const StyledBlogPostItem = styled.div`
   margin-bottom: 25px;
 `;
-const BlogPostItemImage = styled.div`
+const BlogPostItemImage = styled(Image)`
   position: relative;
-  height: 200px;
   margin-bottom: 30px;
 
-  @media (min-width: 600px) {
-    height: 600px;
-  }
+  height: auto;
+  width: 100%;
+
+  max-width: 550px;
 `;
 
 export interface BlogPostItemProps {
@@ -29,9 +29,13 @@ const BlogPostItem: React.FC<BlogPostItemProps> = ({ post, status }) => (
     {post && Object.keys(post).length !== 0 && (
       <>
         <h1>{post.title}</h1>
-        <BlogPostItemImage>
-          <Image src={post.image} layout="fill" alt={"blog-post-image"} />
-        </BlogPostItemImage>
+        <BlogPostItemImage
+          src={post.image}
+          width={0}
+          height={0}
+          sizes="100vw"
+          alt={"blog-post-image"}
+        />
         <p>{post.content}</p>
       </>
     )}

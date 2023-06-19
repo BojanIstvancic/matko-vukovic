@@ -20,7 +20,7 @@ const StyledBlogPost = styled.div`
     margin-bottom: 0;
   }
 `;
-const BlogPostImageContainer = styled.div`
+const BlogPostLink = styled(Link)`
   position: relative;
   height: 100%;
   width: 120px;
@@ -75,7 +75,7 @@ export interface BlogPostprops {
 
 const BlogPost: React.FC<BlogPostprops> = ({ post }) => (
   <StyledBlogPost>
-    <BlogPostImageContainer>
+    <BlogPostLink href={`${links.news.url}/${post._id}`}>
       <Image
         src={post.image}
         width={0}
@@ -84,8 +84,7 @@ const BlogPost: React.FC<BlogPostprops> = ({ post }) => (
         style={{ width: "100%", height: "100%" }}
         alt={`blog-post-image-${post._id}`}
       />
-      <Link href={`${links.news.url}/${post._id}`} />
-    </BlogPostImageContainer>
+    </BlogPostLink>
     <BlogPostContent>
       <Link href={`${links.news.url}/${post._id}`}>
         <h3>{post.title}</h3>
