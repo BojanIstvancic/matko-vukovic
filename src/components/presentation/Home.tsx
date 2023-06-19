@@ -195,7 +195,10 @@ const Home: React.FC<HomeProps> = ({
                 <BlogPostImageContainer>
                   <Image
                     src={item.image}
-                    layout="fill"
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    style={{ width: "100%", height: "100%" }}
                     alt={`blog-post-image-${item._id}`}
                   />
                   <svg

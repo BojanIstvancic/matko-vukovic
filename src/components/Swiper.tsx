@@ -57,7 +57,7 @@ const SwiperComponent: React.FC<SwiperProps> = ({ images }) => {
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
-            <Image src={image} alt={`swiper-image-${index}`} layout="fill" />
+            <Image src={image} alt={`swiper-image-${index}`} priority />
           </SwiperSlide>
         ))}
       </Swiper>
