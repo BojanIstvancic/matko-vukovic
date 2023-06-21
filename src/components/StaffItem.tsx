@@ -6,14 +6,17 @@ import { staffRoles } from "@/constants/helpers";
 import { Employee } from "@/constants/types";
 import Portrait from "/public/images/portrait.png";
 
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 const StyledStaffItem = styled.div`
   text-align: center;
 `;
-const StaffItemImage = styled.div`
+const StaffItemImage = styled(Image)`
   position: relative;
   margin-bottom: 10px;
+
+  width: 100%;
+  height: 200px;
 `;
 const StaffItemName = styled.p`
   font-weight: bold;
@@ -28,14 +31,13 @@ export interface StaffItemProps {
 
 const StaffItem: React.FC<StaffItemProps> = ({ item }) => (
   <StyledStaffItem key={item._id}>
-    <StaffItemImage>
-      <Image
-        src={item.image || Portrait}
-        alt={item.firstName}
-        width={640}
-        height={639}
-      />
-    </StaffItemImage>
+    <StaffItemImage
+      src={item.image || Portrait}
+      alt={item.firstName}
+      width={0}
+      height={0}
+      sizes="100vw"
+    />
     <StaffItemName>{`${item.firstName} ${item.lastName}`}</StaffItemName>
     <StaffItemRole>{staffRoles[item.role]}</StaffItemRole>
   </StyledStaffItem>

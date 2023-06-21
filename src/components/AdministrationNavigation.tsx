@@ -21,18 +21,8 @@ const StyledNavigation = styled.div`
   a {
     font-size: 15px;
     color: var(--gray-200);
-    padding: 15px 25px;
+    padding: 10px;
     text-transform: uppercase;
-
-    &:hover,
-    &.active {
-      color: var(--white);
-      background: var(--green-700);
-    }
-
-    &:hover {
-      transition: all 500ms ease;
-    }
   }
 `;
 const NavigationItem = styled.div`

@@ -16,7 +16,7 @@ const BlogPostItemImage = styled(Image)`
   height: auto;
   width: 100%;
 
-  max-width: 550px;
+  max-height: 400px;
 `;
 
 export interface BlogPostItemProps {

@@ -13,7 +13,7 @@ const AboutBlock = styled.div`
   margin-bottom: 30px;
 `;
 const AboutBlockContent = styled.div`
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     display: flex;
   }
 `;
@@ -21,7 +21,7 @@ const AboutBlockContentImage = styled.div`
   position: relative;
   margin-bottom: 10px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     flex: 300px 0 0;
     margin-right: 30px;
     margin-bottom: 0;
@@ -34,18 +34,26 @@ const AboutUs: React.FC<{}> = () => (
     <p>
       Образовање деце је традиција и обавеза. Због тога су наши преци још давне
       1857. године у Суботици изградили и прву основну школу која данас носи име
-      "Соња Маринковић". Она се раније звала: "Основна школа првог кварта", ОШ
-      "Доситеј Обрадовић", ОШ првог кварта "Пајо Кујунџић". Данашње име добила
-      је 1962. год. по народном хероју Соњи Маринковић, рођене 3. јуна када се
-      прославља и дан школе. Ми смо данас школа која је спој традиције, искуства
-      и нових наставних метода рада спремних да радимо у 21. веку.
+      &quot;Соња Маринковић &quot;. Она се раније звала: &quot;Основна школа
+      првог кварта &quot;, ОШ &quot;Доситеј Обрадовић &quot;, ОШ првог кварта
+      &quot;Пајо Кујунџић &quot;. Данашње име добила је 1962. год. по народном
+      хероју Соњи Маринковић, рођене 3. јуна када се прославља и дан школе. Ми
+      смо данас школа која је спој традиције, искуства и нових наставних метода
+      рада спремних да радимо у 21. веку.
     </p>
     <br />
     <AboutBlock>
       <h2>Centralna škola</h2>
       <AboutBlockContent>
         <AboutBlockContentImage>
-          <Image src={SchoolOne} alt="velika-skola" width={550} height={367} />
+          <Image
+            src={SchoolOne}
+            alt="velika-skola"
+            width={0}
+            height={0}
+            sizes="100vw"
+            priority
+          />
         </AboutBlockContentImage>
         <p>
           Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget,
@@ -65,7 +73,13 @@ const AboutUs: React.FC<{}> = () => (
       <h2>Mala škola u Gatu</h2>
       <AboutBlockContent>
         <AboutBlockContentImage>
-          <Image src={SchoolTwo} alt="mala-skola" width={550} height={350} />
+          <Image
+            src={SchoolTwo}
+            alt="mala-skola"
+            width={0}
+            height={0}
+            sizes="100vw"
+          />
         </AboutBlockContentImage>
         <p>
           Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget,
@@ -88,8 +102,9 @@ const AboutUs: React.FC<{}> = () => (
           <Image
             src={SchoolThree}
             alt="mala-skola-2"
-            width={550}
-            height={373}
+            width={0}
+            height={0}
+            sizes="100vw"
           />
         </AboutBlockContentImage>
         <p>
