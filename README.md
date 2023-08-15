@@ -2,8 +2,8 @@
 
 This is the frontend part of the website. This website is divided into two sections:
 
-> presentation for the parents
-> admin panel for the content manager (protected routes)
+1. presentation for the parents
+2. admin panel for the content manager (protected routes)
 
 ## Getting Started
 
