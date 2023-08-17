@@ -49,6 +49,11 @@ npm run dev
 ## Built With
 
 - [Next.js](https://nextjs.org/docs) - The web framework used
+- [Typescript](https://www.typescriptlang.org/) - Typescript
+- [Redux Toolkit](https://redux-toolkit.js.org/) - State Management
+- [MUI](https://mui.com/) - UI Library
+- [Styled-Components](https://styled-components.com/) - Custom Styles
+- [Formik](https://formik.org/) - Form Library
 - [NPM](https://docs.npmjs.com/) - Dependency Management
 
 ## Authors
